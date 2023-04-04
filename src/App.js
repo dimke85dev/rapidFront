@@ -10,6 +10,7 @@ import Settings from './pages/Settings';
 function App() {
   return (
     <Layout>
+      <h1>Rapid Servise</h1>
       <Switch>
         <Route path="/" exact>
           <Redirect to="/homepage"></Redirect>
