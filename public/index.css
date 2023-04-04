@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  background-color: aquamarine;
+  justify-content: right;
+}
+header ul {
+  display: flex;
+}
+li {
+  margin-right: 50px;
+  text-decoration: none;
+}
+@media (max-width: 400px) {
+  header {
+    justify-content: left;
+  }
+  header ul {
+    flex-direction: column;
+  }
+}
