@@ -74,12 +74,11 @@ const SomeForm = (props) => {
   return (
     <form className={'control-group'} onSubmit={formSubmitHandler}>
       <div className="form-control">
-        <div className={`${nameInputClasses}`}>
-          <SelectToSelect carLable={selectToSelectFunction} />
-        </div>
+        <SelectToSelect carLable={selectToSelectFunction} />
         <div className={`${ageCarInputClasses}`}>
           <label htmlFor="ageCar">Введіть рік авто</label>
           <input
+            className="border-input"
             type="text"
             id="ageCar"
             value={enteredageCar}
@@ -93,6 +92,7 @@ const SomeForm = (props) => {
         <div className={`${nameInputClasses}`}>
           <label htmlFor="name">Ім'я</label>
           <input
+            className="border-input"
             type="text"
             id="name"
             value={enteredName}
@@ -105,8 +105,9 @@ const SomeForm = (props) => {
         </div>
 
         <div className={`${vinCodeInputClasses}`}>
-          <label htmlFor="vinCode">Введіть VinCode</label>
+          <label htmlFor="vinCode">Введіть "VinCode"</label>
           <input
+            className="border-input"
             type="vinCode"
             id="vinCode"
             value={enteredVinCode}
@@ -118,7 +119,10 @@ const SomeForm = (props) => {
           )}
         </div>
         <div className="form-actions">
-          <button className="btn-submit" disabled={!isFormValid && true}>
+          <button
+            className={isFormValid ? 'btn-submit' : 'btn-invalid'}
+            disabled={!isFormValid && true}
+          >
             Отправить
           </button>
         </div>

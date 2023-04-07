@@ -2,8 +2,11 @@
   text-align: center;
 }
 h1 {
+  font-family: 'Sedgwick Ave Display', cursive;
   text-align: center;
-  font-size: 60px;
+  font-size: 70px;
+  margin-bottom: 6px;
+  margin-top: 10px;
 }
 
 .App-logo {

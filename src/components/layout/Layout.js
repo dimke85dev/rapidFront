@@ -5,8 +5,10 @@ import styles from './Layout.module.css';
 const Layout = (props) => {
   return (
     <Fragment>
-      <Header />
-      <main className={styles.main}>{props.children}</main>
+      <div className="mx-auto">
+        <Header />
+        <main className={styles.main}>{props.children}</main>
+      </div>
     </Fragment>
   );
 };

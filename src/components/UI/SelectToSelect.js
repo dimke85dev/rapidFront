@@ -1,8 +1,8 @@
 //Код компонента React с выпадающим списком внутри выпадающего списка выглядит следующим образом:
 
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import { dataCar } from '../../cars';
+import '../addFormCustom/Form.css';
 
 const SelectToSelect = (props) => {
   const firstDropdownOptions = [];
@@ -38,10 +38,14 @@ const SelectToSelect = (props) => {
 
   return (
     <div>
-      <p>
+      <label>
         {selectedModelOption ? `${carLable} ${selectedModelOption}` : carLable}
-      </p>
-      <select defaultValue="" onChange={selectCarHandler}>
+      </label>
+      <select
+        className="border-input"
+        defaultValue=""
+        onChange={selectCarHandler}
+      >
         <option value="" disabled>
           Оберіть Марку
         </option>
@@ -53,6 +57,7 @@ const SelectToSelect = (props) => {
       </select>
       {selectedCarOption && (
         <select
+          className="border-input"
           onClick={
             // secondDropdownOptions.length === 1 ? selectModelHandler : () => {}
             selectModelHandler

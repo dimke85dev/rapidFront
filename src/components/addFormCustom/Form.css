@@ -17,23 +17,64 @@
 .form-control div {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  /* margin: 0 auto; */
+}
+.border-input {
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 5px;
 }
 
 .btn-submit {
   margin: 0 auto;
+  border: 1px solid rgb(181, 173, 173);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+.btn-submit:hover {
+  background-color: rgb(185, 240, 164);
+}
+.btn-invalid {
+  margin: 0 auto;
+  border: 1px solid rgb(17, 17, 17);
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: rgb(232, 157, 157);
 }
 
 input,
 select {
+  margin: 0 auto;
   width: 80%;
   margin-bottom: 1rem;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Edu VIC WA NT Beginner', cursive;
+  font-weight: 1000;
+  font-size: 14px;
+}
+option {
+  /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+  /* font-family: 'Poppins', sans-serif; */
+  font-weight: 700;
+  font-size: 17px;
 }
 
 .invalid label {
-  color: red;
+  /* color: red; */
 }
 
 .invalid input {
   border-color: red;
   background-color: #dccccc;
+}
+
+label {
+  font-family: 'Edu VIC WA NT Beginner', cursive;
+  font-weight: 600;
+  font-size: 20px;
+}
+.error-text {
+  font-family: 'Edu VIC WA NT Beginner', cursive;
+  color: red;
 }
