@@ -3,12 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  a {
+    text-decoration: none;
+  }
   body {
     background: #141e30;
     background: -webkit-linear-gradient(to right, #243855, #141e30);
     font-family: 'Edu VIC WA NT Beginner', cursive;
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Sedgwick Ave Display', cursive;
   }
 }
 body {
@@ -32,27 +39,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-header {
-  display: flex;
+h1 {
+  font-family: 'Sedgwick Ave Display', cursive;
   text-align: center;
-  margin: 0 auto;
-  width: 100%;
-  background-color: aquamarine;
-  justify-content: right;
+  font-size: 50px;
+  margin-bottom: 6px;
+  margin-top: 10px;
 }
-header ul {
-  display: flex;
-}
-li {
-  margin-right: 50px;
-  text-decoration: none;
-}
-@media (max-width: 400px) {
-  header {
-    justify-content: left;
+
+@media (max-width: 768px) {
+  .login-media {
+    width: 100%;
   }
-  header ul {
-    flex-direction: column;
+  .registred-media {
+    width: 100%;
   }
 }

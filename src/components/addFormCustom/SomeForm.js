@@ -5,7 +5,7 @@ import './Form.css';
 
 const SomeForm = (props) => {
   const selectToSelectFunction = (carLable, modalLable) => {
-    console.log(carLable, modalLable);
+    // console.log(carLable, modalLable);
   };
 
   const {
@@ -76,9 +76,11 @@ const SomeForm = (props) => {
       <div className="form-control">
         <SelectToSelect carLable={selectToSelectFunction} />
         <div className={`${ageCarInputClasses}`}>
-          <label htmlFor="ageCar">Введіть рік авто</label>
+          <label className="form-label" htmlFor="ageCar">
+            Введіть рік авто
+          </label>
           <input
-            className="border-input"
+            className="form-input border-input "
             type="text"
             id="ageCar"
             value={enteredageCar}
@@ -90,9 +92,11 @@ const SomeForm = (props) => {
           )}
         </div>
         <div className={`${nameInputClasses}`}>
-          <label htmlFor="name">Ім'я</label>
+          <label className="form-label" htmlFor="name">
+            Ім'я
+          </label>
           <input
-            className="border-input"
+            className="form-input border-input"
             type="text"
             id="name"
             value={enteredName}
@@ -105,9 +109,11 @@ const SomeForm = (props) => {
         </div>
 
         <div className={`${vinCodeInputClasses}`}>
-          <label htmlFor="vinCode">Введіть "VinCode"</label>
+          <label className="form-label" htmlFor="vinCode">
+            Введіть "VinCode"
+          </label>
           <input
-            className="border-input"
+            className="form-input border-input"
             type="vinCode"
             id="vinCode"
             value={enteredVinCode}

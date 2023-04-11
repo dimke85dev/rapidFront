@@ -1,4 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+} from 'react-router-dom';
 import React, { useEffect } from 'react';
 import './App.css';
 import Layout from './components/layout/Layout';
@@ -18,19 +23,52 @@ import PostsPage from './pages/PostsPage';
 import PostPage from './pages/PostPage';
 import AddPostPage from './pages/AddPostPage';
 import EditPostPage from './pages/EditPostPage';
+import { useNavigate } from 'react-router-dom';
 // import useBlocker from 'react-router-prompt';
 
 // import Modal from './components/UI/Modal';
 
+// const router = createBrowserRouter([
+//   { path: '/', element: <MainPage /> },
+
+//   { path: '/posts', element: <PostsPage /> },
+//   { path: ':id', element: <PostPage /> },
+//   { path: 'newPost', element: <AddPostPage /> },
+//   { path: 'editPost', element: <EditPostPage /> },
+
+//   { path: '/register', element: <RegisterPage /> },
+
+//   { path: '/about', element: <AboutPages /> },
+
+//   { path: '/login', element: <LoginPage /> },
+
+//   { path: '/takeAcar', element: <TakeACar /> },
+
+//   { path: '/directory', element: <Directory /> },
+
+//   { path: '/reports', element: <Reports /> },
+//   { path: '/settings', element: <Settings /> },
+// ]);
+
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMe());
-  });
+
+    navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
+    window.onbeforeunload = () => {
+      window.sessionStorage.setItem(
+        'lastRoute',
+        JSON.stringify(window.location.pathname)
+      );
+    };
+  }, []);
 
   return (
     <Layout>
       <h1>Rapid Servise</h1>
+      {/* <RouterProvider router={router} />; */}
       <Routes>
         <Route path="/" element={<MainPage />} />
 

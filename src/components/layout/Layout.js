@@ -7,7 +7,7 @@ const Layout = (props) => {
     <Fragment>
       <div className="mx-auto">
         <Header />
-        <main className={styles.main}>{props.children}</main>
+        <main className={'container ' + styles.main}>{props.children}</main>
       </div>
     </Fragment>
   );

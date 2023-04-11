@@ -74,6 +74,22 @@ export const getMe = createAsyncThunk('auth/getMe', async () => {
     return data;
   } catch (error) {
     console.log(error);
+    toast(
+      error.message === 'Network Error'
+        ? "Помилка зв'язку з сервером"
+        : error.message,
+      {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: 'error',
+      }
+    );
   }
 });
 

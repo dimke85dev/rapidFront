@@ -38,26 +38,30 @@ const SelectToSelect = (props) => {
 
   return (
     <div>
-      <label>
+      <h2 className="form-h2">
         {selectedModelOption ? `${carLable} ${selectedModelOption}` : carLable}
-      </label>
+      </h2>
       <select
-        className="border-input"
+        className="form-select border-input"
         defaultValue=""
         onChange={selectCarHandler}
       >
-        <option value="" disabled>
+        <option className="form-option" value="" disabled>
           Оберіть Марку
         </option>
         {firstDropdownOptions.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option
+            className="form-option"
+            key={option.value}
+            value={option.value}
+          >
             {option.label}
           </option>
         ))}
       </select>
       {selectedCarOption && (
         <select
-          className="border-input"
+          className="form-select border-input"
           onClick={
             // secondDropdownOptions.length === 1 ? selectModelHandler : () => {}
             selectModelHandler
@@ -69,7 +73,11 @@ const SelectToSelect = (props) => {
             Оберіть модель
           </option>
           {secondDropdownOptions.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option
+              className="form-option"
+              key={option.value}
+              value={option.value}
+            >
               {option.label}
             </option>
           ))}

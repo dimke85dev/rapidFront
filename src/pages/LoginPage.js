@@ -22,11 +22,12 @@ const LoginPage = () => {
         return;
       }
       dispatch(loginUser({ username, password }));
-      if (username && password) {
+      if (status) {
         setPassword('');
         setUserName('');
       }
     } catch (error) {
+      console.log(error);
       toast(error, {
         position: 'bottom-right',
         autoClose: 5000,
@@ -38,7 +39,6 @@ const LoginPage = () => {
         theme: 'light',
         type: 'error',
       });
-      // console.log(error);
     }
   };
 
@@ -62,7 +62,7 @@ const LoginPage = () => {
   return (
     <form
       onSubmit={submitHeandler}
-      className="w-1/3 h-60 mx-auto mt-30 bg-blue-400 px-4 py-4 rounded-xl opacity-95"
+      className="login-media w-1/2 mx-auto mt-30 bg-blue-400 px-4 py-4 rounded-xl opacity-95"
     >
       <h2 className="text-lg text-black text-center">Авторізація</h2>
       <label htmlFor="login" className="text-xs text-black">

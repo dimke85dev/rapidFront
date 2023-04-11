@@ -58,7 +58,7 @@ const RegisterPage = () => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="w-1/3 h-50 mx-auto mt-30 bg-blue-400 px-4 py-8 rounded-xl opacity-95"
+      className="login-media w-1/2 mx-auto mt-30 bg-blue-400 px-4 py-4 rounded-xl opacity-95"
     >
       <h2 className="text-lg text-black text-center">Реєстрація</h2>
       <label htmlFor="login" className="text-xs text-black">
