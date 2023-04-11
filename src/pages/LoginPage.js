@@ -46,7 +46,7 @@ const LoginPage = () => {
     if (status) {
       toast(status, {
         position: 'bottom-right',
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
