@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instanse = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://rapid-back-3ngv4i30q-dimke85dev.vercel.app/api',
 });
 
 instanse.interceptors.request.use((config) => {
