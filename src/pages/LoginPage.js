@@ -15,6 +15,23 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (status) {
+      toast(status, {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: messageType === 'ok' ? 'success' : 'error',
+      });
+    }
+    if (isAuth) navigate('/');
+  }, [status, isAuth, navigate, messageType]);
+
   const submitHeandler = (e) => {
     e.preventDefault();
     try {
@@ -41,23 +58,6 @@ const LoginPage = () => {
       });
     }
   };
-
-  useEffect(() => {
-    if (status) {
-      toast(status, {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-        type: messageType === 'ok' ? 'success' : 'error',
-      });
-    }
-    if (isAuth) navigate('/');
-  }, [status, isAuth, navigate, messageType]);
 
   return (
     <form

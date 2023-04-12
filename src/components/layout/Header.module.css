@@ -38,7 +38,7 @@ header {
   border-bottom: 1px solid #171e1a;
 }
 
-img {
+header img {
   max-width: none;
   width: 80px;
   height: 50px;
@@ -51,9 +51,6 @@ img {
   header {
     padding: 2%;
   }
-  header ul {
-    /* text-align: left; */
-  }
 
   .menu-btn {
     display: flex;
@@ -61,8 +58,7 @@ img {
     justify-content: space-between;
     width: 55px;
     height: 45px;
-    /* border: 1px solid black; */
-    border-radius: 50%;
+    /* border-radius: 50%; */
     padding: 2.5%;
     background-color: transparent;
     /* border: none; */

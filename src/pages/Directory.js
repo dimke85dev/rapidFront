@@ -1,5 +1,11 @@
+import AddPostPage from './AddPostPage';
+
 const Directory = () => {
-  return <div>Directory</div>;
+  return (
+    <div>
+      <AddPostPage />
+    </div>
+  );
 };
 
 export default Directory;

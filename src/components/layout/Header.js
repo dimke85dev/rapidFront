@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Header.module.css';
 import React, { useState } from 'react';
@@ -14,8 +14,6 @@ const Header = () => {
   };
   const isAuth = useSelector(checkIsAuth);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // usePrompt('Вы уверены, что хотите уйти?', true);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -113,7 +111,7 @@ const Header = () => {
             <li>
               {isAuth ? (
                 <NavLink
-                  to="/login"
+                  to="/out"
                   className={({ isActive }) => (isActive ? styles.active : '')}
                   onClick={logoutHandler}
                 >
