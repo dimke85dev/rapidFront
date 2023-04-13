@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../../utils/axios';
+import { toast } from 'react-toastify';
 
 const initialState = {
   posts: [],
@@ -18,6 +19,15 @@ export const createPost = createAsyncThunk(
     }
   }
 );
+export const getAllPosts = createAsyncThunk('/post/getAllPosts', async () => {
+  try {
+    const { data } = await axios.get('/posts');
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 //создай реакт компонент и стили как калькулятор айфона
 export const postSlice = createSlice({
   name: 'post',
@@ -34,6 +44,20 @@ export const postSlice = createSlice({
       state.posts.push(action.payload);
     });
     builder.addCase(createPost.rejected, (state) => {
+      state.loading = false;
+    });
+
+    //Get ALL Posts
+    builder.addCase(getAllPosts.pending, (state) => {
+      state.loading = true;
+      state.status = null;
+    });
+    builder.addCase(getAllPosts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.posts = action.payload.posts;
+      state.popularPosts = action.payload.popularPosts;
+    });
+    builder.addCase(getAllPosts.rejected, (state) => {
       state.loading = false;
     });
   },

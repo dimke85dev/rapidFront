@@ -13,7 +13,8 @@ const AddPostPage = () => {
 
   const navigate = useNavigate();
 
-  const subminHandler = () => {
+  const subminHandler = (e) => {
+    e.preventDefault();
     if (!title) {
       toast('Заголовок повинен бути заповнений');
       return;
@@ -40,7 +41,7 @@ const AddPostPage = () => {
   };
 
   return (
-    <form className="w-1/2 mx-auto py-10" onSubmit={(e) => e.preventDefault()}>
+    <form className="mobile-form w-1/2 mx-auto py-10" onSubmit={subminHandler}>
       <label className="text-gray-300 py-2 bg-gray-600 text-xs mt-2 flex items-center justify-center border-2 border-dotted cursor-pointer">
         Додати зображення :
         <input
@@ -73,6 +74,7 @@ const AddPostPage = () => {
         ></textarea>
         <div className="flex gap-8 items-center justify-center mt-4">
           <button
+            type="submit"
             className="flex items-center bg-gray-600 text-white rounded-sm py-2 px-4"
             onClick={subminHandler}
           >
@@ -80,6 +82,7 @@ const AddPostPage = () => {
           </button>
           <button
             onClick={clearFormHandler}
+            type="button"
             className="flex items-center bg-red-500 text-white rounded-sm py-2 px-4"
           >
             Відміна

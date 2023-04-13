@@ -27,121 +27,137 @@ const Calculator = () => {
       <div className="display">{result}</div>
       <div className="buttons">
         <button
-          className="button light-gray"
+          className="button-calc light-gray"
           data-value="clear"
           onClick={handleClick}
         >
           AC
         </button>
         <button
-          className="button light-gray"
+          className="button-calc light-gray"
           data-value="+/-"
           onClick={handleClick}
         >
           +/-
         </button>
         <button
-          className="button light-gray"
+          className="button-calc light-gray"
           data-value="%"
           onClick={handleClick}
         >
           %
         </button>
-        <button className="button orange" data-value="/" onClick={handleClick}>
+        <button
+          className="button-calc orange"
+          data-value="/"
+          onClick={handleClick}
+        >
           ÷
         </button>
 
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="7"
           onClick={handleClick}
         >
           7
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="8"
           onClick={handleClick}
         >
           8
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="9"
           onClick={handleClick}
         >
           9
         </button>
-        <button className="button orange" data-value="*" onClick={handleClick}>
+        <button
+          className="button-calc orange"
+          data-value="*"
+          onClick={handleClick}
+        >
           ×
         </button>
 
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="4"
           onClick={handleClick}
         >
           4
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="5"
           onClick={handleClick}
         >
           5
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="6"
           onClick={handleClick}
         >
           6
         </button>
-        <button className="button orange" data-value="-" onClick={handleClick}>
+        <button
+          className="button-calc orange"
+          data-value="-"
+          onClick={handleClick}
+        >
           –
         </button>
 
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="1"
           onClick={handleClick}
         >
           1
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="2"
           onClick={handleClick}
         >
           2
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="3"
           onClick={handleClick}
         >
           3
         </button>
-        <button className="button orange" data-value="+" onClick={handleClick}>
+        <button
+          className="button-calc orange"
+          data-value="+"
+          onClick={handleClick}
+        >
           +
         </button>
 
         <button
-          className="button wide dark-gray"
+          className="button-calc wide dark-gray"
           data-value="0"
           onClick={handleClick}
         >
           0
         </button>
         <button
-          className="button dark-gray"
+          className="button-calc dark-gray"
           data-value="."
           onClick={handleClick}
         >
           .
         </button>
         <button
-          className="button orange"
+          className="button-calc orange"
           data-value="equal"
           onClick={handleClick}
         >

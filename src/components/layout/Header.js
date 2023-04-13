@@ -28,12 +28,16 @@ const Header = () => {
     <header>
       <div className={`container mx-auto ${styles.header}`}>
         <NavLink className={styles.logo} to="/" onClick={mobilMenuHandler}>
-          <img alt="car service" src="check-engine.svg"></img>
+          <img
+            className={styles.logo}
+            alt="car service"
+            src="check-engine.svg"
+          ></img>
         </NavLink>
         <button onClick={mobilMenuHandler} className={styles['menu-btn']}>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
+          <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
+          <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
         </button>
         <nav
           className={`${styles.nav} ${
