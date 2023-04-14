@@ -28,9 +28,8 @@ const AddPostPage = () => {
       data.append('title', title); //добавляем свойство с ключем 'title' и значение title
       data.append('text', text);
       data.append('image', image);
-      console.log(data);
-
       dispatch(createPost(data));
+
       navigate('/');
     } catch (error) {
       toast(error);
@@ -45,6 +44,7 @@ const AddPostPage = () => {
   return (
     <form
       method="POST"
+      encType="multipart/form-data"
       className="mobile-form w-1/2 mx-auto py-10"
       onSubmit={subminHandler}
     >
