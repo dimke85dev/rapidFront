@@ -28,6 +28,8 @@ const AddPostPage = () => {
       data.append('title', title); //добавляем свойство с ключем 'title' и значение title
       data.append('text', text);
       data.append('image', image);
+      console.log(data);
+
       dispatch(createPost(data));
       navigate('/');
     } catch (error) {
@@ -41,7 +43,11 @@ const AddPostPage = () => {
   };
 
   return (
-    <form className="mobile-form w-1/2 mx-auto py-10" onSubmit={subminHandler}>
+    <form
+      method="POST"
+      className="mobile-form w-1/2 mx-auto py-10"
+      onSubmit={subminHandler}
+    >
       <label className="text-gray-300 py-2 bg-gray-600 text-xs mt-2 flex items-center justify-center border-2 border-dotted cursor-pointer">
         Додати зображення :
         <input
