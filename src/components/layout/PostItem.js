@@ -15,9 +15,10 @@ const PostItem = ({ post }) => {
       <div className={post.imgUrl ? 'flex rouded-sm h-80' : 'flex rounded-sm'}>
         {post.imgUrl && (
           <img
-            src="default.jpg"
+            // src="/uploads/default.jpg"
             // src={`https://rapid-back.vercel.app/${post.imgUrl}`}
             // src={`http://localhost:5000/${post.imgUrl}`}
+            src={`http://192.168.0.105:5000/${post.imgUrl}`}
             alt="img"
             className="object-cover w-full"
           />
