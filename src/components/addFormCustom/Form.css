@@ -4,7 +4,7 @@
   /* border-radius: 15px; */
   background-color: rgb(158, 170, 151);
   opacity: 95%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .form-control {
   padding: 1.5rem;
@@ -14,7 +14,7 @@
   border-radius: 15px;
   background-color: white;
   margin-bottom: 10px;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .form-control div {
   display: flex;
@@ -57,7 +57,9 @@
 }
 .form-option {
   /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+  /* font-family: 'Sedgwick Ave Display', cursive; */
   font-family: 'Poppins', sans-serif;
+  /* font-family: 'Lato', sans-serif; */
   border: 1px solid black;
   font-weight: 500;
   font-size: 15px;
@@ -69,11 +71,19 @@
 }
 
 .form-label {
-  font-family: 'Edu VIC WA NT Beginner', cursive;
+  /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+  /* font-family: 'Sedgwick Ave Display', cursive; */
+  font-family: 'Lato', sans-serif;
+
   font-weight: 500;
   font-size: 20px;
 }
 .form-h2 {
+  /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+  /* font-family: 'Poppins', sans-serif; */
+  /* font-family: 'Lato', sans-serif; */
+  /* font-family: 'Sedgwick Ave Display', cursive; */
+  margin-bottom: 10px;
   font-weight: 500;
   font-size: 20px;
 }
