@@ -55,8 +55,8 @@ header {
   }
   .logo {
     /* padding: 2%; */
-    top: 7px;
-    left: 7px;
+    top: 16px;
+    left: 16px;
     position: absolute;
     width: 60px;
     height: 35px;

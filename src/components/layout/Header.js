@@ -46,15 +46,15 @@ const Header = () => {
   return (
     <header>
       <div className={`container mx-auto ${styles.header}`}>
-        <NavLink to="/" onClick={mobilMenuHandler}>
-          <img
-            className={
-              `${isScrolled ? styles['logo-scroll'] : ''} ` + styles.logo
-            }
-            alt="car service"
-            src="check-engine.svg"
-          ></img>
-        </NavLink>
+        <img
+          onClick={mobilMenuHandler}
+          className={
+            `${isScrolled ? styles['logo-scroll'] : ''} ` + styles.logo
+          }
+          alt="car service"
+          src="check-engine.svg"
+        ></img>
+
         <button onClick={mobilMenuHandler} className={styles['menu-btn']}>
           <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
           <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>

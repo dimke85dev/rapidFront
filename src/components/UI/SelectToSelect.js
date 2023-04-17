@@ -9,7 +9,7 @@ const SelectToSelect = (props) => {
   const secondDropdownOptions = [];
   const [selectedCarOption, setSelectedCarOption] = useState('');
   const [selectedModelOption, setSelectedModelOption] = useState('');
-  const carLable = !selectedCarOption ? 'Оберіть авто' : selectedCarOption;
+  const [carLable, setCarLable] = useState('Оберіть авто');
 
   dataCar.map((car) =>
     firstDropdownOptions.push({ label: car.id, value: car.name })
@@ -18,6 +18,7 @@ const SelectToSelect = (props) => {
   const selectCarHandler = (event) => {
     setSelectedModelOption('');
     setSelectedCarOption(event.target.value);
+    setCarLable(event.target.value);
   };
 
   const modelsArr = dataCar.filter((el) => el.name === selectedCarOption);
