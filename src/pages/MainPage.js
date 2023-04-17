@@ -21,7 +21,7 @@ const MainPage = () => {
   }
 
   return (
-    <div className=" max-w-[900px] mx-auto py-10">
+    <div className="max-w-[900px] bg-slate-200 mx-auto py-10 px-3">
       <div className="post-elem flex justify-between gap-8">
         <div className="flex flex-col gap-10 basis-4/5">
           {posts?.map((post, index) => (

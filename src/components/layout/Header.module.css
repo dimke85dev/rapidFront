@@ -61,6 +61,12 @@ header {
     width: 60px;
     height: 35px;
   }
+  .logo-scroll {
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    /* opacity: 50%; */
+  }
 
   .menu-btn {
     display: flex;
@@ -89,7 +95,7 @@ header {
   .mobileMenu {
     display: flex;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;

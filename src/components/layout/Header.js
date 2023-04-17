@@ -1,17 +1,36 @@
 import { NavLink } from 'react-router-dom';
 
 import styles from './Header.module.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIsAuth, logout } from '../../store/features/auth/authSlice';
 import { toast } from 'react-toastify';
 
 const Header = () => {
+  ///// Сохраняем состояние скроллинга и в компоненте меняем класс у элемента
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    function handleScroll() {
+      const top = window.pageYOffset || document.documentElement.scrollTop;
+      if (top > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  ///////
+  /// Сохраняем состояние открытого меню мобильной версии
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const mobilMenuHandler = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  //////
+
   const isAuth = useSelector(checkIsAuth);
   const dispatch = useDispatch();
 
@@ -23,13 +42,15 @@ const Header = () => {
       position: 'bottom-right',
     });
   };
-
+  //напиши фунцию изменения класса у элемента в компоненте реакт при скроле
   return (
     <header>
       <div className={`container mx-auto ${styles.header}`}>
-        <NavLink className={styles.logo} to="/" onClick={mobilMenuHandler}>
+        <NavLink to="/" onClick={mobilMenuHandler}>
           <img
-            className={styles.logo}
+            className={
+              `${isScrolled ? styles['logo-scroll'] : ''} ` + styles.logo
+            }
             alt="car service"
             src="check-engine.svg"
           ></img>
