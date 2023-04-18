@@ -58,7 +58,7 @@ const PostPage = () => {
         Назад
       </Link>
 
-      <div className="post-elem flex gap-10  py-4  ">
+      <div className="post-elem  flex gap-10  py-4  ">
         <div className="">
           <div className="flex flex-col basis-1/4 flex-grow">
             <div
