@@ -79,13 +79,13 @@ const Header = () => {
               <React.Fragment>
                 <li>
                   <NavLink
-                    to="/takeacar"
+                    to="/posts"
                     className={({ isActive }) =>
                       isActive ? styles.active : ''
                     }
                     onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
-                    Прийняти авто
+                    Мої Статті
                   </NavLink>
                 </li>
                 <li>
@@ -96,9 +96,21 @@ const Header = () => {
                     }
                     onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
-                    Довідник
+                    Створити статтю
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/takeacar"
+                    className={({ isActive }) =>
+                      isActive ? styles.active : ''
+                    }
+                    onClick={isMobileMenuOpen && mobilMenuHandler}
+                  >
+                    Прийняти авто
+                  </NavLink>
+                </li>
+
                 <li>
                   <NavLink
                     to="/reports"
