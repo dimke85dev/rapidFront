@@ -3,7 +3,7 @@ header {
 }
 
 .header {
-  width: 100%;
+  max-width: 1200px;
   /* height: 4rem; */
   display: flex;
   padding: 1% 1%;

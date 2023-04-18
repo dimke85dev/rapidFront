@@ -8,12 +8,20 @@ import {
   AiTwotoneDelete,
 } from 'react-icons/ai';
 import axios from '../utils/axios';
-import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removePost } from '../store/features/post/postSlice';
+import {
+  createComment,
+  getPostComments,
+} from '../store/features/comment/commentSlice';
+import CommentItem from '../components/comments/CommentItem';
 
 const PostPage = () => {
+  const [comment, setComment] = useState('');
+
   const { user } = useSelector((state) => state.auth);
+  const { comments } = useSelector((state) => state.comment);
   const [post, setPost] = useState(null);
   const params = useParams(); //берет params из строки браузера
   const dispatch = useDispatch();
@@ -24,9 +32,21 @@ const PostPage = () => {
     setPost(data);
   }, [params.id]);
 
+  const fetchComments = useCallback(async () => {
+    try {
+      dispatch(getPostComments(params.id));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, params.id]);
+
   useEffect(() => {
     fetchPost();
   }, [fetchPost]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   // console.log(post);
 
@@ -43,6 +63,17 @@ const PostPage = () => {
       dispatch(removePost(params.id));
       toast('Стаття була видалена');
       navigate('/posts');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    try {
+      const postId = params.id;
+      dispatch(createComment({ postId, comment }));
+      setComment('');
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +117,7 @@ const PostPage = () => {
             <div className="text-xl">{post.title}</div>
             <p className="opacity-60 text-xs pt-4">{post.text}</p>
             <div className="flex gap-3 items-center justify-between">
-              <div className="flex gap-r mt-4">
+              <div className="flex gap-2 mt-4">
                 <button className="flex items-center justify-center gap-2 text-xs opacity-50">
                   <AiFillEye />
                   <span>{post.views || 0}</span>
@@ -115,7 +146,27 @@ const PostPage = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/3">COMMENTS</div>
+        <div className="mobile-form w-1/3 p-8 bg-gray-700 flex flex-col gap-2 rounded-sm">
+          <form onSubmit={submitHandler} className="flex gap-2">
+            <input
+              type="text"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Comment"
+              className="text-black w-full rounded-sm bg-gray-400 border p-2 text-xs outline-none placeholder:text-gray-700"
+            />
+            <button
+              className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
+              type="submit"
+              onClick={submitHandler}
+            >
+              Відправити
+            </button>
+          </form>
+          {comments?.map((cmt) => (
+            <CommentItem key={cmt._id} cmt={cmt} user={user} />
+          ))}
+        </div>
       </div>
     </div>
   );

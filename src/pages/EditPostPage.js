@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { updatePost } from '../store/features/post/postSlice';
 import { useNavigate, useParams } from 'react-router-dom';
