@@ -27,6 +27,8 @@ const PostPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const token = Boolean(localStorage.token);
+
   const fetchPost = useCallback(async () => {
     const { data } = await axios.get(`/posts/${params.id}`);
     setPost(data);
@@ -70,6 +72,10 @@ const PostPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!comment) {
+      toast('Заповніть поле коментар', { autoClose: 1500 });
+      return;
+    }
     try {
       const postId = params.id;
       dispatch(createComment({ postId, comment }));
@@ -151,6 +157,7 @@ const PostPage = () => {
             <input
               type="text"
               value={comment}
+              disabled={!token && true}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Comment"
               className="text-black w-full rounded-sm bg-gray-400 border p-2 text-xs outline-none placeholder:text-gray-700"
@@ -159,6 +166,7 @@ const PostPage = () => {
               className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
               type="submit"
               onClick={submitHandler}
+              disabled={!token && true}
             >
               Відправити
             </button>

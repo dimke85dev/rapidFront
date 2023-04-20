@@ -17,7 +17,6 @@ const PostsPage = () => {
   useEffect(() => {
     fetchMyPosts();
   }, []);
-
   if (!posts.length) {
     return (
       <div className="text-xl text-center text-black py-10">

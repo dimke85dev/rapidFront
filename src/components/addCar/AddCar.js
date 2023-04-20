@@ -1,21 +1,50 @@
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/use-input';
 import SelectToSelect from '../UI/SelectToSelect';
 
 import './Form.css';
+import { createCar } from '../../store/features/car/carSlice';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 
 const SomeForm = (props) => {
+  const [carName, setCarName] = useState('');
+  const [carYear, setcarYear] = useState('');
+  const [carVinCode, setCarVinCode] = useState('');
+  const { status, messageType } = useSelector((state) => state.car);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status) {
+      toast(status, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: messageType === 'ok' ? 'success' : 'error',
+      });
+    }
+  }, [status, messageType]);
+
   const selectToSelectFunction = (carLable, modalLable) => {
+    setCarName(carLable + ' ' + modalLable);
     // console.log(carLable, modalLable);
   };
+  // console.log(carName);
 
-  const {
-    value: enteredName,
-    hasError: hasNameInputError,
-    isValid: isEnteredNameValid,
-    inputChangeHandler: nameInputChangeHandler,
-    inputLostFocusHandler: nameInputLostFocusHandler,
-    resetValues: resetNameInputValues,
-  } = useInput((val) => val.trim() !== '');
+  // const {
+  //   value: enteredName,
+  //   hasError: hasNameInputError,
+  //   isValid: isEnteredNameValid,
+  //   inputChangeHandler: nameInputChangeHandler,
+  //   inputLostFocusHandler: nameInputLostFocusHandler,
+  //   resetValues: resetNameInputValues,
+  // } = useInput((val) => val.trim() !== '');
 
   const {
     value: enteredVinCode,
@@ -47,25 +76,46 @@ const SomeForm = (props) => {
 
   let isFormValid = false;
 
-  if (isEnteredNameValid && isEnteredVinCodeValid && isEnteredageCarValid) {
+  if (isEnteredVinCodeValid && isEnteredageCarValid) {
     isFormValid = true;
   }
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-
+    if (!carName) {
+      toast('Треба обрати назву авто');
+      return;
+    }
     if (!isFormValid) {
       return;
     }
-
-    resetNameInputValues();
-
+    try {
+      dispatch(
+        createCar({
+          name: carName,
+          vinCode: enteredVinCode,
+          year: enteredageCar,
+        })
+      );
+    } catch (error) {
+      toast(error, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: 'error',
+      });
+    }
+    // resetNameInputValues();
     resetVinCodeInputValues();
-
     resetageCarInputValues();
   };
 
-  const nameInputClasses = hasNameInputError ? 'invalid' : '';
+  // const nameInputClasses = hasNameInputError ? 'invalid' : '';
 
   const vinCodeInputClasses = hasVinCodeInputError ? 'invalid' : '';
 
@@ -86,25 +136,9 @@ const SomeForm = (props) => {
             value={enteredageCar}
             onChange={ageCarInputChangeHandler}
             onBlur={ageCarInputLostFocusHandler}
-          />
+          ></input>
           {hasageCarInputError && (
             <p className="error-text">Поле повинно бути заповнене</p>
-          )}
-        </div>
-        <div className={`${nameInputClasses}`}>
-          <label className="form-label" htmlFor="name">
-            Ім'я
-          </label>
-          <input
-            className="form-input border-input"
-            type="text"
-            id="name"
-            value={enteredName}
-            onChange={nameInputChangeHandler}
-            onBlur={nameInputLostFocusHandler}
-          />
-          {hasNameInputError && (
-            <p className="error-text">Поле ім'я повинно бути заповнено</p>
           )}
         </div>
 
@@ -126,10 +160,12 @@ const SomeForm = (props) => {
         </div>
         <div className="form-actions">
           <button
+            type="submit"
+            onClick={formSubmitHandler}
             className={isFormValid ? 'btn-submit' : 'btn-invalid'}
             disabled={!isFormValid && true}
           >
-            Отправить
+            Додати
           </button>
         </div>
       </div>
