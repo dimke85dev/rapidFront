@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { AiFillEye, AiOutlineMessage } from 'react-icons/ai';
 import Moment from 'react-moment';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Loader from '../UI/Loader';
 
 const PostItem = ({ post }) => {
+  const { loading } = useSelector((state) => state.post);
   if (!post) {
     return (
       <div className="text-xl text-center text-black py-10">
+        <Loader />
         Статті відсутні
       </div>
     );
   }
+
   return (
     <Link to={`/${post._id}`}>
       <div className="flex flex-col basis-1/4 flex-grow">

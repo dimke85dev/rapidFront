@@ -18,8 +18,8 @@ import PostsPage from './pages/PostsPage';
 import PostPage from './pages/PostPage';
 import AddPostPage from './pages/AddPostPage';
 import EditPostPage from './pages/EditPostPage';
-import CarCart from './components/CarCart.js/CarCart';
 import AddCarRepair from './pages/AddCarRepair';
+import AddCar from './components/addCar/AddCar';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ function App() {
 
         <Route path="/takeacar" element={<TakeACar />} />
         <Route path="/addcarrepair" element={<AddCarRepair />} />
+        <Route path="/addcar" element={<AddCar />} />
 
         <Route path="/directory" element={<Directory />} />
 

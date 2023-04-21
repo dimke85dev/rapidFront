@@ -60,7 +60,14 @@ export const getCar = createAsyncThunk('car/getCar', async ({ vinCode }) => {
 export const CarSlice = createSlice({
   name: 'car',
   initialState,
-  reducers: {},
+  reducers: {
+    carOut: (state) => {
+      state.car = null;
+      state.status = null;
+      state.messageType = null;
+      state.isloading = false;
+    },
+  },
   extraReducers: (builder) => {
     // Create Car
     builder.addCase(createCar.pending, (state) => {
@@ -96,3 +103,4 @@ export const CarSlice = createSlice({
 });
 
 export default CarSlice.reducer;
+export const { carOut } = CarSlice.actions;

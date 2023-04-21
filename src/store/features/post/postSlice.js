@@ -56,7 +56,11 @@ export const updatePost = createAsyncThunk(
 export const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    postClear(state) {
+      state.loading = false;
+    },
+  },
   extraReducers: (builder) => {
     //Create Post
     builder.addCase(createPost.pending, (state) => {
@@ -119,3 +123,4 @@ export const postSlice = createSlice({
 });
 
 export default postSlice.reducer;
+export const { postClear } = postSlice.actions;

@@ -3,15 +3,15 @@ import useInput from '../../hooks/use-input';
 import SelectToSelect from '../UI/SelectToSelect';
 
 import './Form.css';
-import { createCar } from '../../store/features/car/carSlice';
+import { carOut, createCar } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const SomeForm = (props) => {
+const AddCar = (props) => {
   const [carName, setCarName] = useState('');
-  const [carYear, setcarYear] = useState('');
-  const [carVinCode, setCarVinCode] = useState('');
   const { status, messageType } = useSelector((state) => state.car);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -29,6 +29,9 @@ const SomeForm = (props) => {
         type: messageType === 'ok' ? 'success' : 'error',
       });
     }
+    // console.log(status + 'addcar');
+    messageType === 'ok' && navigate('/takeacar');
+    dispatch(carOut());
   }, [status, messageType]);
 
   const selectToSelectFunction = (carLable, modalLable) => {
@@ -82,6 +85,7 @@ const SomeForm = (props) => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
     if (!carName) {
       toast('Треба обрати назву авто');
       return;
@@ -97,6 +101,8 @@ const SomeForm = (props) => {
           year: enteredageCar,
         })
       );
+      dispatch(carOut());
+      // messageType === 'ok' && navigate('/takeacar');
     } catch (error) {
       toast(error, {
         position: 'bottom-right',
@@ -122,10 +128,13 @@ const SomeForm = (props) => {
   const ageCarInputClasses = hasageCarInputError ? 'invalid' : '';
 
   return (
-    <form className={'control-group'} onSubmit={formSubmitHandler}>
-      <div className="form-control">
+    <form
+      className={'control-group w-2/3 mx-auto mobile-form'}
+      onSubmit={formSubmitHandler}
+    >
+      <div className="form-control ">
         <SelectToSelect carLable={selectToSelectFunction} />
-        <div className={`${ageCarInputClasses}`}>
+        <div className={`${ageCarInputClasses} flex flex-col`}>
           <label className="form-label" htmlFor="ageCar">
             Введіть рік авто
           </label>
@@ -142,7 +151,7 @@ const SomeForm = (props) => {
           )}
         </div>
 
-        <div className={`${vinCodeInputClasses}`}>
+        <div className={`${vinCodeInputClasses} flex flex-col`}>
           <label className="form-label" htmlFor="vinCode">
             Введіть "VinCode"
           </label>
@@ -165,7 +174,7 @@ const SomeForm = (props) => {
             className={isFormValid ? 'btn-submit' : 'btn-invalid'}
             disabled={!isFormValid && true}
           >
-            Додати
+            Зберегти
           </button>
         </div>
       </div>
@@ -173,4 +182,4 @@ const SomeForm = (props) => {
   );
 };
 
-export default SomeForm;
+export default AddCar;

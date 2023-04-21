@@ -4,6 +4,7 @@ import styles from './Header.module.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIsAuth, logout } from '../../store/features/auth/authSlice';
+import { carOut } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
 
 const Header = () => {
@@ -42,7 +43,12 @@ const Header = () => {
       position: 'bottom-right',
     });
   };
-  //напиши фунцию изменения класса у элемента в компоненте реакт при скроле
+
+  const carOutHandler = () => {
+    dispatch(carOut());
+    isMobileMenuOpen && mobilMenuHandler();
+  };
+
   return (
     <header>
       <div className={`container mx-auto ${styles.header}`}>
@@ -105,7 +111,7 @@ const Header = () => {
                     className={({ isActive }) =>
                       isActive ? styles.active : ''
                     }
-                    onClick={isMobileMenuOpen && mobilMenuHandler}
+                    onClick={carOutHandler}
                   >
                     Прийняти авто
                   </NavLink>

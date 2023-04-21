@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCar } from '../store/features/car/carSlice';
+import { getCar, carOut } from '../store/features/car/carSlice';
 import SomeForm from '../components/addCar/AddCar';
 import useInput from '../hooks/use-input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,9 +14,10 @@ const TakeACar = () => {
     (state) => state.car
   );
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
   const {
     value: enteredVinCode,
     hasError: hasVinCodeInputError,
@@ -41,14 +42,24 @@ const TakeACar = () => {
     try {
       // console.log(enteredVinCode);
       // if (!enteredVinCode) return;
-      dispatch(getCar({ vinCode: enteredVinCode }));
 
-      // if (car) navigate('/addcarrepair');
+      dispatch(getCar({ vinCode: enteredVinCode }));
+      // dispatch(carOut());
     } catch (error) {}
   };
+
+  useEffect(() => {
+    if (car?.length) navigate('/addcarrepair');
+    // dispatch(carOut());
+  }, [car, navigate, dispatch]);
+
   const addCarFormHandler = () => {
-    setAddCarFormVisible(!addCarFormVisible);
+    dispatch(carOut());
+    navigate('/addcar');
   };
+  useEffect(() => {
+    dispatch(carOut());
+  }, [dispatch]);
 
   useEffect(() => {
     if (status) {
@@ -64,13 +75,14 @@ const TakeACar = () => {
         type: messageType === 'ok' ? 'success' : 'error',
       });
     }
-  }, [status, messageType]);
+    // console.log(status + 'takacar');
+    // dispatch(carOut());
+  }, [status]);
 
   return (
     <React.Fragment>
-      {addCarFormVisible && <SomeForm></SomeForm>}
       {!addCarFormVisible && (
-        <div className="">
+        <div className="w-2/3 mx-auto">
           <form
             method="POST"
             encType="multipart/form-data"
@@ -107,11 +119,11 @@ const TakeACar = () => {
               </button>
               {status && (
                 <button
+                  type="button"
                   onClick={addCarFormHandler}
                   // className="w-1/4 mb-2 mx-auto items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
                   className="mx-4 items-center bg-gray-600 text-xs text-white rounded-xl py-2 px-4"
                   // disabled={!isEnteredVinCodeValid && true}
-                  type="submit"
                 >
                   Додати
                 </button>
