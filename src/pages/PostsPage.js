@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PostItem from '../components/layout/PostItem';
 import axios from '../utils/axios';
-import React, { Fragment, useDebugValue, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Loader from '../components/UI/Loader';
 import { postClear } from '../store/features/post/postSlice';
 
