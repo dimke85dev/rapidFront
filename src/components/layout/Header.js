@@ -83,6 +83,42 @@ const Header = () => {
             </li>
             {isAuth && (
               <React.Fragment>
+                <li className={styles.directory}>
+                  <NavLink
+                    to="/directory"
+                    className={({ isActive }) =>
+                      isActive ? styles.active : ''
+                    }
+                    onClick={isMobileMenuOpen && mobilMenuHandler}
+                  >
+                    Довідники
+                  </NavLink>
+                  <ul className={styles['ul-dir-dropdown']}>
+                    <li>
+                      <Link>Користувачі</Link>
+                    </li>
+                    <li>
+                      <Link>Автомобілі</Link>
+                    </li>
+                    <li>
+                      <Link>Види Ремонту</Link>
+                    </li>
+                    <li>
+                      <Link>Прайс</Link>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/reports"
+                        className={({ isActive }) =>
+                          isActive ? styles.active : ''
+                        }
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                      >
+                        Звіт
+                      </NavLink>
+                    </li>
+                  </ul>
+                </li>
                 <li className={styles.service}>
                   <NavLink
                     to="/service"
@@ -119,43 +155,6 @@ const Header = () => {
                       >
                         Створити статтю
                       </Link>
-                    </li>
-                  </ul>
-                </li>
-
-                <li className={styles.directory}>
-                  <NavLink
-                    to="/directory"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
-                    onClick={isMobileMenuOpen && mobilMenuHandler}
-                  >
-                    Довідники
-                  </NavLink>
-                  <ul className={styles['ul-dir-dropdown']}>
-                    <li>
-                      <Link>Користувачі</Link>
-                    </li>
-                    <li>
-                      <Link>Автомобілі</Link>
-                    </li>
-                    <li>
-                      <Link>Види Ремонту</Link>
-                    </li>
-                    <li>
-                      <Link>Прайс</Link>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/reports"
-                        className={({ isActive }) =>
-                          isActive ? styles.active : ''
-                        }
-                        onClick={isMobileMenuOpen && mobilMenuHandler}
-                      >
-                        Звіт
-                      </NavLink>
                     </li>
                   </ul>
                 </li>
