@@ -17,6 +17,7 @@ const PostsPage = () => {
       const { data, status } = await axios.get('/posts/user/me');
       setPosts(data);
       setStatus(status === 200 ? true : false);
+      // setStatus(false);
       // console.log(statusText);
       console.log(data1);
     } catch (error) {
