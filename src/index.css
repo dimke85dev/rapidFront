@@ -58,6 +58,12 @@ h1 {
   margin-bottom: 6px;
   margin-top: 10px;
 }
+header {
+  z-index: 100;
+}
+main {
+  z-index: 200;
+}
 
 @media (max-width: 768px) {
   .post-elem {

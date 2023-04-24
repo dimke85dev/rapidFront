@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import styles from './Header.module.css';
 import React, { useEffect, useState } from 'react';
@@ -71,7 +71,7 @@ const Header = () => {
             isMobileMenuOpen ? styles.mobileMenu : ''
           }`}
         >
-          <ul>
+          <ul className={styles['ul-main']}>
             <li>
               <NavLink
                 to="/"
@@ -83,18 +83,47 @@ const Header = () => {
             </li>
             {isAuth && (
               <React.Fragment>
-                <li>
+                <li className={styles.service}>
                   <NavLink
-                    to="/posts"
+                    to="/service"
                     className={({ isActive }) =>
                       isActive ? styles.active : ''
                     }
                     onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
-                    Мої Статті
+                    Сервіси
                   </NavLink>
+                  <ul className={styles['ul-serv-dropdown']}>
+                    <li>
+                      <Link
+                        to="/takeacar"
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                      >
+                        Прийняти авто
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        to="/posts"
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                      >
+                        Мої Статті
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        to="/newPost"
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                      >
+                        Створити статтю
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
-                <li>
+
+                <li className={styles.directory}>
                   <NavLink
                     to="/directory"
                     className={({ isActive }) =>
@@ -102,31 +131,33 @@ const Header = () => {
                     }
                     onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
-                    Створити статтю
+                    Довідники
                   </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/takeacar"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
-                    onClick={carOutHandler}
-                  >
-                    Прийняти авто
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/reports"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
-                    onClick={isMobileMenuOpen && mobilMenuHandler}
-                  >
-                    Звіт
-                  </NavLink>
+                  <ul className={styles['ul-dir-dropdown']}>
+                    <li>
+                      <Link>Користувачі</Link>
+                    </li>
+                    <li>
+                      <Link>Автомобілі</Link>
+                    </li>
+                    <li>
+                      <Link>Види Ремонту</Link>
+                    </li>
+                    <li>
+                      <Link>Прайс</Link>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/reports"
+                        className={({ isActive }) =>
+                          isActive ? styles.active : ''
+                        }
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                      >
+                        Звіт
+                      </NavLink>
+                    </li>
+                  </ul>
                 </li>
                 <li>
                   <NavLink
@@ -151,6 +182,7 @@ const Header = () => {
                 Про нас
               </NavLink>
             </li>
+
             <li>
               {isAuth ? (
                 <NavLink

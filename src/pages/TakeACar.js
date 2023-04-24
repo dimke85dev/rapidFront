@@ -5,12 +5,11 @@ import useInput from '../hooks/use-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import Loader from '../components/UI/Loader';
 
 const TakeACar = () => {
   const [addCarFormVisible, setAddCarFormVisible] = useState(false);
-  const [isVincode, setIsVincode] = useState(false);
-  const [isVincodeVisible, setIsVincodeVisible] = useState(false);
-  const { status, messageType, statusAnswer, car } = useSelector(
+  const { status, messageType, isloading, car } = useSelector(
     (state) => state.car
   );
 
@@ -57,6 +56,7 @@ const TakeACar = () => {
     dispatch(carOut());
     navigate('/addcar');
   };
+
   useEffect(() => {
     dispatch(carOut());
   }, [dispatch]);
@@ -78,11 +78,11 @@ const TakeACar = () => {
     // console.log(status + 'takacar');
     // dispatch(carOut());
   }, [status]);
-
   return (
     <React.Fragment>
+      {isloading && <Loader />}
       {!addCarFormVisible && (
-        <div className="w-2/3 mx-auto">
+        <div className="mobile-form w-2/3 mx-auto">
           <form
             method="POST"
             encType="multipart/form-data"

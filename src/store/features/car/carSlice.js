@@ -65,7 +65,7 @@ export const CarSlice = createSlice({
       state.car = null;
       state.status = null;
       state.messageType = null;
-      state.isloading = false;
+      // state.isloading = false;
     },
   },
   extraReducers: (builder) => {

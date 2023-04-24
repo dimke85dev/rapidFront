@@ -20,6 +20,7 @@ import AddPostPage from './pages/AddPostPage';
 import EditPostPage from './pages/EditPostPage';
 import AddCarRepair from './pages/AddCarRepair';
 import AddCar from './components/addCar/AddCar';
+import Posts from './pages/Directory';
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ function App() {
       {/* <RouterProvider router={router} />; */}
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/service" element={<MainPage />} />
+        <Route path="/directory" element={<MainPage />} />
 
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/out" element={<MainPage />} />
@@ -50,7 +53,7 @@ function App() {
         <Route path="/addcarrepair" element={<AddCarRepair />} />
         <Route path="/addcar" element={<AddCar />} />
 
-        <Route path="/directory" element={<Directory />} />
+        {/* <Route path="/directory" element={<Directory />} /> */}
 
         <Route path="/reports" element={<Reports />} />
         <Route path="/settings" element={<Settings />} />

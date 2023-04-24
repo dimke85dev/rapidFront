@@ -5,12 +5,13 @@ import SelectToSelect from '../UI/SelectToSelect';
 import './Form.css';
 import { carOut, createCar } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../UI/Loader';
 
 const AddCar = (props) => {
   const [carName, setCarName] = useState('');
-  const { status, messageType } = useSelector((state) => state.car);
+  const { status, messageType, isloading } = useSelector((state) => state.car);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -126,59 +127,61 @@ const AddCar = (props) => {
   const vinCodeInputClasses = hasVinCodeInputError ? 'invalid' : '';
 
   const ageCarInputClasses = hasageCarInputError ? 'invalid' : '';
-
   return (
-    <form
-      className={'control-group w-2/3 mx-auto mobile-form'}
-      onSubmit={formSubmitHandler}
-    >
-      <div className="form-control ">
-        <SelectToSelect carLable={selectToSelectFunction} />
-        <div className={`${ageCarInputClasses} flex flex-col`}>
-          <label className="form-label" htmlFor="ageCar">
-            Введіть рік авто
-          </label>
-          <input
-            className="form-input border-input "
-            type="text"
-            id="ageCar"
-            value={enteredageCar}
-            onChange={ageCarInputChangeHandler}
-            onBlur={ageCarInputLostFocusHandler}
-          ></input>
-          {hasageCarInputError && (
-            <p className="error-text">Поле повинно бути заповнене</p>
-          )}
-        </div>
+    <Fragment>
+      <form
+        className={'control-group w-2/3 mx-auto mobile-form'}
+        onSubmit={formSubmitHandler}
+      >
+        {isloading && <Loader />}
+        <div className="form-control ">
+          <SelectToSelect carLable={selectToSelectFunction} />
+          <div className={`${ageCarInputClasses} flex flex-col`}>
+            <label className="form-label" htmlFor="ageCar">
+              Введіть рік авто
+            </label>
+            <input
+              className="form-input border-input "
+              type="text"
+              id="ageCar"
+              value={enteredageCar}
+              onChange={ageCarInputChangeHandler}
+              onBlur={ageCarInputLostFocusHandler}
+            ></input>
+            {hasageCarInputError && (
+              <p className="error-text">Поле повинно бути заповнене</p>
+            )}
+          </div>
 
-        <div className={`${vinCodeInputClasses} flex flex-col`}>
-          <label className="form-label" htmlFor="vinCode">
-            Введіть "VinCode"
-          </label>
-          <input
-            className="form-input border-input"
-            type="vinCode"
-            id="vinCode"
-            value={enteredVinCode}
-            onChange={vinCodeInputChangeHandler}
-            onBlur={vinCodeInputLostFocusHandler}
-          />
-          {hasVinCodeInputError && (
-            <p className="error-text">Поле VinCode повинно бути заповнене</p>
-          )}
+          <div className={`${vinCodeInputClasses} flex flex-col`}>
+            <label className="form-label" htmlFor="vinCode">
+              Введіть "VinCode"
+            </label>
+            <input
+              className="form-input border-input"
+              type="vinCode"
+              id="vinCode"
+              value={enteredVinCode}
+              onChange={vinCodeInputChangeHandler}
+              onBlur={vinCodeInputLostFocusHandler}
+            />
+            {hasVinCodeInputError && (
+              <p className="error-text">Поле VinCode повинно бути заповнене</p>
+            )}
+          </div>
+          <div className="form-actions">
+            <button
+              type="submit"
+              onClick={formSubmitHandler}
+              className={isFormValid ? 'btn-submit' : 'btn-invalid'}
+              disabled={!isFormValid && true}
+            >
+              Зберегти
+            </button>
+          </div>
         </div>
-        <div className="form-actions">
-          <button
-            type="submit"
-            onClick={formSubmitHandler}
-            className={isFormValid ? 'btn-submit' : 'btn-invalid'}
-            disabled={!isFormValid && true}
-          >
-            Зберегти
-          </button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </Fragment>
   );
 };
 
