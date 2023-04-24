@@ -13,9 +13,12 @@ const PostsPage = () => {
 
   const fetchMyPosts = async () => {
     try {
-      const { data, statusText } = await axios.get('/posts/user/me');
+      const data1 = await axios.get('/posts/user/me');
+      const { data, status } = await axios.get('/posts/user/me');
       setPosts(data);
-      setStatus(statusText === 'OK' ? true : false);
+      setStatus(status === 200 ? true : false);
+      // console.log(statusText);
+      console.log(data1);
     } catch (error) {
       console.log(error);
     }

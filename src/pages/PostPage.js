@@ -32,9 +32,9 @@ const PostPage = () => {
   const token = Boolean(localStorage.token);
 
   const fetchPost = useCallback(async () => {
-    const { data, statusText } = await axios.get(`/posts/${params.id}`);
+    const { data, status } = await axios.get(`/posts/${params.id}`);
     setPost(data);
-    setStatus(statusText === 'OK' ? true : false); //пока запросс выполняеться всегда false
+    setStatus(status === 200 ? true : false); //пока запросс выполняеться всегда false
   }, [params.id]);
 
   const fetchComments = useCallback(async () => {
