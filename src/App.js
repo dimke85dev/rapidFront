@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Layout from './components/layout/Layout';
 import TakeACar from './pages/TakeACar';
-import Directory from './pages/Directory';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import RegisterPage from './pages/RegisterPage';
@@ -20,7 +19,8 @@ import AddPostPage from './pages/AddPostPage';
 import EditPostPage from './pages/EditPostPage';
 import AddCarRepair from './pages/AddCarRepair';
 import AddCar from './components/addCar/AddCar';
-import Posts from './pages/Directory';
+import MainRepairsPage from './pages/MainRepairsPage';
+import MainRepairPage from './pages/MainRepairPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,10 +50,11 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/takeacar" element={<TakeACar />} />
-        <Route path="/addcarrepair" element={<AddCarRepair />} />
         <Route path="/addcar" element={<AddCar />} />
+        <Route path="/addcarrepair" element={<AddCarRepair />} />
 
-        {/* <Route path="/directory" element={<Directory />} /> */}
+        <Route path="/mainrepair" element={<MainRepairsPage />} />
+        <Route path="/mainrepair/:id" element={<MainRepairPage />} />
 
         <Route path="/reports" element={<Reports />} />
         <Route path="/settings" element={<Settings />} />

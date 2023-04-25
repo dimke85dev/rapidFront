@@ -101,7 +101,7 @@ const Header = () => {
                       <Link>Автомобілі</Link>
                     </li>
                     <li>
-                      <Link>Види Ремонту</Link>
+                      <Link to="/mainrepair">Види Ремонту</Link>
                     </li>
                     <li>
                       <Link>Прайс</Link>
