@@ -113,6 +113,9 @@ header {
 }
 
 @media (max-width: 768px) {
+  .ul-main {
+    gap: 10px 0px;
+  }
   header {
     /* position: fixed; */
     height: 70px;
@@ -170,6 +173,7 @@ header {
     z-index: 5;
 
     padding-top: 140px;
+    gap: 10px 0px;
   }
   .mobileMenu .ul-main {
     flex-direction: column;

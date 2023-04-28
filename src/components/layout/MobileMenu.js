@@ -70,7 +70,7 @@ const MobileMenu = () => {
   const service = serviceMenu ? '' : 'hidden';
   //   const mainMenu = directoryMenu || serviceMenu ? 'hidden' : '';
   return (
-    <div className={`container mx-auto ${styles.header}`}>
+    <div className={`container  mx-auto ${styles.header}`}>
       <img
         onClick={mobilMenuHandler}
         className={`${isScrolled ? styles['logo-scroll'] : ''} ` + styles.logo}
@@ -84,11 +84,11 @@ const MobileMenu = () => {
           <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
         </button>
         <nav
-          className={`${styles.nav} ${
+          className={`${styles.nav}  ${
             isMobileMenuOpen ? styles.mobileMenu : ''
           }`}
         >
-          <ul className={styles['ul-main']}>
+          <ul className={`${styles['ul-main']} gap-3 `}>
             {mainMenu && (
               <Fragment>
                 <li>
@@ -152,7 +152,7 @@ const MobileMenu = () => {
               </Fragment>
             )}
 
-            <div className={directory}>
+            <div className={`${directory} flex flex-col  gap-4`}>
               <li>
                 <Link onClick={isMobileMenuOpen && mobilMenuHandler}>
                   Користувачі
@@ -186,7 +186,7 @@ const MobileMenu = () => {
               </li>
             </div>
 
-            <div className={service}>
+            <div className={`${service} flex flex-col  gap-4`}>
               <li>
                 <Link
                   to="/takeacar"
