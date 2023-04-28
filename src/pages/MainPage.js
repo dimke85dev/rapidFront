@@ -16,6 +16,7 @@ const MainPage = () => {
   if (!posts?.length) {
     return (
       <Fragment>
+        {loading && <Loader />}
         <div className="text-xl text-center text-red-500 py-10">
           Статті відсутні
         </div>

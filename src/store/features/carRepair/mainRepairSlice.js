@@ -87,8 +87,8 @@ export const mainRepairSlice = createSlice({
     });
     builder.addCase(createMainRepair.fulfilled, (state, action) => {
       state.loading = false;
-      //   console.log(action.payload);
-      state.mainRepair.push(action.payload);
+      // console.log(action.payload.newMainRepair);
+      state.mainRepair.push(action.payload.newMainRepair);
     });
     builder.addCase(createMainRepair.rejected, (state) => {
       state.loading = false;
