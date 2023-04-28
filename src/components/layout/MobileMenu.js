@@ -94,9 +94,6 @@ const MobileMenu = () => {
                 <li>
                   <NavLink
                     to="/"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
                     onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
                     Головна
@@ -107,9 +104,6 @@ const MobileMenu = () => {
                     <li className={styles.directory}>
                       <NavLink
                         data-type="directory"
-                        className={({ isActive }) =>
-                          !isActive ? styles.active : ''
-                        }
                         onClick={isMobileMenuOpen && directoryHandler}
                       >
                         Довідники
@@ -118,9 +112,6 @@ const MobileMenu = () => {
                     <li className={styles.service}>
                       <NavLink
                         data-type="service"
-                        className={({ isActive }) =>
-                          !isActive ? styles.active : ''
-                        }
                         onClick={isMobileMenuOpen && serviceHandler}
                       >
                         Сервіси
@@ -129,9 +120,6 @@ const MobileMenu = () => {
                     <li>
                       <NavLink
                         to="/settings"
-                        className={({ isActive }) =>
-                          isActive ? styles.active : ''
-                        }
                         onClick={isMobileMenuOpen && mobilMenuHandler}
                       >
                         Параметри
@@ -142,9 +130,6 @@ const MobileMenu = () => {
                 <li>
                   <NavLink
                     to="/about"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
                     onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
                     Про нас
@@ -152,21 +137,12 @@ const MobileMenu = () => {
                 </li>
                 <li className={''}>
                   {isAuth ? (
-                    <NavLink
-                      to="/out"
-                      className={({ isActive }) =>
-                        isActive ? styles.active : ''
-                      }
-                      onClick={logoutHandler}
-                    >
+                    <NavLink to="/out" onClick={logoutHandler}>
                       Вийти
                     </NavLink>
                   ) : (
                     <NavLink
                       to={'/login'}
-                      className={({ isActive }) =>
-                        isActive ? styles.active : ''
-                      }
                       onClick={isMobileMenuOpen && mobilMenuHandler}
                     >
                       Увійти
@@ -203,7 +179,6 @@ const MobileMenu = () => {
               <li>
                 <NavLink
                   to="/reports"
-                  className={({ isActive }) => (isActive ? styles.active : '')}
                   onClick={isMobileMenuOpen && mobilMenuHandler}
                 >
                   Звіт

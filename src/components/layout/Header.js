@@ -9,39 +9,16 @@ import { toast } from 'react-toastify';
 import MobileMenu from './MobileMenu';
 
 const Header = () => {
+  //получаеть ширину экрана и относительно ширины экрана используем то или иное меню
   const [width, setWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  ///// Сохраняем состояние скроллинга и в компоненте меняем класс у элемента
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setisMobile] = useState(false);
-  const [directoryMenu, setDirectoryMenu] = useState(true);
-  const [serviceMenu, setServiceMenu] = useState(true);
+  ////////////////////////////////////
 
   /// Сохраняем состояние открытого меню мобильной версии
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const mobilMenuHandler = (e) => {
-    // e.target.dataset.type === 'directory'
-    //   ? setDirectoryMenu(!directoryMenu)
-    //   : setIsMobileMenuOpen(!isMobileMenuOpen);
-    // e.target.dataset.type === 'service'
-    //   ? setServiceMenu(!serviceMenu)
-    //   : setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const directoryHandler = (e) => {
-    // setDirectoryMenu(!directoryMenu);
-    // setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-  const serviceHandler = (e) => {
-    // setServiceMenu(!serviceMenu);
-  };
 
   //////
   const isAuth = useSelector(checkIsAuth);
@@ -49,16 +26,10 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    isMobileMenuOpen && setIsMobileMenuOpen(!isMobileMenuOpen);
     window.localStorage.removeItem('token');
     toast('Ви вийшли із системи', {
       position: 'bottom-right',
     });
-  };
-
-  const carOutHandler = () => {
-    dispatch(carOut());
-    isMobileMenuOpen && mobilMenuHandler();
   };
 
   return (
@@ -66,35 +37,16 @@ const Header = () => {
       {width > 768 ? (
         <div className={`container mx-auto ${styles.header}`}>
           <img
-            onClick={mobilMenuHandler}
-            className={
-              `${isScrolled ? styles['logo-scroll'] : ''} ` + styles.logo
-            }
             alt="car service"
             src="check-engine.svg"
+            className={styles.logo}
           ></img>
-          <button onClick={mobilMenuHandler} className={styles['menu-btn']}>
-            <span
-              className={styles[isMobileMenuOpen ? 'black' : 'white']}
-            ></span>
-            <span
-              className={styles[isMobileMenuOpen ? 'black' : 'white']}
-            ></span>
-            <span
-              className={styles[isMobileMenuOpen ? 'black' : 'white']}
-            ></span>
-          </button>
-          <nav
-            className={`${styles.nav} ${
-              isMobileMenuOpen ? styles.mobileMenu : ''
-            }`}
-          >
+          <nav className={`${styles.nav}`}>
             <ul className={styles['ul-main']}>
               <li>
                 <NavLink
                   to="/"
                   className={({ isActive }) => (isActive ? styles.active : '')}
-                  onClick={isMobileMenuOpen && mobilMenuHandler}
                 >
                   Головна
                 </NavLink>
@@ -107,42 +59,37 @@ const Header = () => {
                       className={({ isActive }) =>
                         !isActive ? styles.active : ''
                       }
-                      onClick={isMobileMenuOpen && directoryHandler}
                     >
                       Довідники
                     </NavLink>
-                    {directoryMenu && (
-                      <ul
-                        //
-                        className={styles['ul-dir-dropdown']}
-                      >
-                        <li>
-                          <Link onClick={directoryHandler}>Користувачі</Link>
-                        </li>
-                        <li>
-                          <Link onClick={directoryHandler}>Автомобілі</Link>
-                        </li>
-                        <li>
-                          <Link to="/mainrepair" onClick={directoryHandler}>
-                            Види Ремонту
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={directoryHandler}>Прайс</Link>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/reports"
-                            className={({ isActive }) =>
-                              isActive ? styles.active : ''
-                            }
-                            onClick={isMobileMenuOpen && mobilMenuHandler}
-                          >
-                            Звіт
-                          </NavLink>
-                        </li>
-                      </ul>
-                    )}
+
+                    <ul
+                      //
+                      className={styles['ul-dir-dropdown']}
+                    >
+                      <li>
+                        <Link>Користувачі</Link>
+                      </li>
+                      <li>
+                        <Link>Автомобілі</Link>
+                      </li>
+                      <li>
+                        <Link to="/mainrepair">Види Ремонту</Link>
+                      </li>
+                      <li>
+                        <Link>Прайс</Link>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/reports"
+                          className={({ isActive }) =>
+                            isActive ? styles.active : ''
+                          }
+                        >
+                          Звіт
+                        </NavLink>
+                      </li>
+                    </ul>
                   </li>
                   <li className={styles.service}>
                     <NavLink
@@ -150,31 +97,22 @@ const Header = () => {
                       className={({ isActive }) =>
                         !isActive ? styles.active : ''
                       }
-                      onClick={isMobileMenuOpen && serviceHandler}
                     >
                       Сервіси
                     </NavLink>
-                    {serviceMenu && (
-                      <ul className={styles['ul-serv-dropdown']}>
-                        <li>
-                          <Link to="/takeacar" onClick={serviceHandler}>
-                            Прийняти авто
-                          </Link>
-                        </li>
+                    <ul className={styles['ul-serv-dropdown']}>
+                      <li>
+                        <Link to="/takeacar">Прийняти авто</Link>
+                      </li>
 
-                        <li>
-                          <Link to="/posts" onClick={serviceHandler}>
-                            Мої Статті
-                          </Link>
-                        </li>
+                      <li>
+                        <Link to="/posts">Мої Статті</Link>
+                      </li>
 
-                        <li>
-                          <Link to="/newPost" onClick={serviceHandler}>
-                            Створити статтю
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
+                      <li>
+                        <Link to="/newPost">Створити статтю</Link>
+                      </li>
+                    </ul>
                   </li>
                   <li>
                     <NavLink
@@ -182,7 +120,6 @@ const Header = () => {
                       className={({ isActive }) =>
                         isActive ? styles.active : ''
                       }
-                      onClick={isMobileMenuOpen && mobilMenuHandler}
                     >
                       Параметри
                     </NavLink>
@@ -194,7 +131,6 @@ const Header = () => {
                 <NavLink
                   to="/about"
                   className={({ isActive }) => (isActive ? styles.active : '')}
-                  onClick={isMobileMenuOpen && mobilMenuHandler}
                 >
                   Про нас
                 </NavLink>
@@ -217,7 +153,6 @@ const Header = () => {
                     className={({ isActive }) =>
                       isActive ? styles.active : ''
                     }
-                    onClick={isMobileMenuOpen && mobilMenuHandler}
                   >
                     Увійти
                   </NavLink>
