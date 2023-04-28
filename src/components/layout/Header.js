@@ -54,14 +54,7 @@ const Header = () => {
               {isAuth && (
                 <React.Fragment>
                   <li className={styles.directory}>
-                    <NavLink
-                      data-type="directory"
-                      className={({ isActive }) =>
-                        !isActive ? styles.active : ''
-                      }
-                    >
-                      Довідники
-                    </NavLink>
+                    <NavLink data-type="directory">Довідники</NavLink>
 
                     <ul
                       //
@@ -82,9 +75,9 @@ const Header = () => {
                       <li>
                         <NavLink
                           to="/reports"
-                          className={({ isActive }) =>
-                            isActive ? styles.active : ''
-                          }
+                          // className={({ isActive }) =>
+                          //   isActive ? styles.active : ''
+                          // }
                         >
                           Звіт
                         </NavLink>
@@ -94,9 +87,9 @@ const Header = () => {
                   <li className={styles.service}>
                     <NavLink
                       data-type="service"
-                      className={({ isActive }) =>
-                        !isActive ? styles.active : ''
-                      }
+                      // className={({ isActive }) =>
+                      //   !isActive ? styles.active : ''
+                      // }
                     >
                       Сервіси
                     </NavLink>
@@ -141,7 +134,7 @@ const Header = () => {
                   <NavLink
                     to="/out"
                     className={({ isActive }) =>
-                      isActive ? styles.active : ''
+                      isActive && width < 768 ? styles.active : ''
                     }
                     onClick={logoutHandler}
                   >
