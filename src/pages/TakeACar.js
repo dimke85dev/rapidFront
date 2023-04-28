@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import Quagga from 'quagga';
 import { getCar, carOut } from '../store/features/car/carSlice';
 import SomeForm from '../components/addCar/AddCar';
 import useInput from '../hooks/use-input';
@@ -6,8 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import Loader from '../components/UI/Loader';
+import QRCode from 'react-qr-code';
+import { useQrEncode, useQrDecode } from 'react-qr-hooks';
+import QrScanner from '../components/UI/QrScaner';
 
 const TakeACar = () => {
+  const encoded = useQrEncode(
+    'uu1ksd0f538825408' /* object with options (if needed) */
+  );
+
+  const decoded = useQrDecode(encoded /* object with options (if needed) */);
+
   const [addCarFormVisible, setAddCarFormVisible] = useState(false);
   const { status, messageType, isloading, car } = useSelector(
     (state) => state.car
@@ -78,8 +88,26 @@ const TakeACar = () => {
     // console.log(status + 'takacar');
     // dispatch(carOut());
   }, [status]);
+
+  console.log(encoded);
   return (
     <React.Fragment>
+      {/* <QRCode
+        size={256}
+        style={{
+          height: '200px',
+          maxWidth: '100%',
+          width: '200px',
+          margin: '20px auto',
+        }}
+        value={'hello wo'}
+        viewBox={`0 0 256 256`}
+      /> */}
+      {/* <img src={encoded} alt="My QR code" />
+      <p>{decoded}</p> */}
+
+      <QrScanner />
+      <div />
       {isloading && <Loader />}
       {!addCarFormVisible && (
         <div className="mobile-form w-2/3 mx-auto">
