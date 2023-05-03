@@ -9,7 +9,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../UI/Loader';
 
-const AddCar = (props) => {
+const AddCar = () => {
   const [carName, setCarName] = useState('');
   const { status, messageType, isloading } = useSelector((state) => state.car);
   const navigate = useNavigate();
@@ -30,25 +30,13 @@ const AddCar = (props) => {
         type: messageType === 'ok' ? 'success' : 'error',
       });
     }
-    // console.log(status + 'addcar');
     messageType === 'ok' && navigate('/takeacar');
     dispatch(carOut());
   }, [status, messageType]);
 
   const selectToSelectFunction = (carLable, modalLable) => {
     setCarName(carLable + ' ' + modalLable);
-    // console.log(carLable, modalLable);
   };
-  // console.log(carName);
-
-  // const {
-  //   value: enteredName,
-  //   hasError: hasNameInputError,
-  //   isValid: isEnteredNameValid,
-  //   inputChangeHandler: nameInputChangeHandler,
-  //   inputLostFocusHandler: nameInputLostFocusHandler,
-  //   resetValues: resetNameInputValues,
-  // } = useInput((val) => val.trim() !== '');
 
   const {
     value: enteredVinCode,
@@ -103,7 +91,6 @@ const AddCar = (props) => {
         })
       );
       dispatch(carOut());
-      // messageType === 'ok' && navigate('/takeacar');
     } catch (error) {
       toast(error, {
         position: 'bottom-right',
@@ -117,16 +104,14 @@ const AddCar = (props) => {
         type: 'error',
       });
     }
-    // resetNameInputValues();
     resetVinCodeInputValues();
     resetageCarInputValues();
   };
 
-  // const nameInputClasses = hasNameInputError ? 'invalid' : '';
-
   const vinCodeInputClasses = hasVinCodeInputError ? 'invalid' : '';
 
   const ageCarInputClasses = hasageCarInputError ? 'invalid' : '';
+
   return (
     <Fragment>
       <form

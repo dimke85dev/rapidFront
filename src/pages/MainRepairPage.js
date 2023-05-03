@@ -1,23 +1,123 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getMainRepairById } from '../store/features/carRepair/mainRepairSlice';
+import { Link } from 'react-router-dom';
+
+import {
+  getAllMainRepairs,
+  getMainRepairById,
+} from '../store/features/carRepair/mainRepairSlice';
 import Loader from '../components/UI/Loader';
+import { toast } from 'react-toastify';
+import {
+  createTypeRepair,
+  getAllTypeRepairs,
+  typeRepairClear,
+} from '../store/features/carRepair/typeRepairSlice';
 
 const MainRepairPage = () => {
+  const [isTypeRepairFormVisible, setIsTypeRepairFormActive] = useState(false);
+  const [typeRepairName, setTypeRepairName] = useState(false);
+
   const param = useParams();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMainRepairById(param.id));
-  }, [dispatch, param.id]);
 
   const { loading, mainRepair } = useSelector((state) => state.mainrepair);
-  //   console.log(mainRepair);
+  const { typeRepair, status } = useSelector((state) => state.typerepair);
+
+  useEffect(() => {
+    dispatch(typeRepairClear());
+    if (status) toast('Додано');
+    dispatch(getMainRepairById(param.id));
+    dispatch(getAllTypeRepairs({ id: param.id }));
+  }, [dispatch, status]);
+
+  const AddTypeRepairHandler = () => {
+    setIsTypeRepairFormActive(!isTypeRepairFormVisible);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (!typeRepairName.length || typeRepairName === ' ') {
+      toast('Поле повинно бути заповнене');
+      return;
+    }
+    const data = {
+      nameTypeRepair: typeRepairName,
+      id: param.id,
+    };
+    dispatch(createTypeRepair(data));
+    setIsTypeRepairFormActive(!isTypeRepairFormVisible);
+    setTypeRepairName('');
+  };
 
   return (
-    <div className="w-2/3 bg-gray-300 mx-auto flex flex-col text-blue-700">
-      {loading ? <Loader /> : <div>{mainRepair.nameMainRepair}</div>}
-    </div>
+    <Fragment>
+      {!isTypeRepairFormVisible ? (
+        <div className="mobile-form w-2/3 bg-gray-300 mx-auto px-3 flex rounded-xl flex-col text-black-700">
+          <Link
+            to="/mainrepair"
+            className="fixed my-3 mx-auto items-center bg-gray-600 text-xs text-white hover:bg-blue-300 hover:shadow-lg hover:shadow-black-700/70 hover:text-black rounded-xl py-2 px-4"
+          >
+            назад
+          </Link>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className="my-3">{mainRepair.nameMainRepair}</div>
+          )}
+          <div className="mobile-form flex flex-col w-full px-6 py-4 rounded-xl bg-white mx-auto shadow-lg shadow-gray-700/70">
+            <span className="grid grid-cols-1 grid-rows-4 gap-1  ">
+              {typeRepair.length
+                ? typeRepair[0].map((el) => (
+                    <p
+                      className=" border-solid border-2 border-gray-600 rounded-xl mb-2"
+                      key={el._id}
+                      to={`/mainrepair/${el._id}`}
+                    >
+                      {el.nameTypeRepair}
+                    </p>
+                  ))
+                : 'Записи відсутні'}
+            </span>
+          </div>
+
+          <button
+            onClick={AddTypeRepairHandler}
+            className="my-3 mx-auto flex justify-center items-center bg-gray-600 text-xs text-white hover:bg-blue-300 hover:shadow-lg hover:shadow-black-700/70 hover:text-black rounded-xl py-2 px-4"
+          >
+            Додати
+          </button>
+        </div>
+      ) : (
+        <form
+          onSubmit={submitHandler}
+          className="flex flex-col p-3 mobile-form w-2/3 h-full mx-auto gap-3  bg-gray-300"
+        >
+          <label>Тип послуги</label>
+          <input
+            onChange={(e) => setTypeRepairName(e.target.value)}
+            className="p-2"
+            placeholder="Введіть вид послуги"
+          ></input>
+          <div className="flex  gap-5 mx-auto">
+            <button
+              onClick={submitHandler}
+              className="mx-auto flex justify-center items-center bg-gray-600 text-xs text-white hover:bg-blue-300 hover:shadow-lg hover:shadow-black-700/70 hover:text-black rounded-xl p-2"
+              type="button"
+            >
+              Зберегти
+            </button>
+            <button
+              className="mx-auto flex justify-center items-center bg-gray-600 text-xs text-white hover:bg-blue-300 hover:shadow-lg hover:shadow-black-700/70 hover:text-black rounded-xl p-2"
+              type="игеещт"
+            >
+              Відміна
+            </button>
+          </div>
+        </form>
+      )}
+    </Fragment>
   );
 };
 

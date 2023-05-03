@@ -1,23 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Quagga from 'quagga';
 import { getCar, carOut } from '../store/features/car/carSlice';
-import SomeForm from '../components/addCar/AddCar';
 import useInput from '../hooks/use-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import Loader from '../components/UI/Loader';
-import QRCode from 'react-qr-code';
-import { useQrEncode, useQrDecode } from 'react-qr-hooks';
-import QrScanner from '../components/UI/QrScaner';
 
 const TakeACar = () => {
-  const encoded = useQrEncode(
-    'uu1ksd0f538825408' /* object with options (if needed) */
-  );
-
-  const decoded = useQrDecode(encoded /* object with options (if needed) */);
-
   const [addCarFormVisible, setAddCarFormVisible] = useState(false);
   const { status, messageType, isloading, car } = useSelector(
     (state) => state.car
@@ -39,27 +28,17 @@ const TakeACar = () => {
     return vinRegExp.test(vin.toUpperCase());
   });
 
-  // function validateVin(vin) {
-  //   const vinRegExp = /^[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}$/;
-  //   return vinRegExp.test(vin.toUpperCase());
-  // }
-
   const vinCodeInputClasses = hasVinCodeInputError ? 'invalid' : '';
 
   const submitHandler = (e) => {
     e.preventDefault();
     try {
-      // console.log(enteredVinCode);
-      // if (!enteredVinCode) return;
-
       dispatch(getCar({ vinCode: enteredVinCode }));
-      // dispatch(carOut());
     } catch (error) {}
   };
 
   useEffect(() => {
     if (car?.length) navigate('/addcarrepair');
-    // dispatch(carOut());
   }, [car, navigate, dispatch]);
 
   const addCarFormHandler = () => {
@@ -89,25 +68,8 @@ const TakeACar = () => {
     // dispatch(carOut());
   }, [status]);
 
-  console.log(encoded);
   return (
     <React.Fragment>
-      {/* <QRCode
-        size={256}
-        style={{
-          height: '200px',
-          maxWidth: '100%',
-          width: '200px',
-          margin: '20px auto',
-        }}
-        value={'hello wo'}
-        viewBox={`0 0 256 256`}
-      /> */}
-      {/* <img src={encoded} alt="My QR code" />
-      <p>{decoded}</p> */}
-
-      <QrScanner />
-      <div />
       {isloading && <Loader />}
       {!addCarFormVisible && (
         <div className="mobile-form w-2/3 mx-auto">
