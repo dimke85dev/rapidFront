@@ -172,7 +172,10 @@ const MobileMenu = () => {
                 </Link>
               </li>
               <li>
-                <Link onClick={isMobileMenuOpen && mobilMenuHandler}>
+                <Link
+                  to="/price"
+                  onClick={isMobileMenuOpen && mobilMenuHandler}
+                >
                   Прайс
                 </Link>
               </li>
