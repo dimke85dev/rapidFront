@@ -38,6 +38,10 @@ const MainRepairsPage = () => {
     setMainReapairName('');
   };
 
+  const backHandler = () => {
+    setIsAddMAinRepairFormActive(!isAddMAinRepairFormActive);
+  };
+
   return (
     <Fragment>
       {!isAddMAinRepairFormActive ? (
@@ -90,7 +94,8 @@ const MainRepairsPage = () => {
             </button>
             <button
               className="mx-auto flex justify-center items-center bg-gray-600 text-xs text-white hover:bg-blue-300 hover:shadow-lg hover:shadow-black-700/70 hover:text-black rounded-xl p-2"
-              type="игеещт"
+              type="button"
+              onClick={backHandler}
             >
               Відміна
             </button>

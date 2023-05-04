@@ -3,6 +3,7 @@ import axios from '../../../utils/axios';
 
 const initialState = {
   typeRepair: [],
+  typeAllRepair: [],
   loading: false,
   status: null,
 };
@@ -18,6 +19,16 @@ export const createTypeRepair = createAsyncThunk(
     }
   }
 );
+
+export const getAllTypeRepairsGet = createAsyncThunk('/price', async () => {
+  try {
+    const { data } = await axios.get('/typerepair/getalltype');
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export const getAllTypeRepairs = createAsyncThunk(
   '/typeRepair/getAllTypeRepair',
@@ -89,24 +100,24 @@ export const typeRepairSlice = createSlice({
     });
     builder.addCase(getAllTypeRepairs.fulfilled, (state, action) => {
       state.loading = false;
-      state.typeRepair.push(action.payload);
+      state.typeRepair = action.payload;
     });
     builder.addCase(getAllTypeRepairs.rejected, (state) => {
       state.loading = false;
     });
 
     //Get ALL Posts
-    // builder.addCase(getTypeRepairById.pending, (state) => {
-    //   state.loading = true;
-    //   state.status = null;
-    // });
-    // builder.addCase(getTypeRepairById.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.mainRepair = action.payload;
-    // });
-    // builder.addCase(getMainRepairById.rejected, (state) => {
-    //   state.loading = false;
-    // });
+    builder.addCase(getAllTypeRepairsGet.pending, (state) => {
+      state.loading = true;
+      state.status = null;
+    });
+    builder.addCase(getAllTypeRepairsGet.fulfilled, (state, action) => {
+      state.loading = false;
+      state.typeAllRepair = action.payload;
+    });
+    builder.addCase(getAllTypeRepairsGet.rejected, (state) => {
+      state.loading = false;
+    });
 
     // //Remove Post
     // builder.addCase(removePost.pending, (state) => {

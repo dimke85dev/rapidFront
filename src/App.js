@@ -21,6 +21,7 @@ import AddCarRepair from './pages/AddCarRepair';
 import AddCar from './components/addCar/AddCar';
 import MainRepairsPage from './pages/MainRepairsPage';
 import MainRepairPage from './pages/MainRepairPage';
+import Price from './pages/Price';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
         <Route path="/:id/editPost" element={<EditPostPage />} />
 
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/price" element={<Price />} />
 
         <Route path="/about" element={<AboutPages />} />
 
