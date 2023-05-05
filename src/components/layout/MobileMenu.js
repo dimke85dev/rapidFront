@@ -128,6 +128,14 @@ const MobileMenu = () => {
                   </React.Fragment>
                 )}
                 <li>
+                  <Link
+                    to="/price"
+                    onClick={isMobileMenuOpen && mobilMenuHandler}
+                  >
+                    Прайс
+                  </Link>
+                </li>
+                <li>
                   <NavLink
                     to="/about"
                     onClick={isMobileMenuOpen && mobilMenuHandler}
@@ -171,14 +179,7 @@ const MobileMenu = () => {
                   Види Ремонту
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/price"
-                  onClick={isMobileMenuOpen && mobilMenuHandler}
-                >
-                  Прайс
-                </Link>
-              </li>
+
               <li>
                 <NavLink
                   to="/reports"

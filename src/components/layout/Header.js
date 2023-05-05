@@ -69,9 +69,7 @@ const Header = () => {
                       <li>
                         <Link to="/mainrepair">Види Ремонту</Link>
                       </li>
-                      <li>
-                        <Link to="/price">Прайс</Link>
-                      </li>
+
                       <li>
                         <NavLink
                           to="/reports"
@@ -120,6 +118,9 @@ const Header = () => {
                 </React.Fragment>
               )}
 
+              <li>
+                <Link to="/price">Прайс</Link>
+              </li>
               <li>
                 <NavLink
                   to="/about"

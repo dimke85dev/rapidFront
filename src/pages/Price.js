@@ -1,9 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { getAllMainRepairs } from '../store/features/carRepair/mainRepairSlice';
-import {
-  getAllTypeRepairsGet,
-  typeRepairClear,
-} from '../store/features/carRepair/typeRepairSlice';
+import { getAllTypeRepairsGet } from '../store/features/carRepair/typeRepairSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/UI/Loader';
 
