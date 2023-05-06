@@ -15,7 +15,7 @@ import {
   typeRepairClear,
 } from '../store/features/carRepair/typeRepairSlice';
 
-const MainRepairPage = () => {
+const TypeRepairPage = () => {
   const [isTypeRepairFormVisible, setIsTypeRepairFormActive] = useState(false);
   const [typeRepairName, setTypeRepairName] = useState('');
   const [price, setPrice] = useState(0);
@@ -148,4 +148,4 @@ const MainRepairPage = () => {
   );
 };
 
-export default MainRepairPage;
+export default TypeRepairPage;

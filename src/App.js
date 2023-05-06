@@ -20,7 +20,7 @@ import EditPostPage from './pages/EditPostPage';
 import AddCarRepair from './pages/AddCarRepair';
 import AddCar from './components/addCar/AddCar';
 import MainRepairsPage from './pages/MainRepairsPage';
-import MainRepairPage from './pages/MainRepairPage';
+import TypeRepairPage from './pages/TypeRepairPage';
 import Price from './pages/Price';
 
 function App() {
@@ -56,7 +56,7 @@ function App() {
         <Route path="/addcarrepair" element={<AddCarRepair />} />
 
         <Route path="/mainrepair" element={<MainRepairsPage />} />
-        <Route path="/mainrepair/:id" element={<MainRepairPage />} />
+        <Route path="/mainrepair/:id" element={<TypeRepairPage />} />
 
         <Route path="/reports" element={<Reports />} />
         <Route path="/settings" element={<Settings />} />
