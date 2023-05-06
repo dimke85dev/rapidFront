@@ -130,7 +130,9 @@ const PostPage = () => {
                   </div>
                 </div>
                 <div className="text-xl">{post.title}</div>
-                <p className="opacity-60 text-xs pt-4">{post.text}</p>
+                <p className="opacity-60 text-xs pt-4 text-justify indent-4">
+                  {post.text}
+                </p>
                 <div className="flex gap-3 items-center justify-between">
                   <div className="flex gap-2 mt-4">
                     <button className="flex items-center justify-center gap-2 text-xs opacity-50">
