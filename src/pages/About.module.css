@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
@@ -53,11 +56,16 @@ li {
 
 .member h4 {
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.perevagy {
+  font-size: 15px;
 }
 
 .member p {
-  font-family: 'Edu VIC WA NT Beginner', cursive;
+  /* font-family: 'Edu VIC WA NT Beginner', cursive; */
   margin-top: 5px;
   font-size: 16px;
 }
@@ -82,5 +90,7 @@ li {
     width: 100%;
     margin: 0 auto;
     text-align: justify;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
   }
 }

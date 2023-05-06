@@ -31,7 +31,7 @@ const AboutPages = () => {
           </p>
         </div>
         <h3>Наші переваги:</h3>
-        <ul className="text-xs">
+        <ul className={styles.perevagy + ' text-xs'}>
           <li>Досвідчені та кваліфіковані спеціалісти</li>
           <li>Використання тільки якісних запчастин та матеріалів</li>
           <li>Швидкий та якісний ремонт</li>
@@ -42,37 +42,33 @@ const AboutPages = () => {
           <div className={styles.member}>
             <img src="member1.jpg" alt="Участник команды 1" />
             <h4>Олег Георгович</h4>
-            <p>Майстер з ремонту усього</p>
+            <p>Головний механік</p>
           </div>
           <div className={styles.member}>
             <img src="member2.jpg" alt="Участник команды 2" />
-            <h3>Віталій Євгенович</h3>
-            <p>Електрик</p>
+            <h4>Віталій Євгенович </h4>
+            <p>Головний електрик</p>
           </div>
           <div className={styles.member}>
             <img src="member3.jpg" alt="Участник команды 3" />
             <h4>Роман</h4>
-            <p>Механик</p>
+            <p>Механік</p>
           </div>
           <div className={styles.member}>
             <img src="member3.jpg" alt="Участник команды 3" />
             <h4>Валерій</h4>
-            <p>Механик</p>
+            <p>Механік</p>
           </div>
           <div className={styles.member}>
             <img src="member3.jpg" alt="Участник команды 3" />
             <h4>Назар</h4>
-            <p>Майстер з ремонту двигунів</p>
+            <p>Механік</p>
           </div>
+
           <div className={styles.member}>
             <img src="member3.jpg" alt="Участник команды 3" />
-            <h4>Назар</h4>
-            <p>Механик</p>
-          </div>
-          <div className={styles.member}>
-            <img src="member3.jpg" alt="Участник команды 3" />
-            <h4>Олексій Олексієнко</h4>
-            <p>Механик</p>
+            <h4>Олексій</h4>
+            <p>Механік</p>
           </div>
         </div>
       </div>{' '}
@@ -81,3 +77,4 @@ const AboutPages = () => {
 };
 
 export default AboutPages;
+// Sit ex non ut officia qui id commodo ea non esse. Lorem culpa sunt mollit aliqua enim ut duis aliquip consequat eiusmod Lorem cillum qui sint. Ipsum adipisicing cillum minim eiusmod elit nostrud reprehenderit amet.

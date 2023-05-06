@@ -18,6 +18,8 @@ const Price = () => {
     dispatch(getAllTypeRepairsGet());
   }, [dispatch]);
 
+  if (!typeAllRepair.length && !mainRepair.length) return;
+
   return typeloading || loading ? (
     <Loader></Loader>
   ) : (

@@ -1,17 +1,17 @@
 .footer {
   position: fixed;
   bottom: 0;
-  background-color: #e1dede;
-  color: #666;
+  background-color: #aea5a5;
+  color: #ffffff;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   opacity: 70%;
   /* position: absolute; */
-  bottom: 0;
+  /* bottom: 0; */
   width: 100%;
-  height: 3rem;
+  /* height: 20px; */
 }
 
 .social {
@@ -19,7 +19,7 @@
 }
 
 .social a {
-  color: #666;
+  color: #ffffff;
   margin-right: 1rem;
 }
 
@@ -29,11 +29,11 @@
 
 @media (max-width: 768px) {
   .footer {
-    flex-direction: column;
-    height: 40px;
+    /* flex-direction: column; */
+    /* height: 20px; */
   }
 
   .social {
-    margin-bottom: 1rem;
+    /* margin: auto 0; */
   }
 }
