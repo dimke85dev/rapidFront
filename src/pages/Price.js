@@ -43,7 +43,7 @@ const Price = () => {
                   <div className=" w-1/6 flex justify-between gap-3">
                     <span className="text-left">від </span>
                     <span className="text-green-500 text-right">
-                      {typeAllRepair.find((el) => el._id === type).price}
+                      {typeAllRepair.find((el) => el._id === type).price}.00
                     </span>
                   </div>
                 </div>
