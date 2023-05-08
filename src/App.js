@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './App.css';
 import Layout from './components/layout/Layout';
 import TakeACar from './pages/TakeACar';
@@ -22,6 +22,7 @@ import AddCar from './components/addCar/AddCar';
 import MainRepairsPage from './pages/MainRepairsPage';
 import TypeRepairPage from './pages/TypeRepairPage';
 import Price from './pages/Price';
+import Footer from './components/layout/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,39 +31,42 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Layout>
-      <h1>Rapid Servise</h1>
-      {/* <RouterProvider router={router} />; */}
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/service" element={<MainPage />} />
-        <Route path="/directory" element={<MainPage />} />
+    <Fragment>
+      <Layout>
+        <h1>Rapid Servise</h1>
+        {/* <RouterProvider router={router} />; */}
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/service" element={<MainPage />} />
+          <Route path="/directory" element={<MainPage />} />
 
-        <Route path="/posts" element={<PostsPage />} />
-        <Route path="/out" element={<MainPage />} />
-        <Route path="/:id" element={<PostPage />} />
-        <Route path="/newPost" element={<AddPostPage />} />
-        <Route path="/:id/editPost" element={<EditPostPage />} />
+          <Route path="/posts" element={<PostsPage />} />
+          <Route path="/out" element={<MainPage />} />
+          <Route path="/:id" element={<PostPage />} />
+          <Route path="/newPost" element={<AddPostPage />} />
+          <Route path="/:id/editPost" element={<EditPostPage />} />
 
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/price" element={<Price />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/price" element={<Price />} />
 
-        <Route path="/about" element={<AboutPages />} />
+          <Route path="/about" element={<AboutPages />} />
 
-        <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/takeacar" element={<TakeACar />} />
-        <Route path="/addcar" element={<AddCar />} />
-        <Route path="/addcarrepair" element={<AddCarRepair />} />
+          <Route path="/takeacar" element={<TakeACar />} />
+          <Route path="/addcar" element={<AddCar />} />
+          <Route path="/addcarrepair" element={<AddCarRepair />} />
 
-        <Route path="/mainrepair" element={<MainRepairsPage />} />
-        <Route path="/mainrepair/:id" element={<TypeRepairPage />} />
+          <Route path="/mainrepair" element={<MainRepairsPage />} />
+          <Route path="/mainrepair/:id" element={<TypeRepairPage />} />
 
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-      <ToastContainer position="bottom-right" />
-    </Layout>
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+        <ToastContainer position="bottom-right" />
+      </Layout>
+      <Footer></Footer>
+    </Fragment>
   );
 }
 //напиши мне функцию фильтрации списка в select

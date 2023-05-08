@@ -50,7 +50,7 @@ const MainRepairsPage = () => {
           <div className="mobile-form flex flex-col w-3/4 px-6 pb-4 rounded-xl rounded-r-none bg-white mx-auto shadow-lg shadow-gray-700/70">
             <label className="mx-auto text-xl mb-3">Види послуг </label>
 
-            <span className="grid grid-cols-1 grid-rows-4 gap-1  ">
+            <p className="grid grid-cols-1 grid-rows-4 gap-1  ">
               {mainRepair.length
                 ? mainRepair.map((el) => (
                     <Link
@@ -62,7 +62,7 @@ const MainRepairsPage = () => {
                     </Link>
                   ))
                 : 'Записи відсутні'}
-            </span>
+            </p>
           </div>
           <div className="w-1/4  flex flex-col p-4 gap-4 mx-auto bg-gray-300 py-4 rounded-r-xl  shadow-lg shadow-gray-700/70">
             <button

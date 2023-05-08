@@ -5,6 +5,7 @@
   background-color: rgb(158, 170, 151);
   /* opacity: 95%; */
   /* height: 100vh; */
+  /* min-height: calc(100vh - 60px); */
 }
 .form-control {
   padding: 1.5rem;

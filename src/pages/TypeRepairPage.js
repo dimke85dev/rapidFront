@@ -86,7 +86,7 @@ const TypeRepairPage = () => {
                       className="flex gap-3"
                     >
                       <p className=" w-4/5 border-solid border-2 border-gray-600 rounded-xl mb-2">
-                        {el.nameTypeRepair}
+                        {el.nameTypeRepair.toUpperCase()}
                       </p>
 
                       <p className="w-1/5 border-solid border-2 border-gray-600 rounded-xl mb-2">

@@ -10,7 +10,6 @@ const Layout = (props) => {
         <Header />
         <main className={'container ' + styles.main}>{props.children}</main>
       </div>
-      <Footer></Footer>
     </Fragment>
   );
 };
