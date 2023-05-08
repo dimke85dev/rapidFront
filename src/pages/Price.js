@@ -29,9 +29,9 @@ const Price = () => {
           <div key={el._id}>
             <div className="my-5 text-yellow-600 ">{el.nameMainRepair}</div>
             <div className="flex justify-between gap-3">
-              <h3 className="text-left">Найменування</h3>
+              <h3 className="text-left text-xl">Найменування</h3>
               <div className="flex gap-10">
-                <h3 className="text-green-500">Ціна</h3>
+                <h3 className="text-black-500 text-xl">Ціна</h3>
               </div>
             </div>
             <div>
@@ -44,6 +44,7 @@ const Price = () => {
                     <span className="text-left">від </span>
                     <span className="text-green-500 text-right">
                       {typeAllRepair.find((el) => el._id === type).price}.00
+                      {'       \u20B4'}
                     </span>
                   </div>
                 </div>
