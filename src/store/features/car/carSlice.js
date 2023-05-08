@@ -62,7 +62,6 @@ export const getAllCars = createAsyncThunk('car/allCar', async () => {
   try {
     const { data } = await axios.get('cars/allcars');
 
-    console.log(data);
     return data;
   } catch (error) {
     toast(error.response.data.message, {

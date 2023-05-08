@@ -21,23 +21,14 @@ const Cars = () => {
       <h3>Автомобілі</h3>
       {cars.length &&
         cars.map((el) => (
-          <div className="mobile-form flex">
-            <p
-              className=" w-4/5 mx-auto border-solid border-2 border-gray-600 mb-2"
-              key={el._id}
-            >
+          <div key={el._id} className="mobile-form flex">
+            <p className=" w-4/5 mx-auto border-solid border-2 border-gray-600 mb-2">
               {el.name}
             </p>
-            <p
-              className="w-4/5 mx-auto border-solid border-2 border-gray-600  mb-2"
-              key={el._id}
-            >
+            <p className="w-4/5 mx-auto border-solid border-2 border-gray-600  mb-2">
               {el.vinCode}
             </p>
-            <p
-              className="w-1/5 mx-auto border-solid border-2 border-gray-600  mb-2"
-              key={el._id}
-            >
+            <p className="w-1/5 mx-auto border-solid border-2 border-gray-600  mb-2">
               {el.year}p.
             </p>
           </div>
