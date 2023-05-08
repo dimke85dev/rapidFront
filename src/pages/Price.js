@@ -23,7 +23,7 @@ const Price = () => {
   return typeloading || loading ? (
     <Loader></Loader>
   ) : (
-    <div className=" bg-white px-8 py-2 rounded-xl mobile-form">
+    <div className=" bg-white px-5 py-2 rounded-xl mobile-form">
       {mainRepair.length &&
         mainRepair.map((el) => (
           <div key={el._id}>
@@ -36,8 +36,8 @@ const Price = () => {
             </div>
             <div>
               {el.typeRepair.map((type) => (
-                <div className="flex justify-between gap-3" key={type}>
-                  <span className="text-left">
+                <div className="flex justify-between gap-1" key={type}>
+                  <span className="  text-left">
                     {typeAllRepair.find((el) => el._id === type).nameTypeRepair}
                   </span>
                   <div className=" w-1/5 flex justify-between gap-1">
