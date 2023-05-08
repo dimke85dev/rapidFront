@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 const initialState = {
   car: null,
+  cars: [],
   status: null,
   messageType: null,
   isloading: false,
@@ -41,6 +42,27 @@ export const getCar = createAsyncThunk('car/getCar', async ({ vinCode }) => {
   try {
     const { data } = await axios.post('cars/carvin', { vinCode });
     // console.log(data);
+    return data;
+  } catch (error) {
+    toast(error.response.data.message, {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+      type: 'error',
+    });
+  }
+});
+
+export const getAllCars = createAsyncThunk('car/allCar', async () => {
+  try {
+    const { data } = await axios.get('cars/allcars');
+
+    console.log(data);
     return data;
   } catch (error) {
     toast(error.response.data.message, {
@@ -96,6 +118,20 @@ export const CarSlice = createSlice({
       state.car = action.payload?.car;
     });
     builder.addCase(getCar.rejected, (state, action) => {
+      state.status = action.payload.message;
+      state.isloading = false;
+    });
+
+    builder.addCase(getAllCars.pending, (state) => {
+      state.isloading = true;
+      state.status = null;
+    });
+    builder.addCase(getAllCars.fulfilled, (state, action) => {
+      state.isloading = false;
+      state.status = action.payload?.message;
+      state.cars = action.payload;
+    });
+    builder.addCase(getAllCars.rejected, (state, action) => {
       state.status = action.payload.message;
       state.isloading = false;
     });

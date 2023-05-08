@@ -23,6 +23,8 @@ import MainRepairsPage from './pages/MainRepairsPage';
 import TypeRepairPage from './pages/TypeRepairPage';
 import Price from './pages/Price';
 import Footer from './components/layout/Footer';
+import Users from './pages/Users';
+import Cars from './pages/Cars';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,8 +52,10 @@ function App() {
           <Route path="/price" element={<Price />} />
 
           <Route path="/about" element={<AboutPages />} />
+          <Route path="/cars" element={<Cars />} />
 
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/users" element={<Users />} />
 
           <Route path="/takeacar" element={<TakeACar />} />
           <Route path="/addcar" element={<AddCar />} />

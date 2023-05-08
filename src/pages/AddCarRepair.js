@@ -1,17 +1,41 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import SelectToSelect from '../components/UI/SelectToSelect';
+import { getAllMainRepairs } from '../store/features/carRepair/mainRepairSlice';
+import { getAllTypeRepairsGet } from '../store/features/carRepair/typeRepairSlice';
+import Loader from '../components/UI/Loader';
 
 const AddCarRepair = () => {
   const navigate = useNavigate();
   const { car } = useSelector((state) => state.car);
+  const [mainRepairFind, setMainRepairFind] = useState([]);
+  const { loading, mainRepair } = useSelector((state) => state.mainrepair);
+  const { typeAllRepair, loading: typeloading } = useSelector(
+    (state) => state.typerepair
+  );
+
+  const dispatch = useDispatch();
+  // console.log(mainRepairFind);
   useEffect(() => {
     if (!car) {
       navigate('/takeacar');
     }
-  }, [navigate, car]);
+    // dispatch(typeRepairClear());
+    dispatch(getAllMainRepairs());
+    dispatch(getAllTypeRepairsGet());
+  }, [dispatch, navigate, car]);
 
+  const selectMainRepairHandler = (e) => {
+    setMainRepairFind(
+      mainRepair.filter((el) => el.nameMainRepair === e.target.value)
+    );
+  };
+
+  if (!typeAllRepair) return <Loader></Loader>;
+  if (!typeAllRepair.length) return <Loader></Loader>;
+
+  if (!typeAllRepair) return;
+  if (!mainRepair) return;
   if (!car) return;
 
   return (
@@ -34,47 +58,29 @@ const AddCarRepair = () => {
         <div>
           <h2 className="form-h2">Оберіть вид ремонту</h2>
           <select
+            onChange={selectMainRepairHandler}
             className="form-select border-input"
-            defaultValue=""
             // onChange={selectCarHandler}
           >
-            <option className="form-option" value="" disabled>
-              Тип ремонту
-            </option>
-            {/* {firstDropdownOptions.map((option) => (
-              <option
-                className="form-option"
-                key={option.value}
-                value={option.value}
-              >
-                {option.label}
+            {mainRepair.map((el) => (
+              <option key={el._id} className="form-option">
+                {el.nameMainRepair}
               </option>
-            ))} */}
+            ))}
           </select>
-          {/* {selectedCarOption && (
-            <select
-              className="form-select border-input"
-              onClick={
-                // secondDropdownOptions.length === 1 ? selectModelHandler : () => {}
-                selectModelHandler
-              }
-              defaultValue=""
-              // onChange={selectModelHandler}
-            >
-              <option value="" disabled>
-                Оберіть модель
-              </option>
-              {secondDropdownOptions.map((option) => (
-                <option
-                  className="form-option"
-                  key={option.value}
-                  value={option.value}
-                >
-                  {option.label}
+          <select
+            // onChange={''}
+            className="form-select border-input"
+            // onChange={selectCarHandler}
+          >
+            {mainRepairFind.map((el) =>
+              el.typeRepair.map((type) => (
+                <option key={type} className="form-option">
+                  {typeAllRepair.find((el) => el._id === type).nameTypeRepair}
                 </option>
-              ))}
-            </select>
-          )} */}
+              ))
+            )}
+          </select>
         </div>
       </div>
     </div>

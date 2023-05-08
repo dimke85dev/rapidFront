@@ -162,12 +162,15 @@ const MobileMenu = () => {
 
             <div className={`${directory} flex flex-col  gap-4`}>
               <li>
-                <Link onClick={isMobileMenuOpen && mobilMenuHandler}>
+                <Link
+                  to="/users"
+                  onClick={isMobileMenuOpen && mobilMenuHandler}
+                >
                   Користувачі
                 </Link>
               </li>
               <li>
-                <Link onClick={isMobileMenuOpen && mobilMenuHandler}>
+                <Link to="/cars" onClick={isMobileMenuOpen && mobilMenuHandler}>
                   Автомобілі
                 </Link>
               </li>

@@ -61,10 +61,10 @@ const Header = () => {
                       className={styles['ul-dir-dropdown']}
                     >
                       <li>
-                        <Link>Користувачі</Link>
+                        <Link to="/users">Користувачі</Link>
                       </li>
                       <li>
-                        <Link>Автомобілі</Link>
+                        <Link to="/cars">Автомобілі</Link>
                       </li>
                       <li>
                         <Link to="/mainrepair">Види Ремонту</Link>

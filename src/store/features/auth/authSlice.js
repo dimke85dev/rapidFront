@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 const initialState = {
   user: null,
+  users: [],
   token: null,
   isLoading: false,
   status: null,
@@ -93,6 +94,32 @@ export const getMe = createAsyncThunk('auth/getMe', async () => {
   }
 });
 
+export const getUsers = createAsyncThunk('auth/users', async () => {
+  try {
+    const { data } = await axios.get('auth/users');
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    toast(
+      error.message === 'Network Error'
+        ? "Помилка зв'язку з сервером"
+        : error.message,
+      {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: 'error',
+      }
+    );
+  }
+});
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -153,6 +180,21 @@ export const authSlice = createSlice({
       state.token = action.payload?.token;
     });
     builder.addCase(getMe.rejected, (state, action) => {
+      state.status = action.payload.message;
+      state.messageType = action.payload.messageType;
+      state.isLoading = false;
+    });
+
+    builder.addCase(getUsers.pending, (state) => {
+      state.isLoading = true;
+      state.status = null;
+    });
+    builder.addCase(getUsers.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.status = null; // сообщение из бэкэнда
+      state.users = action.payload;
+    });
+    builder.addCase(getUsers.rejected, (state, action) => {
       state.status = action.payload.message;
       state.messageType = action.payload.messageType;
       state.isLoading = false;
