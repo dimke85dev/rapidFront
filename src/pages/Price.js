@@ -40,11 +40,11 @@ const Price = () => {
                   <span className="text-left">
                     {typeAllRepair.find((el) => el._id === type).nameTypeRepair}
                   </span>
-                  <div className=" w-1/6 flex justify-between gap-3">
+                  <div className=" w-1/5 flex justify-between gap-1">
                     <span className="text-left">від </span>
                     <span className="text-green-500 text-right">
                       {typeAllRepair.find((el) => el._id === type).price}.00
-                      {'       \u20B4'}
+                      {'\u20B4'}
                     </span>
                   </div>
                 </div>
