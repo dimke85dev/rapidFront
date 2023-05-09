@@ -8,7 +8,7 @@ import Loader from '../components/UI/Loader';
 
 const TakeACar = () => {
   const [addCarFormVisible, setAddCarFormVisible] = useState(false);
-  const { status, messageType, isloading, car } = useSelector(
+  const { status, messageType, isloading, car, vinCode } = useSelector(
     (state) => state.car
   );
 
@@ -22,6 +22,7 @@ const TakeACar = () => {
     isValid: isEnteredVinCodeValid,
     inputChangeHandler: vinCodeInputChangeHandler,
     inputLostFocusHandler: vinCodeInputLostFocusHandler,
+    loadInputHandler: loadVicodeInputHandler,
     resetValues: resetVinCodeInputValues,
   } = useInput(function validateVin(vin) {
     const vinRegExp = /^[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}$/;
@@ -38,12 +39,15 @@ const TakeACar = () => {
   };
 
   useEffect(() => {
+    loadVicodeInputHandler(document.getElementById('vinCode').value);
+  }, []);
+  useEffect(() => {
     if (car?.length) navigate('/addcarrepair');
   }, [car, navigate, dispatch]);
 
   const addCarFormHandler = () => {
     dispatch(carOut());
-    navigate('/addcar');
+    navigate(`/addcar/${enteredVinCode}`);
   };
 
   useEffect(() => {
@@ -87,7 +91,7 @@ const TakeACar = () => {
                 className="form-input border-input"
                 type="vinCode"
                 id="vinCode"
-                value={enteredVinCode}
+                value={enteredVinCode || vinCode}
                 onChange={vinCodeInputChangeHandler}
                 onBlur={vinCodeInputLostFocusHandler}
               />

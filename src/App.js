@@ -25,6 +25,7 @@ import Price from './pages/Price';
 import Footer from './components/layout/Footer';
 import Users from './pages/Users';
 import Cars from './pages/Cars';
+import Car from './pages/Car';
 
 function App() {
   const dispatch = useDispatch();
@@ -53,12 +54,13 @@ function App() {
 
           <Route path="/about" element={<AboutPages />} />
           <Route path="/cars" element={<Cars />} />
+          <Route path="/cars/:id" element={<Car />} />
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/users" element={<Users />} />
 
           <Route path="/takeacar" element={<TakeACar />} />
-          <Route path="/addcar" element={<AddCar />} />
+          <Route path="/addcar/:id" element={<AddCar />} />
           <Route path="/addcarrepair" element={<AddCarRepair />} />
 
           <Route path="/mainrepair" element={<MainRepairsPage />} />

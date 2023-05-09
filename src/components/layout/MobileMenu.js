@@ -14,6 +14,7 @@ const MobileMenu = () => {
 
   /// Сохраняем состояние открытого меню мобильной версии
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     function handleScroll() {
@@ -33,12 +34,14 @@ const MobileMenu = () => {
     setmainMenu(true);
     setDirectoryMenu(false);
     setServiceMenu(false);
+    e.target.dataset.type === 'takecar' && dispatch(carOut());
     e.target.dataset.type === 'directory'
       ? setDirectoryMenu(!directoryMenu)
       : setIsMobileMenuOpen(!isMobileMenuOpen);
     e.target.dataset.type === 'service'
       ? setServiceMenu(!serviceMenu)
       : setIsMobileMenuOpen(!isMobileMenuOpen);
+
     // e.target.dataset.type === 'directory' && setDirectoryMenu(!directoryMenu);
     // e.target.dataset.type === 'service' && setServiceMenu(!serviceMenu);
   };
@@ -55,7 +58,6 @@ const MobileMenu = () => {
 
   //////
   const isAuth = useSelector(checkIsAuth);
-  const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -197,6 +199,7 @@ const MobileMenu = () => {
               <li>
                 <Link
                   to="/takeacar"
+                  data-type="takecar"
                   onClick={isMobileMenuOpen && mobilMenuHandler}
                 >
                   Прийняти авто

@@ -3,6 +3,7 @@ import { getUsers } from '../store/features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/UI/Loader';
 import { getAllCars } from '../store/features/car/carSlice';
+import { Link } from 'react-router-dom';
 
 const Cars = () => {
   const { isLoading, cars } = useSelector((state) => state.car);
@@ -21,17 +22,19 @@ const Cars = () => {
       <h3>Автомобілі</h3>
       {cars.length &&
         cars.map((el) => (
-          <div key={el._id} className="mobile-form flex">
-            <p className=" w-4/5 mx-auto border-solid border-2 border-gray-600 mb-2">
-              {el.name}
-            </p>
-            <p className="w-4/5 mx-auto border-solid border-2 border-gray-600  mb-2">
-              {el.vinCode}
-            </p>
-            <p className="w-1/5 mx-auto border-solid border-2 border-gray-600  mb-2">
-              {el.year}p.
-            </p>
-          </div>
+          <Link key={el._id} to={`/cars/${el._id}`}>
+            <div className="mobile-form flex">
+              <p className=" w-4/5 mx-auto border-solid border-2 border-gray-600 mb-2">
+                {el.name}
+              </p>
+              <p className="w-4/5 mx-auto border-solid border-2 border-gray-600  mb-2">
+                {el.vinCode}
+              </p>
+              <p className="w-1/5 mx-auto border-solid border-2 border-gray-600  mb-2">
+                {el.year}p.
+              </p>
+            </div>
+          </Link>
         ))}
     </div>
   );

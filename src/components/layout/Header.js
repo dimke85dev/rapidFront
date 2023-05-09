@@ -1,7 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
+// import { carOut } from '../store/features/car/carSlice';
 
 import styles from './Header.module.css';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIsAuth, logout } from '../../store/features/auth/authSlice';
 import { carOut } from '../../store/features/car/carSlice';
@@ -10,7 +11,9 @@ import MobileMenu from './MobileMenu';
 
 const Header = () => {
   //получаеть ширину экрана и относительно ширины экрана используем то или иное меню
+
   const [width, setWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -30,6 +33,10 @@ const Header = () => {
     toast('Ви вийшли із системи', {
       position: 'bottom-right',
     });
+  };
+
+  const takeCarHandler = () => {
+    dispatch(carOut());
   };
 
   return (
@@ -93,7 +100,9 @@ const Header = () => {
                     </NavLink>
                     <ul className={styles['ul-serv-dropdown']}>
                       <li>
-                        <Link to="/takeacar">Прийняти авто</Link>
+                        <Link onClick={takeCarHandler} to="/takeacar">
+                          Прийняти авто
+                        </Link>
                       </li>
 
                       <li>

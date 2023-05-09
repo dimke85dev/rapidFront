@@ -8,11 +8,14 @@ import { useReducer } from 'react';
 const initialInputState = { inputValue: '', wasTouched: false };
 
 const inputStateReducer = (state, action) => {
+  if (action.type === 'LOAD_CHANGE') {
+    return { inputValue: action.value };
+  }
   if (action.type === 'INPUT_CHANGE') {
     return { inputValue: action.value, wasTouched: state.wasTouched };
   }
   if (action.type === 'INPUT_BLUR') {
-    return { inputValue: state.inputValue, wasTouched: true };
+    return { inputValue: action.value, wasTouched: true };
   }
   if (action.type === 'RESET_INPUT') {
     return { inputValue: '', wasTouched: false };
@@ -28,12 +31,16 @@ const useInput = (validateValueFunc) => {
   const isValueValid = validateValueFunc(inputState.inputValue);
   const isInputInvalid = !isValueValid && inputState.wasTouched;
 
+  const loadInputHandler = (variable) => {
+    dispatchAction({ type: 'LOAD_CHANGE', value: variable });
+  };
+
   const inputChangeHandler = (event) => {
     dispatchAction({ type: 'INPUT_CHANGE', value: event.target.value });
   };
 
   const inputLostFocusHandler = (event) => {
-    dispatchAction({ type: 'INPUT_BLUR' });
+    dispatchAction({ type: 'INPUT_BLUR', value: event.target.value });
   };
 
   const resetValues = () => {
@@ -46,6 +53,7 @@ const useInput = (validateValueFunc) => {
     isValid: isValueValid,
     inputChangeHandler,
     inputLostFocusHandler,
+    loadInputHandler,
     resetValues,
   };
 };

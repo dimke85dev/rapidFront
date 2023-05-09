@@ -3,17 +3,25 @@ import useInput from '../../hooks/use-input';
 import SelectToSelect from '../UI/SelectToSelect';
 
 import './Form.css';
-import { carOut, createCar } from '../../store/features/car/carSlice';
+import {
+  carOut,
+  createCar,
+  getCar,
+  vinSave,
+} from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
 import { Fragment, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../UI/Loader';
 
 const AddCar = () => {
   const [carName, setCarName] = useState('');
-  const { status, messageType, isloading } = useSelector((state) => state.car);
-  const navigate = useNavigate();
+  const { status, messageType, isloading, car } = useSelector(
+    (state) => state.car
+  );
 
+  const navigate = useNavigate();
+  const param = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +40,9 @@ const AddCar = () => {
     }
     messageType === 'ok' && navigate('/takeacar');
     dispatch(carOut());
-  }, [status, messageType]);
+    // if (car?.length) navigate('/addcarrepair');
+    // console.log(car);
+  }, [status, messageType, car]);
 
   const selectToSelectFunction = (carLable, modalLable) => {
     setCarName(carLable + ' ' + modalLable);
@@ -44,11 +54,16 @@ const AddCar = () => {
     isValid: isEnteredVinCodeValid,
     inputChangeHandler: vinCodeInputChangeHandler,
     inputLostFocusHandler: vinCodeInputLostFocusHandler,
+    loadInputHandler: loadVicodeInputHandler,
     resetValues: resetVinCodeInputValues,
   } = useInput(function validateVin(vin) {
     const vinRegExp = /^[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}$/;
     return vinRegExp.test(vin.toUpperCase());
   });
+
+  useEffect(() => {
+    loadVicodeInputHandler(param.id);
+  }, []);
 
   const {
     value: enteredageCar,
@@ -91,6 +106,8 @@ const AddCar = () => {
         })
       );
       dispatch(carOut());
+      dispatch(vinSave(param.id));
+      // isloading && dispatch(getCar({ vinCode: param.id }));
     } catch (error) {
       toast(error, {
         position: 'bottom-right',
@@ -146,10 +163,10 @@ const AddCar = () => {
               className="form-input border-input"
               type="vinCode"
               id="vinCode"
-              value={enteredVinCode}
+              value={enteredVinCode || param.id}
               onChange={vinCodeInputChangeHandler}
               onBlur={vinCodeInputLostFocusHandler}
-            />
+            ></input>
             {hasVinCodeInputError && (
               <p className="error-text">Поле VinCode повинно бути заповнене</p>
             )}
