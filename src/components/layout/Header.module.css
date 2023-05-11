@@ -12,6 +12,7 @@ header {
 
 .ul-main {
   list-style: none;
+  align-items: center;
   display: flex;
   gap: 0 20px;
   margin: 0;
@@ -172,7 +173,7 @@ header {
     height: 100vh;
     z-index: 5;
 
-    padding-top: 140px;
+    padding-top: 90px;
     gap: 10px 0px;
   }
   .mobileMenu .ul-main {

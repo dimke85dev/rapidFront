@@ -1,10 +1,14 @@
 import { Link, NavLink } from 'react-router-dom';
-// import { carOut } from '../store/features/car/carSlice';
+import { FaUserTie } from 'react-icons/fa';
 
 import styles from './Header.module.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkIsAuth, logout } from '../../store/features/auth/authSlice';
+import {
+  checkIsAuth,
+  checkIsRole,
+  logout,
+} from '../../store/features/auth/authSlice';
 import { carOut } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
 import MobileMenu from './MobileMenu';
@@ -25,6 +29,10 @@ const Header = () => {
 
   //////
   const isAuth = useSelector(checkIsAuth);
+  const isRole = useSelector(checkIsRole);
+  const { user } = useSelector((state) => state.auth);
+  // console.log(user);
+
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
@@ -50,94 +58,108 @@ const Header = () => {
           ></img>
           <nav className={`${styles.nav}`}>
             <ul className={styles['ul-main']}>
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) => (isActive ? styles.active : '')}
-                >
-                  Головна
-                </NavLink>
-              </li>
+              {isRole !== 'MASTER' && (
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive ? styles.active : ''
+                    }
+                  >
+                    Головна
+                  </NavLink>
+                </li>
+              )}
               {isAuth && (
                 <React.Fragment>
-                  <li className={styles.directory}>
-                    <NavLink data-type="directory">Довідники</NavLink>
+                  {isRole === 'ADMIN' && (
+                    <li className={styles.directory}>
+                      <NavLink data-type="directory">Довідники</NavLink>
 
-                    <ul
-                      //
-                      className={styles['ul-dir-dropdown']}
-                    >
-                      <li>
-                        <Link to="/users">Користувачі</Link>
-                      </li>
-                      <li>
-                        <Link to="/cars">Автомобілі</Link>
-                      </li>
-                      <li>
-                        <Link to="/mainrepair">Види Ремонту</Link>
-                      </li>
+                      <ul
+                        //
+                        className={styles['ul-dir-dropdown']}
+                      >
+                        <li>
+                          <Link to="/users">Користувачі</Link>
+                        </li>
+                        <li>
+                          <Link to="/cars">Автомобілі</Link>
+                        </li>
+                        <li>
+                          <Link to="/mainrepair">Види Ремонту</Link>
+                        </li>
 
-                      <li>
-                        <NavLink
-                          to="/reports"
-                          // className={({ isActive }) =>
-                          //   isActive ? styles.active : ''
-                          // }
-                        >
-                          Звіт
-                        </NavLink>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className={styles.service}>
-                    <NavLink
-                      data-type="service"
-                      // className={({ isActive }) =>
-                      //   !isActive ? styles.active : ''
-                      // }
-                    >
-                      Сервіси
-                    </NavLink>
-                    <ul className={styles['ul-serv-dropdown']}>
-                      <li>
-                        <Link onClick={takeCarHandler} to="/takeacar">
-                          Прийняти авто
-                        </Link>
-                      </li>
+                        <li>
+                          <NavLink
+                            to="/reports"
+                            // className={({ isActive }) =>
+                            //   isActive ? styles.active : ''
+                            // }
+                          >
+                            Звіт
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </li>
+                  )}
+                  {(isRole === 'MASTER' || isRole === 'ADMIN') && (
+                    <li className={styles.service}>
+                      <NavLink
+                        data-type="service"
+                        // className={({ isActive }) =>
+                        //   !isActive ? styles.active : ''
+                        // }
+                      >
+                        Сервіси
+                      </NavLink>
+                      <ul className={styles['ul-serv-dropdown']}>
+                        <li>
+                          <Link onClick={takeCarHandler} to="/takeacar">
+                            Прийняти авто
+                          </Link>
+                        </li>
 
-                      <li>
-                        <Link to="/posts">Мої Статті</Link>
-                      </li>
+                        <li>
+                          <Link to="/posts">Мої Статті</Link>
+                        </li>
 
-                      <li>
-                        <Link to="/newPost">Створити статтю</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/settings"
-                      className={({ isActive }) =>
-                        isActive ? styles.active : ''
-                      }
-                    >
-                      Параметри
-                    </NavLink>
-                  </li>
+                        <li>
+                          <Link to="/newPost">Створити статтю</Link>
+                        </li>
+                      </ul>
+                    </li>
+                  )}
+                  {isRole === 'ADMIN' && (
+                    <li>
+                      <NavLink
+                        to="/settings"
+                        className={({ isActive }) =>
+                          isActive ? styles.active : ''
+                        }
+                      >
+                        Параметри
+                      </NavLink>
+                    </li>
+                  )}
                 </React.Fragment>
               )}
 
               <li>
                 <Link to="/price">Прайс</Link>
               </li>
-              <li>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) => (isActive ? styles.active : '')}
-                >
-                  Про нас
-                </NavLink>
-              </li>
+              {isRole !== 'MASTER' && (
+                <li>
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive ? styles.active : ''
+                    }
+                  >
+                    Про нас
+                  </NavLink>
+                </li>
+              )}
 
               <li>
                 {isAuth ? (
@@ -160,6 +182,10 @@ const Header = () => {
                     Увійти
                   </NavLink>
                 )}
+              </li>
+              <li className="">
+                <FaUserTie className="mx-auto" />
+                {user?.username}
               </li>
             </ul>
           </nav>{' '}

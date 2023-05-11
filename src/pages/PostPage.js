@@ -6,6 +6,7 @@ import {
   AiOutlineMessage,
   AiTwotoneEdit,
   AiTwotoneDelete,
+  FaUserTie,
 } from 'react-icons/ai';
 import axios from '../utils/axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';

@@ -6,6 +6,7 @@ const initialState = {
   user: null,
   users: [],
   token: null,
+  roles: null,
   isLoading: false,
   status: null,
   messageType: '',
@@ -120,6 +121,29 @@ export const getUsers = createAsyncThunk('auth/users', async () => {
   }
 });
 
+export const removeUser = createAsyncThunk('auth/removeUser', async (id) => {
+  try {
+    const { data } = await axios.delete(`/auth/removeuser`, id);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const updateUser = createAsyncThunk(
+  'auth/updateuser',
+  async (updatedUser) => {
+    try {
+      const { data } = await axios.put(`/auth/updateuser`, updatedUser);
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -129,6 +153,7 @@ export const authSlice = createSlice({
       state.token = null;
       state.isLoading = false;
       state.status = null;
+      state.roles = null;
     },
   },
   extraReducers: (builder) => {
@@ -142,8 +167,9 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.status = action.payload?.message; // сообщение из бэкэнда
       state.messageType = action.payload?.messageType;
-      state.user = action.payload?.user;
+      state.user = action.payload?.newUser;
       state.token = action.payload?.token;
+      state.roles = action.payload?.roles;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.status = action.payload.message;
@@ -161,6 +187,7 @@ export const authSlice = createSlice({
       state.messageType = action.payload?.messageType;
       state.user = action.payload?.user;
       state.token = action.payload?.token;
+      state.roles = action.payload?.user?.roles[0];
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.status = action.payload.message;
@@ -178,6 +205,7 @@ export const authSlice = createSlice({
       state.status = null; // сообщение из бэкэнда
       state.user = action.payload?.user;
       state.token = action.payload?.token;
+      state.roles = action.payload?.user?.roles[0];
     });
     builder.addCase(getMe.rejected, (state, action) => {
       state.status = action.payload.message;
@@ -199,6 +227,42 @@ export const authSlice = createSlice({
       state.messageType = action.payload.messageType;
       state.isLoading = false;
     });
+    //Remove
+    builder.addCase(removeUser.pending, (state) => {
+      state.isLoading = true;
+      state.status = null;
+    });
+    builder.addCase(removeUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.status = action.payload?.message; // сообщение из бэкэнда
+      state.messageType = action.payload?.messageType;
+      state.user = action.payload?.newUser;
+      state.token = action.payload?.token;
+      state.roles = action.payload?.roles;
+    });
+    builder.addCase(removeUser.rejected, (state, action) => {
+      state.status = action.payload.message;
+      state.isLoading = false;
+    });
+
+    //Update
+    builder.addCase(updateUser.pending, (state) => {
+      state.isLoading = true;
+      state.status = null;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.status = action.payload?.message; // сообщение из бэкэнда
+      state.messageType = action.payload?.messageType;
+      state.user = action.payload?.newUser;
+      state.token = action.payload?.token;
+      state.roles = action.payload?.roles;
+    });
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.status = action.payload.message;
+      state.isLoading = false;
+    });
+
     ////////////////////////////////////////////
   },
   //////////////////////////////////////////
@@ -223,6 +287,7 @@ export const authSlice = createSlice({
 });
 
 export const checkIsAuth = (state) => Boolean(state.auth.token);
+export const checkIsRole = (state) => state.auth.roles;
 export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
