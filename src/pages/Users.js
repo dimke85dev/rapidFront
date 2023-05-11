@@ -82,8 +82,16 @@ const Users = () => {
     setIsEdit(!isEdit);
     window.location.reload();
   };
+
   const deleteHandler = (e) => {
+    const id = {};
+    id.id = e.target.dataset.id
+      ? e.target.dataset.id
+      : e.target.parentNode.parentNode.dataset.id;
+
+    dispatch(removeUser(id));
     setIsEdit(!isEdit);
+    window.location.reload();
   };
 
   useEffect(() => {

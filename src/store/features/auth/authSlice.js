@@ -123,8 +123,8 @@ export const getUsers = createAsyncThunk('auth/users', async () => {
 
 export const removeUser = createAsyncThunk('auth/removeUser', async (id) => {
   try {
-    const { data } = await axios.delete(`/auth/removeuser`, id);
-
+    const { data } = await axios.post(`/auth/removeuser/`, id);
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
