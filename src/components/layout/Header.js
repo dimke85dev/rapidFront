@@ -29,9 +29,9 @@ const Header = () => {
 
   //////
   const isAuth = useSelector(checkIsAuth);
+  // console.log(isAuth);
   const isRole = useSelector(checkIsRole);
   const { user } = useSelector((state) => state.auth);
-  // console.log(user);
 
   const dispatch = useDispatch();
 

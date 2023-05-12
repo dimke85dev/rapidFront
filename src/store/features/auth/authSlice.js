@@ -8,6 +8,7 @@ const initialState = {
   token: null,
   roles: null,
   isLoading: false,
+  isUpdating: false,
   status: null,
   messageType: '',
 };
@@ -23,6 +24,32 @@ export const registerUser = createAsyncThunk(
       if (data.token) {
         window.localStorage.setItem('token', data.token);
       }
+      return data;
+    } catch (error) {
+      toast(error.response.data.message, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: 'error',
+      });
+    }
+  }
+);
+
+export const addUserAdminPanel = createAsyncThunk(
+  'auth/AddNewUser',
+  async ({ username, password, formRole }) => {
+    try {
+      const { data } = await axios.post('/auth/register', {
+        username,
+        password,
+        formRole,
+      });
       return data;
     } catch (error) {
       toast(error.response.data.message, {
@@ -124,7 +151,7 @@ export const getUsers = createAsyncThunk('auth/users', async () => {
 export const removeUser = createAsyncThunk('auth/removeUser', async (id) => {
   try {
     const { data } = await axios.post(`/auth/removeuser/`, id);
-    console.log(data);
+
     return data;
   } catch (error) {
     console.log(error);
@@ -174,6 +201,22 @@ export const authSlice = createSlice({
     builder.addCase(registerUser.rejected, (state, action) => {
       state.status = action.payload.message;
       state.isLoading = false;
+    });
+
+    //AddUser in Admin Panel
+    builder.addCase(addUserAdminPanel.pending, (state) => {
+      // state.isLoading = true;
+      state.status = null;
+    });
+    builder.addCase(addUserAdminPanel.fulfilled, (state, action) => {
+      // state.isLoading = false;
+      state.status = action.payload?.message; // сообщение из бэкэнда
+      state.messageType = action.payload?.messageType;
+      state.users.push(action.payload?.newUser);
+    });
+    builder.addCase(addUserAdminPanel.rejected, (state, action) => {
+      state.status = action.payload.message;
+      // state.isLoading = false;
     });
 
     //Login User
@@ -236,9 +279,9 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.status = action.payload?.message; // сообщение из бэкэнда
       state.messageType = action.payload?.messageType;
-      state.user = action.payload?.newUser;
-      state.token = action.payload?.token;
-      state.roles = action.payload?.roles;
+      state.users = action.payload;
+      // state.token = action.payload?.token;
+      // state.roles = action.payload?.roles;
     });
     builder.addCase(removeUser.rejected, (state, action) => {
       state.status = action.payload.message;
@@ -247,20 +290,20 @@ export const authSlice = createSlice({
 
     //Update
     builder.addCase(updateUser.pending, (state) => {
-      state.isLoading = true;
+      state.isUpdating = true;
       state.status = null;
     });
     builder.addCase(updateUser.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.isUpdating = false;
       state.status = action.payload?.message; // сообщение из бэкэнда
       state.messageType = action.payload?.messageType;
-      state.user = action.payload?.newUser;
-      state.token = action.payload?.token;
-      state.roles = action.payload?.roles;
+      // state.user = action.payload?.newUser;
+      // state.token = action.payload?.token;
+      // state.roles = action.payload?.roles;
     });
     builder.addCase(updateUser.rejected, (state, action) => {
       state.status = action.payload.message;
-      state.isLoading = false;
+      state.isUpdating = false;
     });
 
     ////////////////////////////////////////////
