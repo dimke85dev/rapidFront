@@ -64,7 +64,7 @@ const TypeRepairPage = () => {
   return (
     <Fragment>
       {!isTypeRepairFormVisible ? (
-        <div className="mobile-form w-2/3 bg-gray-300 mx-auto px-3 flex rounded-xl flex-col text-black-700">
+        <div className="mobile-form w-2/3 bg-gray-300 mx-auto px-3 flex rounded-xl flex-col text-black-700 shadow-xl shadow-gray-800/80">
           <Link
             to="/mainrepair"
             className="absolute my-3 mx-auto items-center bg-gray-600 text-xs text-white hover:bg-blue-300 hover:shadow-lg hover:shadow-black-700/70 hover:text-black rounded-xl py-2 px-2"

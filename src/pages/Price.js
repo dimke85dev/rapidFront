@@ -23,7 +23,7 @@ const Price = () => {
   return typeloading || loading ? (
     <Loader></Loader>
   ) : (
-    <div className=" bg-white px-5 py-2 rounded-xl mobile-form">
+    <div className="w-3/4 mx-auto bg-white px-5 py-2 rounded-xl mobile-form shadow-xl shadow-black/80">
       {mainRepair.length &&
         mainRepair.map((el) => (
           <div key={el._id}>

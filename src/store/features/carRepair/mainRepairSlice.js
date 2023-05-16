@@ -3,6 +3,7 @@ import axios from '../../../utils/axios';
 
 const initialState = {
   mainRepair: [],
+  carRepairs: [],
   loading: false,
 };
 
@@ -71,6 +72,30 @@ export const updatePost = createAsyncThunk(
   }
 );
 
+export const createCarRepairs = createAsyncThunk(
+  ' carrepairs/addcarrepairs',
+  async (params) => {
+    try {
+      const { data } = await axios.post('/cars/addcarrepairs', params);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getCarRepairs = createAsyncThunk(
+  ' carrepairs/carrepairs',
+  async () => {
+    try {
+      const { data } = await axios.get('/cars/carrepairs');
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const mainRepairSlice = createSlice({
   name: 'mainrepair',
   initialState,
@@ -80,6 +105,34 @@ export const mainRepairSlice = createSlice({
     // },
   },
   extraReducers: (builder) => {
+    //Create Post
+    builder.addCase(createCarRepairs.pending, (state) => {
+      state.loading = true;
+      state.status = null;
+    });
+    builder.addCase(createCarRepairs.fulfilled, (state, action) => {
+      state.loading = false;
+      // console.log(action.payload.newMainRepair);
+      // state.mainRepair.push(action.payload.newMainRepair);
+    });
+    builder.addCase(createCarRepairs.rejected, (state) => {
+      state.loading = false;
+    });
+
+    //Get CarRepairs
+    builder.addCase(getCarRepairs.pending, (state) => {
+      state.loading = true;
+      state.status = null;
+    });
+    builder.addCase(getCarRepairs.fulfilled, (state, action) => {
+      state.loading = false;
+      // console.log(action.payload.newMainRepair);
+      state.carRepairs = action.payload.carRepairs;
+    });
+    builder.addCase(getCarRepairs.rejected, (state) => {
+      state.loading = false;
+    });
+
     //Create Post
     builder.addCase(createMainRepair.pending, (state) => {
       state.loading = true;

@@ -18,19 +18,19 @@ const Cars = () => {
   return isLoading ? (
     <Loader></Loader>
   ) : (
-    <div className="mx-auto bg-white px-5 py-2 rounded-xl mobile-form">
+    <div className="mx-auto bg-white px-5 py-2 rounded-xl mobile-form shadow-lg shadow-green-800/50">
       <h3>Автомобілі</h3>
       {cars.length &&
         cars.map((el) => (
           <Link key={el._id} to={`/cars/${el._id}`}>
             <div className="mobile-form flex">
-              <p className=" w-4/5 mx-auto border-solid border-2 border-gray-600 mb-2">
+              <p className=" w-4/5 mx-auto border-solid border-2 rounded-lg  border-gray-600 mb-2">
                 {el.name}
               </p>
-              <p className="w-4/5 mx-auto border-solid border-2 border-gray-600  mb-2">
+              <p className="w-4/5 mx-auto border-solid border-2 rounded-lg border-gray-600  mb-2">
                 {el.vinCode}
               </p>
-              <p className="w-1/5 mx-auto border-solid border-2 border-gray-600  mb-2">
+              <p className="w-1/5 mx-auto border-solid border-2 rounded-lg border-gray-600  mb-2">
                 {el.year}p.
               </p>
             </div>

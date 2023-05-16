@@ -19,13 +19,12 @@ header {
   padding: 0;
 }
 
-.directory {
-  position: relative;
-  /* z-index: 10; */
-}
+/* .directory {
+  /* position: relative; */
+/* z-index: 10; */
 
 .ul-dir-dropdown {
-  display: none;
+  /* display: none; */
   background-color: #d1e6d6;
   position: absolute;
 
@@ -45,7 +44,7 @@ header {
   opacity: 100%;
 }
 .ul-serv-dropdown {
-  display: none;
+  /* display: none; */
   background-color: #d1e6d6;
   position: absolute;
   width: 250%;
@@ -96,7 +95,7 @@ header {
   .nav li:hover {
     transform: scale(1.1);
   }
-  .service:hover .ul-serv-dropdown {
+  .ul-serv-dropdown {
     display: flex;
     flex-direction: column;
     font-size: 5px;
@@ -104,7 +103,7 @@ header {
     z-index: 101;
   }
 
-  .directory:hover .ul-dir-dropdown {
+  .ul-dir-dropdown {
     display: flex;
     flex-direction: column;
     font-size: 5px;

@@ -17,6 +17,18 @@ const Header = () => {
   //получаеть ширину экрана и относительно ширины экрана используем то или иное меню
 
   const [width, setWidth] = useState(window.innerWidth);
+  const [isHoveredDir, setIsHoveredDir] = useState(false);
+  const [isHoveredServ, setIsHoveredServ] = useState(false);
+
+  //////////////////// Hover functions
+  const handleMouseEnter = (setFunction) => {
+    setFunction(true);
+  };
+
+  const handleMouseLeave = (setFunction) => {
+    setFunction(false);
+  };
+  ///////////////////////
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -45,6 +57,7 @@ const Header = () => {
 
   const takeCarHandler = () => {
     dispatch(carOut());
+    setIsHoveredServ(false);
   };
 
   return (
@@ -73,25 +86,47 @@ const Header = () => {
               {isAuth && (
                 <React.Fragment>
                   {isRole === 'ADMIN' && (
-                    <li className={styles.directory}>
+                    <li
+                      onMouseEnter={() => handleMouseEnter(setIsHoveredDir)}
+                      onMouseLeave={() => handleMouseLeave(setIsHoveredDir)}
+                      className={styles.directory}
+                    >
                       <NavLink data-type="directory">Довідники</NavLink>
 
                       <ul
                         //
-                        className={styles['ul-dir-dropdown']}
+                        className={
+                          isHoveredDir ? styles['ul-dir-dropdown'] : ' hidden'
+                        }
                       >
                         <li>
-                          <Link to="/users">Користувачі</Link>
+                          <Link
+                            onClick={() => setIsHoveredDir(false)}
+                            to="/users"
+                          >
+                            Користувачі
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/cars">Автомобілі</Link>
+                          <Link
+                            onClick={() => setIsHoveredDir(false)}
+                            to="/cars"
+                          >
+                            Автомобілі
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/mainrepair">Види Ремонту</Link>
+                          <Link
+                            onClick={() => setIsHoveredDir(false)}
+                            to="/mainrepair"
+                          >
+                            Види Ремонту
+                          </Link>
                         </li>
 
                         <li>
                           <NavLink
+                            onClick={() => setIsHoveredDir(false)}
                             to="/reports"
                             // className={({ isActive }) =>
                             //   isActive ? styles.active : ''
@@ -104,16 +139,17 @@ const Header = () => {
                     </li>
                   )}
                   {(isRole === 'MASTER' || isRole === 'ADMIN') && (
-                    <li className={styles.service}>
-                      <NavLink
-                        data-type="service"
-                        // className={({ isActive }) =>
-                        //   !isActive ? styles.active : ''
-                        // }
+                    <li
+                      className={styles.service}
+                      onMouseEnter={() => handleMouseEnter(setIsHoveredServ)}
+                      onMouseLeave={() => handleMouseLeave(setIsHoveredServ)}
+                    >
+                      <NavLink data-type="service">Сервіси</NavLink>
+                      <ul
+                        className={
+                          isHoveredServ ? styles['ul-serv-dropdown'] : ' hidden'
+                        }
                       >
-                        Сервіси
-                      </NavLink>
-                      <ul className={styles['ul-serv-dropdown']}>
                         <li>
                           <Link onClick={takeCarHandler} to="/takeacar">
                             Прийняти авто
@@ -121,11 +157,21 @@ const Header = () => {
                         </li>
 
                         <li>
-                          <Link to="/posts">Мої Статті</Link>
+                          <Link
+                            onClick={() => setIsHoveredServ(false)}
+                            to="/posts"
+                          >
+                            Мої Статті
+                          </Link>
                         </li>
 
                         <li>
-                          <Link to="/newPost">Створити статтю</Link>
+                          <Link
+                            onClick={() => setIsHoveredServ(false)}
+                            to="/newPost"
+                          >
+                            Створити статтю
+                          </Link>
                         </li>
                       </ul>
                     </li>

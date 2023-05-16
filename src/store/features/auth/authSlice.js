@@ -24,6 +24,7 @@ export const registerUser = createAsyncThunk(
       if (data.token) {
         window.localStorage.setItem('token', data.token);
       }
+
       return data;
     } catch (error) {
       toast(error.response.data.message, {
@@ -205,18 +206,18 @@ export const authSlice = createSlice({
 
     //AddUser in Admin Panel
     builder.addCase(addUserAdminPanel.pending, (state) => {
-      // state.isLoading = true;
+      state.isLoading = true;
       state.status = null;
     });
     builder.addCase(addUserAdminPanel.fulfilled, (state, action) => {
-      // state.isLoading = false;
+      state.isLoading = false;
       state.status = action.payload?.message; // сообщение из бэкэнда
       state.messageType = action.payload?.messageType;
-      state.users.push(action.payload?.newUser);
+      action.payload && state.users.push(action.payload?.newUser);
     });
     builder.addCase(addUserAdminPanel.rejected, (state, action) => {
       state.status = action.payload.message;
-      // state.isLoading = false;
+      state.isLoading = false;
     });
 
     //Login User

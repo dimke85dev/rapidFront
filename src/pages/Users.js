@@ -15,7 +15,11 @@ import { toast } from 'react-toastify';
 import Modal from '../components/UI/Modal';
 
 const Users = () => {
-  const { isLoading, users } = useSelector((state) => state.auth);
+  const { isLoading, users, status, messageType } = useSelector(
+    (state) => state.auth
+  );
+
+  // console.log(status, messageType);
   const [focusLogin, setfocusLogin] = useState(false);
   const [focusPass, setfocusPass] = useState(false);
   const [focusRole, setfocusRole] = useState(false);
@@ -28,7 +32,82 @@ const Users = () => {
   const [addRole, setAddRole] = useState('');
   const [isAddUserForm, setisAddUserForm] = useState(false);
 
+  function validateLogin(login) {
+    // Проверка на минимальную длину
+    if (login.length < 2) {
+      toast(`Поле Login має бути більше 2 символів`);
+      return false;
+    }
+
+    // Проверка на использование только латинских символов и цифр
+    var alphanumericRegex = /^[a-zA-Z0-9]+$/;
+    if (!alphanumericRegex.test(login)) {
+      toast(`Login повинен складатися з лат символів і цифр`);
+      return false;
+    }
+
+    // Проверка на использование только латинских символов
+    // var latinRegex = /^[a-zA-Z]+$/;
+    // if (!latinRegex.test(login)) {
+    //   toast(`тільки латинські символи або латинські символи і цифри `);
+    //   console.log(1);
+    //   return false;
+    // }
+
+    return true;
+  }
+  function validatePassword(password) {
+    // Проверка на минимальную длину
+    if (password.length < 6) {
+      toast(`Пароль має бути більше 6 символів`);
+      return false;
+    }
+
+    // Проверка на использование только латинских символов и цифр
+    var alphanumericRegex = /^[a-zA-Z0-9]+$/;
+    if (!alphanumericRegex.test(password)) {
+      toast(`тільки латинські символи або латинські символи і цифри `);
+
+      return false;
+    }
+
+    return true;
+  }
+
+  const isInputFormValid = (inputValue, nameInput = '') => {
+    if (!inputValue || !inputValue.replace(/\s/g, '')) {
+      toast(`Поле ${nameInput} повинно бути заповнене`, {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: 'warning',
+        theme: 'dark',
+      });
+      return false;
+    } else return true;
+  };
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status) {
+      toast(status, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        type: messageType === 'ok' ? 'success' : 'error',
+      });
+    }
+  }, [status, messageType]);
 
   useEffect(() => {
     if (focusLogin) {
@@ -82,6 +161,11 @@ const Users = () => {
   };
 
   const addFormUserHandler = (e) => {
+    if (!isInputFormValid(addName, 'Login')) return;
+    if (!validateLogin(addName)) return;
+    if (!isInputFormValid(addPass, 'Пароль')) return;
+    if (!validatePassword(addPass)) return;
+
     dispatch(
       addUserAdminPanel({
         username: addName,
@@ -89,6 +173,8 @@ const Users = () => {
         formRole: addRole,
       })
     );
+    // console.log(status, messageType);
+    // if (status) return;
     setisAddUserForm(!isAddUserForm);
   };
 
@@ -188,7 +274,7 @@ const Users = () => {
   return isLoading ? (
     <Loader></Loader>
   ) : !isAddUserForm ? (
-    <div className="w-1/2 mx-auto bg-white px-5 py-2 rounded-xl mobile-form">
+    <div className="w-1/2 mx-auto bg-white px-5 py-2 rounded-xl mobile-form shadow-lg shadow-green-800/80">
       <h3>Користувачі</h3>
       <div className="flex  justify-between">
         <label className="w-2/5">Login</label>
@@ -263,11 +349,12 @@ const Users = () => {
   ) : (
     <form
       onSubmit={addFormUserHandler}
-      className="flex flex-col p-3 mobile-form w-2/3 h-full mx-auto gap-3  bg-gray-300"
+      className="flex flex-col p-3 mobile-form w-2/3 h-full mx-auto gap-3 rounded-md  bg-gray-300 shadow-xl shadow-gray-800/80"
     >
       <input
         ref={inputLoginRef}
         onFocus={togleFocus}
+        type="text"
         onChange={(e) => setAddName(e.target.value)}
         onKeyDown={EnterFocusLogin}
         className="p-2"
@@ -276,6 +363,8 @@ const Users = () => {
       <label></label>
       <input
         ref={inputPassRef}
+        type="password"
+        autoComplete="current-password"
         onChange={(e) => setAddPass(e.target.value)}
         onKeyDown={EnterFocusPass}
         className="p-2"
