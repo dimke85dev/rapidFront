@@ -18,7 +18,7 @@ const Cars = () => {
   return isLoading ? (
     <Loader></Loader>
   ) : (
-    <div className="mx-auto bg-white px-5 py-2 rounded-xl mobile-form shadow-lg shadow-green-800/50">
+    <div className="mx-auto w-3/4 bg-white px-5 py-2 rounded-xl mobile-form shadow-lg shadow-green-800/50">
       <h3>Автомобілі</h3>
       {cars.length &&
         cars.map((el) => (

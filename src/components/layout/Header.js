@@ -17,6 +17,7 @@ const Header = () => {
   //получаеть ширину экрана и относительно ширины экрана используем то или иное меню
 
   const [width, setWidth] = useState(window.innerWidth);
+  const { car } = useSelector((state) => state.car);
   const [isHoveredDir, setIsHoveredDir] = useState(false);
   const [isHoveredServ, setIsHoveredServ] = useState(false);
 
@@ -57,6 +58,10 @@ const Header = () => {
 
   const takeCarHandler = () => {
     dispatch(carOut());
+    setIsHoveredServ(false);
+  };
+  const addCarRepairHandler = () => {
+    // dispatch(carOut());
     setIsHoveredServ(false);
   };
 
@@ -155,6 +160,16 @@ const Header = () => {
                             Прийняти авто
                           </Link>
                         </li>
+                        {car && (
+                          <li>
+                            <Link
+                              onClick={addCarRepairHandler}
+                              to="/addcarrepair"
+                            >
+                              Продовжити ремонт
+                            </Link>
+                          </li>
+                        )}
 
                         <li>
                           <Link

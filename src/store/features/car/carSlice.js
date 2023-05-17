@@ -131,7 +131,7 @@ export const CarSlice = createSlice({
       state.status = action.payload?.message;
       state.isloading = false;
     });
-
+    //Get Car
     builder.addCase(getCar.pending, (state) => {
       state.isloading = true;
       state.status = null;
@@ -140,13 +140,13 @@ export const CarSlice = createSlice({
       state.isloading = false;
       state.status = action.payload?.message;
       state.messageType = action.payload?.messageType;
-      state.car = action.payload?.car;
+      state.car = action.payload;
     });
     builder.addCase(getCar.rejected, (state, action) => {
       state.status = action.payload.message;
       state.isloading = false;
     });
-
+    //getCArbyId
     builder.addCase(getCarById.pending, (state) => {
       state.isloading = true;
       state.status = null;
@@ -155,13 +155,13 @@ export const CarSlice = createSlice({
       state.isloading = false;
       state.status = action.payload?.message;
       state.messageType = action.payload?.messageType;
-      state.car = action.payload.car;
+      state.car = action.payload;
     });
     builder.addCase(getCarById.rejected, (state, action) => {
       state.status = action.payload.message;
       state.isloading = false;
     });
-
+    // getAllCars
     builder.addCase(getAllCars.pending, (state) => {
       state.isloading = true;
       state.status = null;

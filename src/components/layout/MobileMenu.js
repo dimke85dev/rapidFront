@@ -18,6 +18,7 @@ const MobileMenu = () => {
   const [serviceMenu, setServiceMenu] = useState(false);
   const [mainMenu, setmainMenu] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const { car } = useSelector((state) => state.car);
 
   /// Сохраняем состояние открытого меню мобильной версии
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -184,6 +185,17 @@ const MobileMenu = () => {
                         Прийняти авто
                       </Link>
                     </li>
+                    {car && (
+                      <li>
+                        <Link
+                          // data-type="takecar"
+                          onClick={isMobileMenuOpen && mobilMenuHandler}
+                          to="/addcarrepair"
+                        >
+                          Продовжити ремонт
+                        </Link>
+                      </li>
+                    )}
                     <li>
                       <Link
                         to="/posts"
@@ -278,6 +290,17 @@ const MobileMenu = () => {
                   Прийняти авто
                 </Link>
               </li>
+              {car && (
+                <li>
+                  <Link
+                    // data-type="takecar"
+                    onClick={isMobileMenuOpen && mobilMenuHandler}
+                    to="/addcarrepair"
+                  >
+                    Продовжити ремонт
+                  </Link>
+                </li>
+              )}
 
               <li>
                 <Link

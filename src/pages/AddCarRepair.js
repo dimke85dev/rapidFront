@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import styles from './AddCarRepair.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -37,12 +37,31 @@ const AddCarRepair = () => {
 
   const dispatch = useDispatch();
 
-  // console.log(mainRepairFind);
+  // console.log(car);
   useEffect(() => {
     if (!car) {
       navigate('/takeacar');
       return;
     }
+    // dispatch(
+    //   createCarRepairs({
+    //     nameClient: clientNameValue,
+    //     phoneClient: phoneNumber,
+    //     carId: car[0]._id,
+    //     model: car[0].name,
+    //     vinCode: car[0].vinCode,
+    //     year: car[0].year,
+    //     repair: repairs.map((el) => {
+    //       return {
+    //         mainRepairName: el.mainRepairName,
+    //         typeRepairName: el.typeRepairName,
+    //         price: el.price,
+    //       };
+    //     }),
+    //     userId: user._id,
+    //     flagEnd: 0,
+    //   })
+    // );
     ///Write to localStorage info about today repairs
     // ПРроверяем есть ли localStorage данные по конкретной машине
     if (JSON.parse(localStorage.getItem(car[0].vinCode))) {
@@ -75,12 +94,11 @@ const AddCarRepair = () => {
   const selectTypeRepairHandler = (e) => {
     setTypeRepairValue(e.target.value);
   };
-  console.log(car);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!clientNameValue) {
-      toast('Заповніть ПІБ');
+      toast('Заповніть ПІБ замовника');
       return;
     }
 
@@ -100,13 +118,12 @@ const AddCarRepair = () => {
       model: car[0].name,
       vinCode: car[0].vinCode,
       year: car[0].year,
-      repair: repairs.map((el) => {
-        return {
-          mainRepairName: el.mainRepairName,
-          typeRepairName: el.typeRepairName,
-          price: el.price,
-        };
-      }),
+      allPrice: repairs.reduce(
+        (acc, item) =>
+          acc + item.typeRepairName.reduce((acc, item) => acc + +item.price, 0),
+        0
+      ),
+      repair: repairs,
       userId: user._id,
       flagEnd: 0,
     };
@@ -117,7 +134,8 @@ const AddCarRepair = () => {
     setTypeRepairValue('Тип ремонту');
     setclientNameValue('');
     setPhoneNumber('');
-    navigate('/takeacar');
+    // navigate('/takeacar');
+    navigate('/');
     toast('Данні збережені');
   };
 
@@ -135,14 +153,30 @@ const AddCarRepair = () => {
       toast('Введіть ціну');
       return;
     }
+
     setStatus(!status);
-    repairs.push({
-      vinCode: car[0].vinCode,
-      date: dateRepair,
-      mainRepairName: mainRepairValue,
-      typeRepairName: typeRepairValue,
-      price: priceValue,
-    });
+    const typeRepair = [];
+
+    if (repairs.find((el) => el.mainRepairName === mainRepairValue)) {
+      repairs
+        .filter((el) => el.mainRepairName === mainRepairValue)
+        .map((el) =>
+          el.typeRepairName.push({
+            typeRepair: typeRepairValue,
+            price: priceValue,
+          })
+        );
+      // console.log(typeRepair);
+    } else {
+      typeRepair.push({ typeRepair: typeRepairValue, price: priceValue });
+      repairs.push({
+        vinCode: car[0].vinCode,
+        date: dateRepair,
+        mainRepairName: mainRepairValue,
+        typeRepairName: typeRepair,
+      });
+      // console.log(typeRepair);
+    }
     setRepairs(repairs);
     localStorage.setItem(car[0].vinCode, JSON.stringify(repairs));
     toast('Запис додано');
@@ -150,14 +184,20 @@ const AddCarRepair = () => {
     setMainRepairValue('Вид ремонту');
     setTypeRepairValue('Тип ремонту');
   };
-
+  // const testHandler = () => {
+  //   const a = repairs.reduce(
+  //     (acc, item) =>
+  //       acc + item.typeRepairName.reduce((acc, item) => acc + +item.price, 0),
+  //     0
+  //   );
+  //   console.log(a);
+  // };
   if (!typeAllRepair) return <Loader></Loader>;
   if (!typeAllRepair.length) return <Loader></Loader>;
 
   if (!typeAllRepair) return;
   if (!mainRepair) return;
   if (!car) return;
-
   return (
     <div className="flex flex-col text-sm ">
       <div>
@@ -257,6 +297,7 @@ const AddCarRepair = () => {
               >
                 Додати
               </button>
+
               <button
                 onClick={submitHandler}
                 type="submit"
@@ -272,10 +313,28 @@ const AddCarRepair = () => {
               className="flex justify-between px-5 border-input mt-3"
             >
               <p className="w-2/5 text-left">{el.mainRepairName}</p>
-              <p className="w-2/5 text-left">{el.typeRepairName}</p>
-              <p className="w-1/5 text-right">{el.price}</p>
+              <div className="w-3/5 flex flex-col gap-1">
+                {el.typeRepairName?.map((el) => (
+                  <div
+                    className="flex justify-between px-2"
+                    key={Math.random()}
+                  >
+                    <div className="w-2/5 text-left">{el.typeRepair}</div>
+                    <div className="w-1/5 text-right">{el.price}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
+        </div>
+        <div className="text-right p-3">
+          Всього :{' '}
+          {repairs.reduce(
+            (acc, item) =>
+              acc +
+              item.typeRepairName.reduce((acc, item) => acc + +item.price, 0),
+            0
+          )}
         </div>
       </div>
     </div>

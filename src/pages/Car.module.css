@@ -1,0 +1,17 @@
+@media (max-width: 768px) {
+  .car-mobile {
+    flex-direction: column;
+    padding: 1px;
+  }
+  .head {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    flex-direction: column;
+    text-align: left;
+  }
+  .repair {
+    /* gap: 10px; */
+    font-size: 13px;
+    text-align: left;
+  }
+}

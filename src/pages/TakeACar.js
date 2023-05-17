@@ -35,16 +35,18 @@ const TakeACar = () => {
     e.preventDefault();
     try {
       dispatch(getCar({ vinCode: enteredVinCode }));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {
     loadVicodeInputHandler(document.getElementById('vinCode').value);
   }, []);
+
   useEffect(() => {
     if (car?.length) navigate('/addcarrepair');
   }, [car, navigate, dispatch]);
-
   const addCarFormHandler = () => {
     dispatch(carOut());
     navigate(`/addcar/${enteredVinCode}`);
@@ -91,7 +93,7 @@ const TakeACar = () => {
                 className="form-input border-input"
                 type="vinCode"
                 id="vinCode"
-                value={enteredVinCode || vinCode}
+                value={enteredVinCode || vinCode || 'uu1ksd0f538825416'}
                 onChange={vinCodeInputChangeHandler}
                 onBlur={vinCodeInputLostFocusHandler}
               />
