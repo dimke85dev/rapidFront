@@ -76,6 +76,18 @@ const Header = () => {
           ></img>
           <nav className={`${styles.nav}`}>
             <ul className={styles['ul-main']}>
+              {isRole === 'USER' && (
+                <li>
+                  <NavLink
+                    to="/contacts"
+                    className={({ isActive }) =>
+                      isActive ? styles.active : ''
+                    }
+                  >
+                    Контакти
+                  </NavLink>
+                </li>
+              )}
               {isRole !== 'MASTER' && (
                 <li>
                   <NavLink

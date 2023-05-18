@@ -26,6 +26,7 @@ import Footer from './components/layout/Footer';
 import Users from './pages/Users';
 import Cars from './pages/Cars';
 import Car from './pages/Car';
+import Contacts from './pages/Contacts';
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
           <Route path="/price" element={<Price />} />
 
           <Route path="/about" element={<AboutPages />} />
+          <Route path="/contacts" element={<Contacts />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/cars/:id" element={<Car />} />
 
