@@ -10,7 +10,7 @@ const Map = () => {
     lng: 23.982057654910328,
   }));
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBiWrtDsrRWF_w5tbMcDavNMc9Y5a-IUr8',
+    googleMapsApiKey: '',
   });
 
   const handleMarkerClick = (event) => {
