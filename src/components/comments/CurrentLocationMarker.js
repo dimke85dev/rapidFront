@@ -12,7 +12,7 @@ const CurrentLocationMarker = ({ position }) => {
       );
 
     if (isMobile) {
-      const url = `geo:${lat},${lng}`;
+      const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
       window.location.href = url;
     } else {
       // Открытие Google Карт в новой вкладке и построение маршрута
