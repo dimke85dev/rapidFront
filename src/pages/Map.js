@@ -4,7 +4,7 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import styles from './Map.module.css';
 import Loader from '../components/UI/Loader';
 
-const Map = (props) => {
+const Map = () => {
   const center = useMemo(
     () => ({
       lat: 49.82413102441198,
