@@ -42,7 +42,6 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/service" element={<MainPage />} />
-          <Route path="/directory" element={<MainPage />} />
 
           <Route path="/posts" element={<PostsPage />} />
           <Route path="/out" element={<MainPage />} />

@@ -4,13 +4,16 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import styles from './Map.module.css';
 import Loader from '../components/UI/Loader';
 
-const Map = () => {
-  const center = useMemo(() => ({
-    lat: 49.82413102441198,
-    lng: 23.982057654910328,
-  }));
+const Map = (props) => {
+  const center = useMemo(
+    () => ({
+      lat: 49.82413102441198,
+      lng: 23.982057654910328,
+    }),
+    []
+  );
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBiWrtDsrRWF_w5tbMcDavNMc9Y5a-IUr8',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const handleMarkerClick = (event) => {

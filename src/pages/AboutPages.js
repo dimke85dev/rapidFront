@@ -77,4 +77,3 @@ const AboutPages = () => {
 };
 
 export default AboutPages;
-// Sit ex non ut officia qui id commodo ea non esse. Lorem culpa sunt mollit aliqua enim ut duis aliquip consequat eiusmod Lorem cillum qui sint. Ipsum adipisicing cillum minim eiusmod elit nostrud reprehenderit amet.

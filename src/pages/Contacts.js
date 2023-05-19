@@ -1,8 +1,6 @@
 import styles from './Map.module.css';
 import React from 'react';
 
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import Loader from '../components/UI/Loader';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { MdOutlineSchedule } from 'react-icons/md';
 

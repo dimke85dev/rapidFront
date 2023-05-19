@@ -9,16 +9,13 @@ const Price = () => {
   const { typeAllRepair, loading: typeloading } = useSelector(
     (state) => state.typerepair
   );
-  // console.log(typeRepair);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(typeRepairClear());
     dispatch(getAllMainRepairs());
     dispatch(getAllTypeRepairsGet());
   }, [dispatch]);
   if (!typeAllRepair.length) return <Loader></Loader>;
-  // if ( || !mainRepair) return <Loader></Loader>;
 
   return typeloading || loading ? (
     <Loader></Loader>

@@ -54,8 +54,6 @@ const PostPage = () => {
     fetchComments();
   }, [fetchComments]);
 
-  // console.log(post);
-
   if (!post) {
     return !status ? (
       <Loader />

@@ -20,7 +20,6 @@ const AddCarRepair = () => {
   const { mainRepair, carRepairs } = useSelector((state) => state.mainrepair);
   const { user } = useSelector((state) => state.auth);
 
-  // const { carRepairs } = useSelector((state) => state.carrepairs);
   const [mainRepairValue, setMainRepairValue] = useState('Вид ремонту');
   const [dateRepair, setdateRepair] = useState(
     format(new Date(), 'dd.MM.yyyy')
@@ -37,32 +36,11 @@ const AddCarRepair = () => {
 
   const dispatch = useDispatch();
 
-  // console.log(car);
   useEffect(() => {
     if (!car) {
       navigate('/takeacar');
       return;
     }
-    // dispatch(
-    //   createCarRepairs({
-    //     nameClient: clientNameValue,
-    //     phoneClient: phoneNumber,
-    //     carId: car[0]._id,
-    //     model: car[0].name,
-    //     vinCode: car[0].vinCode,
-    //     year: car[0].year,
-    //     repair: repairs.map((el) => {
-    //       return {
-    //         mainRepairName: el.mainRepairName,
-    //         typeRepairName: el.typeRepairName,
-    //         price: el.price,
-    //       };
-    //     }),
-    //     userId: user._id,
-    //     flagEnd: 0,
-    //   })
-    // );
-    ///Write to localStorage info about today repairs
     // ПРроверяем есть ли localStorage данные по конкретной машине
     if (JSON.parse(localStorage.getItem(car[0].vinCode))) {
       if (
@@ -74,15 +52,9 @@ const AddCarRepair = () => {
         setRepairs(JSON.parse(localStorage.getItem(car[0].vinCode)));
       } else localStorage.removeItem(car[0].vinCode);
     }
-    // dispatch(typeRepairClear());
     dispatch(getAllMainRepairs());
     dispatch(getAllTypeRepairsGet());
   }, [navigate, car]);
-
-  // useEffect(() => {
-  //   JSON.parse(localStorage.getItem(car[0].vinCode)) &&
-  //     setRepairs(JSON.parse(localStorage.getItem(car[0].vinCode)));
-  // }, []);
 
   const selectMainRepairHandler = (e) => {
     setMainRepairFind(
@@ -128,13 +100,11 @@ const AddCarRepair = () => {
       flagEnd: 0,
     };
     dispatch(createCarRepairs(AllRepairInfo));
-    // localStorage.removeItem(car[0].vinCode);
     setPriceValue('');
     setMainRepairValue('Вид ремонту');
     setTypeRepairValue('Тип ремонту');
     setclientNameValue('');
     setPhoneNumber('');
-    // navigate('/takeacar');
     navigate('/');
     toast('Данні збережені');
   };
@@ -166,7 +136,6 @@ const AddCarRepair = () => {
             price: priceValue,
           })
         );
-      // console.log(typeRepair);
     } else {
       typeRepair.push({ typeRepair: typeRepairValue, price: priceValue });
       repairs.push({
@@ -175,7 +144,6 @@ const AddCarRepair = () => {
         mainRepairName: mainRepairValue,
         typeRepairName: typeRepair,
       });
-      // console.log(typeRepair);
     }
     setRepairs(repairs);
     localStorage.setItem(car[0].vinCode, JSON.stringify(repairs));
@@ -184,14 +152,7 @@ const AddCarRepair = () => {
     setMainRepairValue('Вид ремонту');
     setTypeRepairValue('Тип ремонту');
   };
-  // const testHandler = () => {
-  //   const a = repairs.reduce(
-  //     (acc, item) =>
-  //       acc + item.typeRepairName.reduce((acc, item) => acc + +item.price, 0),
-  //     0
-  //   );
-  //   console.log(a);
-  // };
+
   if (!typeAllRepair) return <Loader></Loader>;
   if (!typeAllRepair.length) return <Loader></Loader>;
 

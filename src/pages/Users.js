@@ -12,7 +12,6 @@ import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/UI/Loader';
 import { toast } from 'react-toastify';
-import Modal from '../components/UI/Modal';
 
 const Users = () => {
   const { isLoading, users, status, messageType } = useSelector(

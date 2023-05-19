@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
-import { getUsers } from '../store/features/auth/authSlice';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/UI/Loader';
 import { getAllCars } from '../store/features/car/carSlice';
@@ -9,7 +8,6 @@ const Cars = () => {
   const { isLoading, cars } = useSelector((state) => state.car);
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(typeRepairClear());
     dispatch(getAllCars());
   }, [dispatch]);
 

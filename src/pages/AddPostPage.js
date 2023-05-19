@@ -28,7 +28,6 @@ const AddPostPage = () => {
       data.append('title', title); //добавляем свойство с ключем 'title' и значение title
       data.append('text', text);
       data.append('image', image);
-      // console.log(data);
       dispatch(createPost(data));
 
       navigate('/');

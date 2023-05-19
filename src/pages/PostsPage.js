@@ -1,19 +1,14 @@
-import { useDispatch } from 'react-redux';
 import PostItem from '../components/layout/PostItem';
 import axios from '../utils/axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import Loader from '../components/UI/Loader';
-import { postClear } from '../store/features/post/postSlice';
 
 const PostsPage = () => {
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState(false);
 
-  const dispatch = useDispatch();
-
   const fetchMyPosts = async () => {
     try {
-      const data1 = await axios.get('/posts/user/me');
       const { data, status } = await axios.get('/posts/user/me');
       setPosts(data);
       setStatus(status === 200 ? true : false);

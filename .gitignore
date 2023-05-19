@@ -16,7 +16,9 @@
 /build
 #*.jpg
 
+
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local

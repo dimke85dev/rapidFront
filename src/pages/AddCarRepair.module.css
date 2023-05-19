@@ -8,13 +8,3 @@
     justify-content: space-between;
   }
 }
-/* @media (max-width: 768px) {
-  .form-tel {
-    padding: 10px;
-    flex-direction: column;
-    gap: 3px;
-  }
-  .form-tel div {
-    justify-content: space-between;
-  }
-} */

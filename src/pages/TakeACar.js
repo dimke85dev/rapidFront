@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getCar, carOut } from '../store/features/car/carSlice';
 import useInput from '../hooks/use-input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import Loader from '../components/UI/Loader';
 
 const TakeACar = () => {
-  const [addCarFormVisible, setAddCarFormVisible] = useState(false);
   const { status, messageType, isloading, car, vinCode } = useSelector(
     (state) => state.car
   );
@@ -23,7 +22,6 @@ const TakeACar = () => {
     inputChangeHandler: vinCodeInputChangeHandler,
     inputLostFocusHandler: vinCodeInputLostFocusHandler,
     loadInputHandler: loadVicodeInputHandler,
-    resetValues: resetVinCodeInputValues,
   } = useInput(function validateVin(vin) {
     const vinRegExp = /^[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}$/;
     return vinRegExp.test(vin.toUpperCase());
@@ -70,64 +68,58 @@ const TakeACar = () => {
         type: messageType === 'ok' ? 'success' : 'error',
       });
     }
-    // console.log(status + 'takacar');
-    // dispatch(carOut());
   }, [status]);
 
   return (
     <React.Fragment>
       {isloading && <Loader />}
-      {!addCarFormVisible && (
-        <div className="mobile-form w-2/3 mx-auto">
-          <form
-            method="POST"
-            encType="multipart/form-data"
-            className={'form-control'}
-            onSubmit={submitHandler}
-          >
-            <div className={`${vinCodeInputClasses}`}>
-              <label className="form-label" htmlFor="vinCode">
-                Введіть "VinCode"
-              </label>
-              <input
-                className="form-input border-input"
-                type="vinCode"
-                id="vinCode"
-                value={enteredVinCode || vinCode || 'uu1ksd0f538825416'}
-                onChange={vinCodeInputChangeHandler}
-                onBlur={vinCodeInputLostFocusHandler}
-              />
-              {hasVinCodeInputError && (
-                <p className="error-text">
-                  Поле VinCode повинно бути заповнене
-                </p>
-              )}
-            </div>
-            <div className="justify-center">
+      <div className="mobile-form w-2/3 mx-auto">
+        <form
+          method="POST"
+          encType="multipart/form-data"
+          className={'form-control'}
+          onSubmit={submitHandler}
+        >
+          <div className={`${vinCodeInputClasses}`}>
+            <label className="form-label" htmlFor="vinCode">
+              Введіть "VinCode"
+            </label>
+            <input
+              className="form-input border-input"
+              type="vinCode"
+              id="vinCode"
+              value={enteredVinCode || vinCode || 'uu1ksd0f538825416'}
+              onChange={vinCodeInputChangeHandler}
+              onBlur={vinCodeInputLostFocusHandler}
+            />
+            {hasVinCodeInputError && (
+              <p className="error-text">Поле VinCode повинно бути заповнене</p>
+            )}
+          </div>
+          <div className="justify-center">
+            <button
+              onClick={submitHandler}
+              // className="w-1/4 mb-2 mx-auto items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
+              className={isEnteredVinCodeValid ? 'btn-submit' : 'btn-invalid'}
+              disabled={!isEnteredVinCodeValid && true}
+              type="submit"
+            >
+              Знайти
+            </button>
+            {status && (
               <button
-                onClick={submitHandler}
+                type="button"
+                onClick={addCarFormHandler}
                 // className="w-1/4 mb-2 mx-auto items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
-                className={isEnteredVinCodeValid ? 'btn-submit' : 'btn-invalid'}
-                disabled={!isEnteredVinCodeValid && true}
-                type="submit"
+                className="mx-4 items-center bg-gray-600 text-xs text-white rounded-xl py-2 px-4"
+                // disabled={!isEnteredVinCodeValid && true}
               >
-                Знайти
+                Додати
               </button>
-              {status && (
-                <button
-                  type="button"
-                  onClick={addCarFormHandler}
-                  // className="w-1/4 mb-2 mx-auto items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
-                  className="mx-4 items-center bg-gray-600 text-xs text-white rounded-xl py-2 px-4"
-                  // disabled={!isEnteredVinCodeValid && true}
-                >
-                  Додати
-                </button>
-              )}
-            </div>
-          </form>
-        </div>
-      )}
+            )}
+          </div>
+        </form>
+      </div>
     </React.Fragment>
   );
 };

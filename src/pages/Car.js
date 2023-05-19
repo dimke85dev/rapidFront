@@ -1,29 +1,34 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { getCarById } from '../store/features/car/carSlice';
 import Loader from '../components/UI/Loader';
 import { getCarRepairs } from '../store/features/carRepair/mainRepairSlice';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns';
+import { format } from 'date-fns';
 import styles from './Car.module.css';
 
 const Car = () => {
   const dispatch = useDispatch();
-  const [allPrice, setAllPrice] = useState(0);
   const param = useParams();
   const id = param.id;
   const { car } = useSelector((state) => state.car);
-  const { carRepairs, isLoading } = useSelector((state) => state.mainrepair);
+  const { carRepairs } = useSelector((state) => state.mainrepair);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getCarById(id));
     dispatch(getCarRepairs());
   }, [dispatch, id]);
-  //   setCar(cars.find((el) => el._id === param.id));
 
   if (!car) return <Loader></Loader>;
   return (
     <Fragment>
+      <button
+        onClick={() => navigate('/cars')}
+        className="border-solid border-2 px-2 py-1 rounded-lg mb-1 border-black"
+      >
+        Назад
+      </button>
       <div
         className={`${styles['car-mobile']} mobile-form w-3/4 mx-auto flex flex-col py-2 px-2 bg-white justify-between border-solid border-2 border-gray-600 rounded-xl shadow-xl shadow-green-800/80 `}
       >
@@ -49,7 +54,6 @@ const Car = () => {
                       className="flex gap-2 px-3 py-1 text-green-800 font-bold text"
                       key={Math.random()}
                     >
-                      {/* <div>{el._id}</div> */}
                       <label>Замовник : {el.nameClient}</label>
                       <label>Тел : {el.phoneClient}</label>
                       <label>

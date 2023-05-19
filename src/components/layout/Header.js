@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { FaUserTie } from 'react-icons/fa';
 
 import styles from './Header.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   checkIsAuth,
@@ -76,18 +76,6 @@ const Header = () => {
           ></img>
           <nav className={`${styles.nav}`}>
             <ul className={styles['ul-main']}>
-              {isRole === 'USER' && (
-                <li>
-                  <NavLink
-                    to="/contacts"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
-                  >
-                    Контакти
-                  </NavLink>
-                </li>
-              )}
               {isRole !== 'MASTER' && (
                 <li>
                   <NavLink
@@ -222,16 +210,28 @@ const Header = () => {
                 <Link to="/price">Прайс</Link>
               </li>
               {isRole !== 'MASTER' && (
-                <li>
-                  <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                      isActive ? styles.active : ''
-                    }
-                  >
-                    Про нас
-                  </NavLink>
-                </li>
+                <Fragment>
+                  <li>
+                    <NavLink
+                      to="/about"
+                      className={({ isActive }) =>
+                        isActive ? styles.active : ''
+                      }
+                    >
+                      Про нас
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/contacts"
+                      className={({ isActive }) =>
+                        isActive ? styles.active : ''
+                      }
+                    >
+                      Контакти
+                    </NavLink>
+                  </li>
+                </Fragment>
               )}
 
               <li>

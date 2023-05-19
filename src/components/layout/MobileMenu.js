@@ -118,19 +118,7 @@ const MobileMenu = () => {
                     </NavLink>
                   </li>
                 )}
-                {isRole === 'USER' && (
-                  <li>
-                    <NavLink
-                      to="/contacts"
-                      onClick={isMobileMenuOpen && mobilMenuHandler}
-                      className={({ isActive }) =>
-                        isActive ? styles.active : ''
-                      }
-                    >
-                      Контакти
-                    </NavLink>
-                  </li>
-                )}
+
                 {isAuth && (
                   <React.Fragment>
                     {isRole === 'ADMIN' && (
@@ -181,6 +169,17 @@ const MobileMenu = () => {
                         onClick={isMobileMenuOpen && mobilMenuHandler}
                       >
                         Про нас
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/contacts"
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                        className={({ isActive }) =>
+                          isActive ? styles.active : ''
+                        }
+                      >
+                        Контакти
                       </NavLink>
                     </li>
                   </Fragment>

@@ -3,16 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import {
-  getAllMainRepairs,
-  getMainRepairById,
-} from '../store/features/carRepair/mainRepairSlice';
+import { getMainRepairById } from '../store/features/carRepair/mainRepairSlice';
 import Loader from '../components/UI/Loader';
 import { toast } from 'react-toastify';
 import {
   createTypeRepair,
   getAllTypeRepairs,
-  typeRepairClear,
 } from '../store/features/carRepair/typeRepairSlice';
 
 const TypeRepairPage = () => {
@@ -27,7 +23,6 @@ const TypeRepairPage = () => {
   const { typeRepair, status } = useSelector((state) => state.typerepair);
 
   useEffect(() => {
-    // dispatch(typeRepairClear());
     if (status) toast('Додано');
     dispatch(getMainRepairById(param.id));
     dispatch(getAllTypeRepairs({ id: param.id }));
@@ -47,7 +42,6 @@ const TypeRepairPage = () => {
       toast('Поле повинно бути заповнене');
       return;
     }
-    // const priceFix = price;
     const data = {
       nameTypeRepair: typeRepairName,
       id: param.id,

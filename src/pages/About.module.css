@@ -6,6 +6,7 @@
   margin: 0 auto;
   padding: 20px;
 }
+
 .about {
   font-family: 'Edu VIC WA NT Beginner', cursive;
   text-align: justify;
@@ -65,7 +66,6 @@ li {
 }
 
 .member p {
-  /* font-family: 'Edu VIC WA NT Beginner', cursive; */
   margin-top: 5px;
   font-size: 16px;
 }
