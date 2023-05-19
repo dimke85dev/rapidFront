@@ -11,11 +11,12 @@ const CurrentLocationMarker = ({ position }) => {
     const isMobileIos = /ios|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isMobileAndroid) {
-      const url = `geo:${lat},${lng}`;
+      //   const url = `geo:${lat},${lng}`;
+      const url = `google.navigation:q=${lat},${lng}`;
       window.location.href = url;
     }
     if (isMobileIos) {
-      window.open(`http://maps.apple.com/?ll=${lat},${lng}`);
+      window.open(`http://maps.apple.com/?daddr=${lat},${lng}`);
     }
     if (!isMobileAndroid && !isMobileIos) {
       // Открытие Google Карт в новой вкладке и построение маршрута
