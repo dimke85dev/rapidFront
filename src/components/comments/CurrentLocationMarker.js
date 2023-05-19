@@ -6,15 +6,18 @@ const CurrentLocationMarker = ({ position }) => {
   const handleMarkerClick = () => {
     const { lat, lng } = position;
 
-    const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
+    const isMobileAndroid =
+      /Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobileIos = /ios|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    if (isMobile) {
-      const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    if (isMobileAndroid) {
+      const url = `geo:${lat},${lng}`;
       window.location.href = url;
-    } else {
+    }
+    if (isMobileIos) {
+      window.open(`http://maps.apple.com/?ll=${lat},${lng}`);
+    }
+    if (!isMobileAndroid && !isMobileIos) {
       // Открытие Google Карт в новой вкладке и построение маршрута
       const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
       window.open(url);
