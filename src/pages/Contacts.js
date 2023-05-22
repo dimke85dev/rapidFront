@@ -3,13 +3,15 @@ import React from 'react';
 
 import { BsTelephoneFill } from 'react-icons/bs';
 import { MdOutlineSchedule } from 'react-icons/md';
+import { MdLocationOn } from 'react-icons/md';
 
 import Map from './Map';
+import LeafLetMAp from '../components/comments/LeafLetMAp';
 
 const Contacts = () => {
   return (
     <div className={`flex justify-between ${styles.mapmobile} `}>
-      <Map className="w-2/5 " />
+      <LeafLetMAp />
 
       <div
         className={`w-3/5 flex flex-col justify-between bg-slate-400 p-5 ${styles.contactmobile} `}
@@ -22,6 +24,13 @@ const Contacts = () => {
             <div className="flex flex-col text-xl">
               <p>XXXXXXXXXXXX</p>
               <p> XXXXXXXXXXXX</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <MdLocationOn className="text-5xl bg-yellow-300 p-1 rounded-lg" />:
+            <div className="flex flex-col text-xl">
+              <p>Rapid Service</p>
+              <p> Зоряна 29</p>
             </div>
           </div>
 

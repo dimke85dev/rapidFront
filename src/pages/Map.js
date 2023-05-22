@@ -74,14 +74,6 @@ const Map = () => {
         libraries={libraries}
       >
         <CurrentLocationMarker position={center} />
-        {/* <Marker
-          title={'RapidService'}
-          onClick={handleMarkerClick}
-          position={{
-            lat: 49.82413102441198,
-            lng: 23.982057654910328,
-          }}
-        ></Marker> */}
       </GoogleMap>
     </Fragment>
   );

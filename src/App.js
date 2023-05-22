@@ -27,6 +27,7 @@ import Users from './pages/Users';
 import Cars from './pages/Cars';
 import Car from './pages/Car';
 import Contacts from './pages/Contacts';
+import LeafLetMAp from './components/comments/LeafLetMAp';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
         {/* <RouterProvider router={router} />; */}
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/leaflet" element={<LeafLetMAp />} />
           <Route path="/service" element={<MainPage />} />
 
           <Route path="/posts" element={<PostsPage />} />

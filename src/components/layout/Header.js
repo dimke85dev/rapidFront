@@ -79,7 +79,7 @@ const Header = () => {
               {isRole !== 'MASTER' && (
                 <li>
                   <NavLink
-                    to="/"
+                    to="/leaflet"
                     className={({ isActive }) =>
                       isActive ? styles.active : ''
                     }

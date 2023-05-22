@@ -3,12 +3,7 @@ import useInput from '../../hooks/use-input';
 import SelectToSelect from '../UI/SelectToSelect';
 
 import './Form.css';
-import {
-  carOut,
-  createCar,
-  getCar,
-  vinSave,
-} from '../../store/features/car/carSlice';
+import { carOut, createCar, vinSave } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
 import { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';

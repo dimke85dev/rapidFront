@@ -1,0 +1,14 @@
+.leaflet-marker-pane {
+  animation: markerBounce 1s infinite;
+  /* Здесь можно настроить длительность анимации */
+}
+
+@keyframes markerBounce {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px); /* Здесь можно настроить высоту прыжка */
+  }
+}

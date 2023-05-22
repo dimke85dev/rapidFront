@@ -11,7 +11,6 @@ const CurrentLocationMarker = ({ position }) => {
     const isMobileIos = /ios|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isMobileAndroid) {
-      //   const url = `geo:${lat},${lng}`;
       const url = `google.navigation:q=${lat},${lng}`;
       window.location.href = url;
     }
