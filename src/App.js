@@ -42,7 +42,7 @@ function App() {
         {/* <RouterProvider router={router} />; */}
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/leaflet" element={<LeafLetMAp />} />
+
           <Route path="/service" element={<MainPage />} />
 
           <Route path="/posts" element={<PostsPage />} />

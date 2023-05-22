@@ -25,7 +25,9 @@
     /* font-family: 'Sedgwick Ave Display', cursive; */
   }
 }
-
+input {
+  touch-action: manipulation;
+}
 .leaflet-container {
   z-index: 0;
   width: 100%;
