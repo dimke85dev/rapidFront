@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import styles from './Header.module.css';
+import styles from '../UI/Header.module.css';
 import { FaUserTie } from 'react-icons/fa';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -210,26 +210,18 @@ const MobileMenu = () => {
                     )}
                     <li>
                       <Link
-                        to="/posts"
-                        onClick={isMobileMenuOpen && mobilMenuHandler}
-                      >
-                        Мої Статті
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/newPost"
-                        onClick={isMobileMenuOpen && mobilMenuHandler}
-                      >
-                        Створити статтю
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
                         to="/price"
                         onClick={isMobileMenuOpen && mobilMenuHandler}
                       >
                         Прайс
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/cars"
+                        onClick={isMobileMenuOpen && mobilMenuHandler}
+                      >
+                        Автомобілі
                       </Link>
                     </li>
                   </Fragment>

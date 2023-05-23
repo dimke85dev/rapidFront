@@ -9,7 +9,7 @@ const LeafLetMAp = ({ position }) => {
   const markerRef = useRef(null);
   const customMarkerIcon = L.icon({
     iconUrl: '../../../check.svg',
-    iconSize: [32, 32], // Размер вашей иконки маркера
+    iconSize: [42, 42], // Размер вашей иконки маркера
     iconAnchor: [16, 32], // Размер якоря иконки маркера
   });
 

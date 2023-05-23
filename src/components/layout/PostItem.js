@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Loader from '../UI/Loader';
+import Ellipsis from 'react-lines-ellipsis';
 
 const PostItem = ({ post }) => {
   const { loading } = useSelector((state) => state.post);
@@ -24,7 +25,7 @@ const PostItem = ({ post }) => {
         >
           {post.imgUrl && (
             <img
-              src="/uploads/default.jpg"
+              src={`/uploads/${post.imgUrl}`}
               // src={`https://rapid-back.vercel.app/${post.imgUrl}`}
               // src={`http://localhost:5000/${post.imgUrl}`}
               // src={`http://192.168.0.105:5000/${post.imgUrl}`}
@@ -41,9 +42,15 @@ const PostItem = ({ post }) => {
           </div>
         </div>
         <div className="text-xl">{post.title}</div>
-        <p className="opacity-60 text-xs pt-4 text-justify indent-4 ">
-          {post.text}
-        </p>
+        <div className="opacity-60 text-xs pt-4 text-justify indent-4 ">
+          <Ellipsis
+            text={post.text}
+            maxLine="4"
+            ellipsis="..."
+            trimRight
+            basedOn="letters"
+          />
+        </div>
         <div className="flex gap-3 items-center">
           <button className="flex items-center justify-center gap-2 text-xs opacity-50">
             <AiFillEye />

@@ -11,7 +11,7 @@ import {
 } from '../../store/features/auth/authSlice';
 import { carOut } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
-import MobileMenu from './MobileMenu';
+import MobileMenu from '../layout/MobileMenu';
 
 const Header = () => {
   //получаеть ширину экрана и относительно ширины экрана используем то или иное меню
@@ -38,8 +38,6 @@ const Header = () => {
   }, []);
   ////////////////////////////////////
 
-  /// Сохраняем состояние открытого меню мобильной версии
-
   //////
   const isAuth = useSelector(checkIsAuth);
   // console.log(isAuth);
@@ -64,6 +62,7 @@ const Header = () => {
     // dispatch(carOut());
     setIsHoveredServ(false);
   };
+  console.log(isHoveredDir);
 
   return (
     <header>
@@ -79,7 +78,7 @@ const Header = () => {
               {isRole !== 'MASTER' && (
                 <li>
                   <NavLink
-                    to="/leaflet"
+                    to="/"
                     className={({ isActive }) =>
                       isActive ? styles.active : ''
                     }
@@ -94,6 +93,7 @@ const Header = () => {
                     <li
                       onMouseEnter={() => handleMouseEnter(setIsHoveredDir)}
                       onMouseLeave={() => handleMouseLeave(setIsHoveredDir)}
+                      onMouseMove={() => setIsHoveredDir(true)}
                       className={styles.directory}
                     >
                       <NavLink data-type="directory">Довідники</NavLink>
@@ -130,12 +130,27 @@ const Header = () => {
                         </li>
 
                         <li>
+                          <Link
+                            onClick={() => setIsHoveredDir(false)}
+                            to="/posts"
+                          >
+                            Мої Статті
+                          </Link>
+                        </li>
+
+                        <li>
+                          <Link
+                            onClick={() => setIsHoveredDir(false)}
+                            to="/newPost"
+                          >
+                            Створити статтю
+                          </Link>
+                        </li>
+
+                        <li>
                           <NavLink
                             onClick={() => setIsHoveredDir(false)}
                             to="/reports"
-                            // className={({ isActive }) =>
-                            //   isActive ? styles.active : ''
-                            // }
                           >
                             Звіт
                           </NavLink>
@@ -173,19 +188,10 @@ const Header = () => {
 
                         <li>
                           <Link
-                            onClick={() => setIsHoveredServ(false)}
-                            to="/posts"
+                            onClick={() => setIsHoveredDir(false)}
+                            to="/cars"
                           >
-                            Мої Статті
-                          </Link>
-                        </li>
-
-                        <li>
-                          <Link
-                            onClick={() => setIsHoveredServ(false)}
-                            to="/newPost"
-                          >
-                            Створити статтю
+                            Автомобілі
                           </Link>
                         </li>
                       </ul>

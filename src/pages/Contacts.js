@@ -1,23 +1,22 @@
-import styles from './Map.module.css';
+import styles from './Contact.module.css';
 import React from 'react';
 
 import { BsTelephoneFill } from 'react-icons/bs';
 import { MdOutlineSchedule } from 'react-icons/md';
 import { MdLocationOn } from 'react-icons/md';
 
-import Map from './Map';
-import LeafLetMAp from '../components/comments/LeafLetMAp';
+import LeafLetMAp from '../components/Map/LeafLetMAp';
 
 const Contacts = () => {
   return (
-    <div className={`flex justify-between ${styles.mapmobile} `}>
-      <LeafLetMAp />
+    <div className={`flex justify-between ${styles.mapmobile} relative `}>
+      <LeafLetMAp className="absolute z-[{-9999}]" />
 
       <div
         className={`w-3/5 flex flex-col justify-between bg-slate-400 p-5 ${styles.contactmobile} `}
       >
         <h2 className="mx-auto ">Контакти</h2>
-        <div className={`${styles.scheduleSocial} flex mx-auto gap-5`}>
+        <div className={`${styles.scheduleSocial} flex flex-col mx-auto gap-5`}>
           <div className="flex gap-3">
             <BsTelephoneFill className="text-5xl bg-yellow-300 p-1 rounded-lg" />
             :

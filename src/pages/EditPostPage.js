@@ -66,7 +66,8 @@ const EditPostPage = () => {
       <div className="flex object-cover py-2">
         {oldImage && (
           <img
-            src="/uploads/default.jpg"
+            // src={"/uploads/default.jpg"}
+            src={`/uploads/${oldImage}`}
             // src={`https://rapid-back.vercel.app/${oldImage}`}
             // src={`http://localhost:5000/${oldImage}`}
             alt={oldImage.name}

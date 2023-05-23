@@ -113,7 +113,7 @@ const PostPage = () => {
                 >
                   {post.imgUrl && (
                     <img
-                      src="/uploads/default.jpg"
+                      src={`/uploads/${post.imgUrl}`}
                       // src={`https://rapid-back.vercel.app/${post.imgUrl}`}
                       // src={`http://localhost:5000/${post.imgUrl}`}
                       // src={`http://192.168.0.105:5000/${post.imgUrl}`}

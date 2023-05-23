@@ -22,12 +22,11 @@ import AddCar from './components/addCar/AddCar';
 import MainRepairsPage from './pages/MainRepairsPage';
 import TypeRepairPage from './pages/TypeRepairPage';
 import Price from './pages/Price';
-import Footer from './components/layout/Footer';
+import Footer from './components/UI/Footer';
 import Users from './pages/Users';
 import Cars from './pages/Cars';
 import Car from './pages/Car';
 import Contacts from './pages/Contacts';
-import LeafLetMAp from './components/comments/LeafLetMAp';
 
 function App() {
   const dispatch = useDispatch();
