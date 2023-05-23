@@ -62,7 +62,6 @@ const Header = () => {
     // dispatch(carOut());
     setIsHoveredServ(false);
   };
-  console.log(isHoveredDir);
 
   return (
     <header>
