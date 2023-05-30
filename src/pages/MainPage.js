@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useCallback, useEffect } from 'react';
 import PostItem from '../components/layout/PostItem';
 import PopularPosts from '../components/layout/PopularPosts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,9 +9,11 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const { posts, popularPosts, loading } = useSelector((state) => state.post);
 
+  // useCallback(() => dispatch(getAllPosts()), [dispatch]);
+
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch]);
+  }, []);
 
   if (!posts?.length) {
     return (

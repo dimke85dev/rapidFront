@@ -248,7 +248,7 @@ const Header = () => {
                     }
                     onClick={logoutHandler}
                   >
-                    Вийти
+                    Вихід
                   </NavLink>
                 ) : (
                   <NavLink
@@ -257,7 +257,7 @@ const Header = () => {
                       isActive ? styles.active : ''
                     }
                   >
-                    Увійти
+                    Вхід
                   </NavLink>
                 )}
               </li>

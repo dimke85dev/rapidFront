@@ -158,7 +158,7 @@ const AddCar = () => {
               className="form-input border-input"
               type="vinCode"
               id="vinCode"
-              value={enteredVinCode || param.id}
+              value={enteredVinCode}
               onChange={vinCodeInputChangeHandler}
               onBlur={vinCodeInputLostFocusHandler}
             ></input>

@@ -39,7 +39,9 @@ const TakeACar = () => {
   };
 
   useEffect(() => {
-    loadVicodeInputHandler(document.getElementById('vinCode').value);
+    loadVicodeInputHandler(
+      document.getElementById('vinCode').value || 'uu1ksd0f538825416'
+    );
   }, []);
 
   useEffect(() => {
@@ -88,7 +90,7 @@ const TakeACar = () => {
               className="form-input border-input"
               type="vinCode"
               id="vinCode"
-              value={enteredVinCode || vinCode || 'uu1ksd0f538825416'}
+              value={enteredVinCode}
               onChange={vinCodeInputChangeHandler}
               onBlur={vinCodeInputLostFocusHandler}
             />

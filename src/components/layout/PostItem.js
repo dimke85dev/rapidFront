@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Loader from '../UI/Loader';
-import Ellipsis from 'react-lines-ellipsis';
+import LinesEllipsis from 'react-lines-ellipsis';
 
 const PostItem = ({ post }) => {
   const { loading } = useSelector((state) => state.post);
@@ -43,9 +43,9 @@ const PostItem = ({ post }) => {
         </div>
         <div className="text-xl">{post.title}</div>
         <div className="opacity-60 text-xs pt-4 text-justify indent-4 ">
-          <Ellipsis
+          <LinesEllipsis
             text={post.text}
-            maxLine="4"
+            maxLine="3"
             ellipsis="..."
             trimRight
             basedOn="letters"

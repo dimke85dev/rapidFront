@@ -229,14 +229,14 @@ const MobileMenu = () => {
                 <li className={''}>
                   {isAuth ? (
                     <NavLink to="/out" onClick={logoutHandler}>
-                      Вийти
+                      Вихід
                     </NavLink>
                   ) : (
                     <NavLink
                       to={'/login'}
                       onClick={isMobileMenuOpen && mobilMenuHandler}
                     >
-                      Увійти
+                      Вхід
                     </NavLink>
                   )}
                 </li>
