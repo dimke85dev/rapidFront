@@ -51,7 +51,9 @@ li {
 }
 
 .member img {
-  max-width: 100%;
+  margin: 0 auto;
+  max-width: 200px;
+  max-height: 200px;
   border-radius: 50%;
 }
 
@@ -78,6 +80,11 @@ li {
   .member {
     margin: 0 auto;
   }
+
+  .member img {
+    width: 200px;
+  }
+
   .carsection {
     display: flex;
     flex-direction: column;

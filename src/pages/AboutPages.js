@@ -50,7 +50,7 @@ const AboutPages = () => {
             <p>Головний електрик</p>
           </div>
           <div className={styles.member}>
-            <img src="member3.jpg" alt="Участник команды 3" />
+            <img src="ramzes.jpg" alt="Участник команды 3" />
             <h4>Роман</h4>
             <p>Механік</p>
           </div>
@@ -60,15 +60,15 @@ const AboutPages = () => {
             <p>Механік</p>
           </div>
           <div className={styles.member}>
-            <img src="member3.jpg" alt="Участник команды 3" />
+            <img src="nazar.jpg" alt="Участник команды 3" />
             <h4>Назар</h4>
-            <p>Механік</p>
+            <p>Моторист</p>
           </div>
 
           <div className={styles.member}>
             <img src="member3.jpg" alt="Участник команды 3" />
             <h4>Олексій</h4>
-            <p>Механік</p>
+            <p>Електрик</p>
           </div>
         </div>
       </div>{' '}
