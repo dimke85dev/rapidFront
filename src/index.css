@@ -179,6 +179,10 @@ main {
   .registred-media {
     width: 100%;
   }
+  .mobile-img {
+    height: 250px;
+    width: 340px;
+  }
 }
 @media (max-width: 400px) {
   h1 {

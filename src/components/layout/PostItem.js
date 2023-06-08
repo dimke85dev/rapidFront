@@ -30,7 +30,7 @@ const PostItem = ({ post }) => {
               // src={`http://localhost:5000/${post.imgUrl}`}
               // src={`http://192.168.0.105:5000/${post.imgUrl}`}
               alt="img"
-              className="object-cover w-full"
+              className="mobile-img object-cover w-full mx-auto"
             />
           )}
         </div>
