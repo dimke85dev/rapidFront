@@ -11,6 +11,7 @@ import {
 } from '../../store/features/auth/authSlice';
 import { carOut } from '../../store/features/car/carSlice';
 import { toast } from 'react-toastify';
+
 const MobileMenu = () => {
   ///// Сохраняем состояние скроллинга и в компоненте меняем класс у элемента
   const [isScrolled, setIsScrolled] = useState(false);
@@ -90,7 +91,11 @@ const MobileMenu = () => {
         src="check-engine.svg"
       ></img>
       <div>
-        <button onClick={mobilMenuHandler} className={styles['menu-btn']}>
+        <button
+          aria-label="menu"
+          onClick={mobilMenuHandler}
+          className={styles['menu-btn']}
+        >
           <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
           <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>
           <span className={styles[isMobileMenuOpen ? 'black' : 'white']}></span>

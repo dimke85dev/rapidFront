@@ -36,8 +36,8 @@ const PostItem = ({ post }) => {
         </div>
 
         <div className="flex justify-between items-center pt-2">
-          <div className="text-xs opacity-50">{post.username}</div>
-          <div className="text-xs text-black opacity-50">
+          <div className="text-xs ">{post.username}</div>
+          <div className="text-xs text-black py-2">
             <Moment date={post.createdAt} format="D MMM YYYY" />
           </div>
         </div>
@@ -52,11 +52,11 @@ const PostItem = ({ post }) => {
           />
         </div>
         <div className="flex gap-3 items-center">
-          <button className="flex items-center justify-center gap-2 text-xs opacity-50">
+          <button className="flex items-center justify-center gap-2 text-xs ">
             <AiFillEye />
             <span>{post.views || 0}</span>
           </button>
-          <button className="flex items-center justify-center gap-2 text-xs opacity-50">
+          <button className="flex py-2 items-center justify-center gap-2 text-xs">
             <AiOutlineMessage />
             <span>{post.comments?.length || 0}</span>
           </button>
