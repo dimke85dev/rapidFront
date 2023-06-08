@@ -1,5 +1,9 @@
 import React from 'react';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import styles from './Footer.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Footer = () => {
   return (
@@ -11,7 +15,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-facebook-f"></i>
+          <FontAwesomeIcon icon={faFacebook} />
         </a>
         <a
           aria-label="Instagram"
@@ -19,7 +23,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-instagram"></i>
+          <FontAwesomeIcon icon={faInstagram} />
         </a>
         <a
           aria-label="twitter"
@@ -27,7 +31,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-twitter"></i>
+          <FontAwesomeIcon icon={faTwitter} />
         </a>
       </div>
       <p>&copy; {new Date().getFullYear()} Your Company Name</p>

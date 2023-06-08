@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Pacifico;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pacifico Regular'), local('Pacifico-Regular'),
+    url(https://fonts.gstatic.com/s/pacifico/v12/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2)
+      format('woff2');
+  font-display: swap;
+}
+
 @layer base {
   /* a {
     text-decoration: none;
@@ -21,6 +31,7 @@
     min-height: 100vh;
     font-family: 'Edu VIC WA NT Beginner', cursive;
     font-family: 'Lato', sans-serif;
+
     /* font-family: 'Poppins', sans-serif; */
     /* font-family: 'Sedgwick Ave Display', cursive; */
   }
