@@ -72,8 +72,8 @@ function App() {
           <Route path="/settings" element={<Settings />} />
         </Routes>
         <ToastContainer position="bottom-right" />
+        <Footer></Footer>
       </Layout>
-      <Footer></Footer>
     </Fragment>
   );
 }
