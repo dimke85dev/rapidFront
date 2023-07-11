@@ -30,6 +30,8 @@ import Contacts from './pages/Contacts';
 
 function App() {
   const dispatch = useDispatch();
+  
+
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);

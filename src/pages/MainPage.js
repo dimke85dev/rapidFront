@@ -1,9 +1,10 @@
-import React, { Fragment, useCallback, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PostItem from '../components/layout/PostItem';
 import PopularPosts from '../components/layout/PopularPosts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '../store/features/post/postSlice';
 import Loader from '../components/UI/Loader';
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const MainPage = () => {
       {loading ? (
         <Loader />
       ) : (
+        <>
+        <Turnstile siteKey='1x00000000000000000000AA' />
         <div className="max-w-[900px] bg-slate-200 mx-auto py-10 px-3">
           <div className="post-elem flex justify-between gap-8">
             <div className="flex flex-col gap-10 basis-4/5">
@@ -46,6 +49,7 @@ const MainPage = () => {
             </div>
           </div>
         </div>
+        </>
       )}
     </React.Fragment>
   );
